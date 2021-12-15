@@ -7,13 +7,7 @@ export default function Home() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section>
-        <p>I am the best thing since sliced 🍞!</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{" "}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
     </Layout>
   );
 }
