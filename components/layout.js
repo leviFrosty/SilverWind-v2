@@ -1,5 +1,9 @@
 import Head from "next/head";
-import Link from "next/link";
+import BackToHome from "./backToHome";
+import Footer from "./footer";
+import Nav from "./nav";
+
+export const siteTitlePrefix = "SilverWind -";
 
 export default function Layout({ children, home }) {
   return (
@@ -11,15 +15,10 @@ export default function Layout({ children, home }) {
           content="Luxury handmade jewerly crafted by Julia."
         />
       </Head>
+      <Nav />
       <main>{children}</main>
-      {!home && (
-        <div>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </div>
-      )}
-      <footer>Footer</footer>
+      {!home && <BackToHome />}
+      <Footer />
     </div>
   );
 }

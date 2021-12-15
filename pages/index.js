@@ -1,13 +1,16 @@
 import Head from "next/head";
-import Layout, { siteTitle } from "../components/layout";
+import Hero from "../components/Hero";
+import Layout, { siteTitlePrefix } from "../components/layout";
 
 export default function Home() {
   return (
     <Layout home>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{siteTitlePrefix} Custom Handmade Jewelry</title>
       </Head>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <section>
+        <Hero />
+      </section>
     </Layout>
   );
 }
