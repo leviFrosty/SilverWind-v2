@@ -7,11 +7,26 @@ export default function Nav() {
 
   return (
     <nav>
-      <Link href="/login">
-        <a>Login!</a>
+      <Link href="/">
+        <a>SilverWind</a>
       </Link>
-      <Link href="/signup">
-        <a>Signup</a>
+      <Link href="/about">
+        <a>about us</a>
+      </Link>
+      <Link href="/portfolio">
+        <a>portfolio</a>
+      </Link>
+      <Link href="/about">
+        <a>categories</a>
+      </Link>
+      <Link href="/products/rings">
+        <a>rings</a>
+      </Link>
+      <Link href="/products/necklaces">
+        <a>necklaces</a>
+      </Link>
+      <Link href="/products/earrings">
+        <a>earrings</a>
       </Link>
       {user ? user.email : null}
     </nav>
