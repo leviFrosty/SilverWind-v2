@@ -10,6 +10,9 @@ export default function Nav() {
       <Link href="/login">
         <a>Login!</a>
       </Link>
+      <Link href="/signup">
+        <a>Signup</a>
+      </Link>
       {user ? user.email : null}
     </nav>
   );

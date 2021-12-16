@@ -11,7 +11,6 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-      console.log(user);
     });
   }, []);
 

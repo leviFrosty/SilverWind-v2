@@ -7,13 +7,6 @@ import { auth } from "../../lib/fbInstance";
 import Head from "next/head";
 import UserContext from "../../contexts/userContext";
 
-// export async function getServerSideProps() {
-//   const auth = getAuth(app);
-//   console.log(auth.currentUser);
-//   // Pass data to the page via props
-//   return { props: { test: "" } };
-// }
-
 const Profile = () => {
   const user = useContext(UserContext);
 
@@ -22,10 +15,6 @@ const Profile = () => {
     signOut(auth);
     router.push("/");
   };
-
-  useEffect(() => {
-    console.log("PROFILE PAGE", user);
-  }, []);
 
   return (
     <Layout>

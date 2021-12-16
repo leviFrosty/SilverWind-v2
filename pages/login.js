@@ -3,7 +3,7 @@ import React from "react";
 import Layout, { siteTitlePrefix } from "../components/layout";
 import LoginForm from "../components/loginForm";
 
-export default function login() {
+export default function Login() {
   return (
     <Layout>
       <Head>
