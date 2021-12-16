@@ -2,13 +2,13 @@ import Head from "next/head";
 import React from "react";
 import Layout, { siteTitlePrefix } from "../../components/layout";
 
-export default function AllProducts() {
+export default function ResetSuccess() {
   return (
     <Layout>
       <Head>
-        <title>{siteTitlePrefix} All Products</title>
+        <title>{siteTitlePrefix} Password Reset!</title>
       </Head>
-      <h1>All Products</h1>
+      <h1>Reset Success</h1>
     </Layout>
   );
 }

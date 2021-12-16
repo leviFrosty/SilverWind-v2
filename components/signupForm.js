@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Input from "./input";
-import { signInWithEmailAndPassword } from "@firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { auth } from "../lib/fbInstance";
 import Form from "./form";
+import Input from "./input";
 
-export default function LoginForm() {
+export default function SignupForm() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
@@ -13,9 +13,11 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => router.push("/"))
-      .catch((error) => seterror(error.message));
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        router.push("/");
+      })
+      .catch((e) => seterror(e.message));
   };
 
   return (
@@ -30,13 +32,13 @@ export default function LoginForm() {
       />
       <Input
         name="password"
-        title="Password"
+        title="password"
         type="password"
         value={password}
         setState={setpassword}
         required
       />
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </Form>
   );
 }
