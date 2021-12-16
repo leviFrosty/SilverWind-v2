@@ -2,14 +2,11 @@ import Head from "next/head";
 import BackToHome from "./backToHome";
 import Footer from "./footer";
 import Nav from "./nav";
-import React, { useContext } from "react";
-import UserContext from "../contexts/userContext";
+import React from "react";
 
 export const siteTitlePrefix = "SilverWind -";
 
 export default function Layout({ home, children }) {
-  const user = useContext(UserContext);
-
   return (
     <>
       <Head>
@@ -19,7 +16,7 @@ export default function Layout({ home, children }) {
           content="Luxury handmade jewerly crafted by Julia."
         />
       </Head>
-      <Nav user={user} />
+      <Nav />
       <main>{children}</main>
       {!home && <BackToHome />}
       <Footer />

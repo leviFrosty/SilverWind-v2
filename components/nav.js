@@ -1,7 +1,10 @@
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../contexts/userContext";
 
-export default function Nav({ user }) {
+export default function Nav() {
+  const user = useContext(UserContext);
+
   return (
     <nav>
       <Link href="/login">
