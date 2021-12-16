@@ -8,7 +8,7 @@ export default function Nav() {
   return (
     <nav>
       <Link href="/login">
-        <a>Login</a>
+        <a>Login!</a>
       </Link>
       {user ? user.email : null}
     </nav>
