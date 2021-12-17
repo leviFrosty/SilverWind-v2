@@ -26,7 +26,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav className="flex flex-col rounded-b-md bg-white shadow-md md:shadow-none px-4 py-2 text-violet-900 md:flex-row md:justify-between md:px-10 max-w-screen-lg mx-auto sticky top-0 z-10">
+    <nav className="flex flex-col rounded-b-md bg-white shadow-md md:shadow-none px-4 py-2 text-violet-900 md:flex-row md:justify-between w-full md:px-4 lg:px-16 sticky top-0 z-10">
       <div className="flex items-center md:mb-0">
         <Link href="/">
           <a className="mx-auto font-bold text-2xl">SilverWind</a>
