@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <>
       <div>
-        <h1>
+        <h1 className="">
           personalized handmade <span>jewelry</span>
         </h1>
         <Link href="/products">
