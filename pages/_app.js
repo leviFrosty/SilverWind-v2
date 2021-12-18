@@ -4,6 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 import { auth } from "../lib/fbInstance";
+import Modal from "react-modal";
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({});
@@ -13,6 +14,8 @@ function MyApp({ Component, pageProps }) {
       setUser(user);
     });
   }, []);
+
+  Modal.setAppElement("#__next");
 
   return (
     <UserProvider value={user}>

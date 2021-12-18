@@ -9,3 +9,8 @@ select,
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+#__next {
+  @apply overflow-x-hidden;
+  @apply min-h-screen;
+}

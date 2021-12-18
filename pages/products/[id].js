@@ -1,17 +1,21 @@
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Layout from "../../components/layout";
 import PageTitle from "../../components/PageTitle";
 import { db } from "../../lib/fbInstance";
+import Spinner from "../../components/Spinner";
+import ImageSelector from "../../components/ImageSelector";
 
 export default function ProductDetails({ product }) {
-  useEffect(() => {
-    console.log(product);
-  }, []);
+  const router = useRouter();
+  if (product == undefined) {router.replace(-1)}
 
+  
   return (
     <Layout>
+    {router.isFallback ? <Spinner/> : null}
       <PageTitle>{product.name}</PageTitle>
+      <ImageSelector product={product}/>
     </Layout>
   );
 }
@@ -39,5 +43,6 @@ export async function getStaticProps(context) {
     props: {
       product,
     },
+    revalidate: 60,
   };
 }
