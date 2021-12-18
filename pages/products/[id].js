@@ -5,6 +5,7 @@ import PageTitle from "../../components/PageTitle";
 import { db } from "../../lib/fbInstance";
 import Spinner from "../../components/Spinner";
 import ImageSelector from "../../components/ImageSelector";
+import ProductInfo from "../../components/ProductInfo";
 
 export default function ProductDetails({ product }) {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function ProductDetails({ product }) {
     {router.isFallback ? <Spinner/> : null}
       <PageTitle>{product.name}</PageTitle>
       <ImageSelector product={product}/>
+      <ProductInfo product={product}/>
     </Layout>
   );
 }
