@@ -14,3 +14,7 @@ a {
   @apply overflow-x-hidden;
   @apply min-h-screen;
 }
+
+.backToHome:hover span {
+  transform: translateX(-3px);
+}
