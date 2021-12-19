@@ -10,7 +10,7 @@ export default function Cart() {
   const router = useRouter();
   
   useEffect(() => {
-    if (!user) return router.push("/login");
+    if (!user) return router.replace("/login");
   }, [])
 
 

@@ -13,7 +13,7 @@ const Profile = () => {
   const router = useRouter();
   
   useEffect(() => {
-    if (!user) return router.push("/login");
+    if (!user) return router.replace("/login");
   }, [])
   
   const signOutUser = () => {

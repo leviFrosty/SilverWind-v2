@@ -8,42 +8,25 @@ import Plane from "../public/icons/plane-departure-solid.svg";
 import Redo from "../public/icons/redo-alt-solid.svg";
 import Basket from "../public/icons/shopping-basket-solid.svg";
 import Truck from "../public/icons/truck-solid.svg";
+import Plus from "../public/icons/plus-solid.svg"
+import Minus from "../public/icons/minus-solid.svg"
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../lib/fbInstance";
+import { addToCart } from "../lib/addToCart";
 
 export default function ProductInfo({ product }) {
   const [quantityText, setquantityText] = useState("");
-  const [addedToCart, setAddedToCart] = useState(false)
+  const [addedToCart, setAddedToCart] = useState(false);
+  const [addedQuantity, setAddedQuantity] = useState(0);
+  const [toAdd, setToAdd] = useState(1);
   const router = useRouter();
   const user = useContext(UserContext);
 
-
-  // const validateCartAdd = () => {
-  //   if (user.uid === undefined) {
-  //     router.push("/login");
-  //   } else {
-  //     console.log("add to cart button clicked");
-  //     addToUserCart(product.id);
-  //   }
-  // };
-
-  const addToCart = async () => {
+  const handleAddToCart = async () => {
     if (!user) return router.push("/login");
-    await setDoc(doc(db, "users", user.uid), { cart: {id: product.id, quantity: 1}}, {merge: true}).catch(e => console.log(e));
-    setAddedToCart(true)
-    return console.log("added to cart!");
+    setAddedQuantity(addedQuantity + toAdd)
+    addToCart(user.uid, product.id, toAdd, setAddedToCart).catch(e => console.log(e));
   };
-
-  // const addToUserCart = async (id) => {
-  //   console.log("adding to user cart");
-  //   const userDoc = await getDoc(doc(db, "users", user.uid));
-  //   const currentCart = userDoc.data().cart;
-  //   await updateDoc(doc(db, "users", user.uid), {
-  //     cart: [{ id, quantity: 1 }, ...currentCart],
-  //   });
-  // };
 
   useEffect(() => {
     formatItemQuantity(product, setquantityText);
@@ -64,10 +47,20 @@ export default function ProductInfo({ product }) {
           </a>
         </Link>
         <button
-          onClick={addToCart}
-          className=" mx-2 cursor-pointer bg-violet-900 text-white rounded-md px-3 py-3 hover:bg-violet-500 font-bold focus:bg-violet-500 "
+          onClick={handleAddToCart}
+          className="relative flex flex-row mx-2 cursor-pointer bg-violet-500 text-white rounded-md px-3 py-2 hover:bg-violet-600 font-bold active:bg-violet-700 items-center"
         >
-          {addedToCart ? `Added to cart!` : `Add to cart`}
+          <p className="flex-grow hover:font-semibold active:font-semibold">{addedToCart ? `Added to cart! 🎉 +${addedQuantity}` : `Add to cart`}</p>
+          <div className="relative bottom-0 flex items-center bg-violet-800 rounded-md p-1 z-10">
+            <Plus className="w-4 h-4 mx-2 active:w-5 active:h-5" onClick={(e) => {
+              e.stopPropagation();
+              setToAdd(toAdd + 1)}}/>
+            <span>{toAdd}</span>
+            <Minus className="w-4 h-4 mx-2 active:w-5 active:h-5 transition-all" onClick={(e) => {
+              e.stopPropagation();
+              if (toAdd > 0) setToAdd(toAdd - 1)}}/>
+          </div>
+          
         </button>
       </div>
       <div className="flex flex-col bg-violet-100 rounded-md mx-2 my-3 px-10 py-3 gap-4">
