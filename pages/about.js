@@ -3,6 +3,7 @@ import React from "react";
 import Layout, { siteTitlePrefix } from "../components/layout";
 
 export default function About() {
+
   return (
     <Layout>
       <Head>
@@ -17,3 +18,5 @@ export default function About() {
     </Layout>
   );
 }
+
+

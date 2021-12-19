@@ -9,8 +9,12 @@ import UserContext from "../../contexts/userContext";
 
 const Profile = () => {
   const user = useContext(UserContext);
-
   const router = useRouter();
+  
+  useEffect(() => {
+    if (!user) return router.push("/login");
+  }, [])
+  
   const signOutUser = () => {
     signOut(auth);
     router.push("/");

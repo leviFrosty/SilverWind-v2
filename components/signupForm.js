@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { auth } from "../lib/fbInstance";
 import Form from "./form";
+import FormSubmitButton from "./FormSubmitButton";
 import Input from "./input";
 
 export default function SignupForm() {
@@ -21,7 +22,7 @@ export default function SignupForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit} error={error}>
+    <Form onSubmit={handleSubmit} error={error} className="my-4 w-full">
       <Input
         name="email"
         title="email"
@@ -38,7 +39,7 @@ export default function SignupForm() {
         setState={setpassword}
         required
       />
-      <button type="submit">Register</button>
+      <FormSubmitButton label="Sign up" />
     </Form>
   );
 }

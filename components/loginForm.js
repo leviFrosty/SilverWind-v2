@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "@firebase/auth";
 import { useRouter } from "next/router";
 import { auth } from "../lib/fbInstance";
 import Form from "./form";
+import FormSubmitButton from "./FormSubmitButton";
 
 export default function LoginForm() {
   const [email, setemail] = useState("");
@@ -19,7 +20,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit} error={error}>
+    <Form onSubmit={handleSubmit} error={error} className="my-4 w-full">
       <Input
         name="email"
         title="email"
@@ -36,7 +37,7 @@ export default function LoginForm() {
         setState={setpassword}
         required
       />
-      <button type="submit">Login</button>
+      <FormSubmitButton label="Login" />
     </Form>
   );
 }
