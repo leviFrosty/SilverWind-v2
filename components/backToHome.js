@@ -3,9 +3,9 @@ import React from "react";
 
 export default function BackToHome() {
   return (
-    <div className="my-2 mx-3 px-3 py-1 relative backToHome w-fit ">
+    <div className="my-2 mx-3 px-3 py-1 relative backToHome w-fit">
       <Link href="/">
-        <a className="text-lg flex flex-row"><span className="relative transition-all mr-2">←</span> <p>Back to home</p></a>
+        <a className="text-lg flex flex-row items-center"><span className="relative transition-all mr-2 text-lg md:text-xl text-violet-500">←</span> <p className="text-violet-500 text-sm md:text-xl">Back to home</p></a>
       </Link>
     </div>
   );

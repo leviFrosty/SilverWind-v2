@@ -16,5 +16,5 @@ a {
 }
 
 .backToHome:hover span {
-  transform: translateX(-3px);
+  transform: translateX(-5px);
 }

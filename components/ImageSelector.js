@@ -11,7 +11,7 @@ export default function ImageSelector({ product }) {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col gap-4 md:flex-row-reverse">
       <Modal
         style={{
           content: {
@@ -33,11 +33,10 @@ export default function ImageSelector({ product }) {
           <TimesSolid className="text-gray-400 hover:text-gray-500 transition-color cursor-pointer" />
         </div>
       </Modal>
-      <div className="w-full h-[400px] bg-gray-100 rounded-md shadow-md my-2 flex align-middle " onClick={() => setmodalIsOpen(true)}>
+      <div className="w-full md:w-[500px] h-[400px] bg-violet-100 rounded-md shadow-lg my-2 flex align-middle " onClick={() => setmodalIsOpen(true)}>
         <img src={selectedImage} className="object-contain w-full max-h-full" alt={product.name} />
       </div>
-
-      <div className="grid grid-cols-5 gap-1">
+      <div className="grid grid-cols-5 gap-1 md:grid-cols-1 h-fit">
         <img
           src={product.coverPhotoURL}
           style={{
@@ -62,6 +61,6 @@ export default function ImageSelector({ product }) {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }

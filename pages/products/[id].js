@@ -9,15 +9,20 @@ import ProductInfo from "../../components/ProductInfo";
 
 export default function ProductDetails({ product }) {
   const router = useRouter();
-  if (product == undefined) {router.replace(-1)}
+  if (product == undefined) {
+    router.replace(-1);
+  }
 
-  
   return (
     <Layout>
-    {router.isFallback ? <Spinner/> : null}
-      <PageTitle>{product.name}</PageTitle>
-      <ImageSelector product={product}/>
-      <ProductInfo product={product}/>
+      {router.isFallback ? <Spinner /> : null}
+      <div className="flex flex-col justify-items-center">
+        <PageTitle>{product.name}</PageTitle>
+        <div className="flex flex-col md:flex-row justify-center">
+          <ImageSelector product={product} />
+          <ProductInfo product={product} />
+        </div>
+      </div>
     </Layout>
   );
 }
