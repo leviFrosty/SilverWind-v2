@@ -6,6 +6,7 @@ import { db } from "../../lib/fbInstance";
 import Spinner from "../../components/Spinner";
 import ImageSelector from "../../components/ImageSelector";
 import ProductInfo from "../../components/ProductInfo";
+import Container from '../../components/Container';
 
 export default function ProductDetails({ product }) {
   const router = useRouter();
@@ -16,13 +17,13 @@ export default function ProductDetails({ product }) {
   return (
     <Layout>
       {router.isFallback ? <Spinner /> : null}
-      <div className="flex flex-col justify-items-center">
+      <Container>
         <PageTitle>{product.name}</PageTitle>
-        <div className="flex flex-col md:flex-row justify-center">
+        <div className="flex flex-col gap-2 md:gap-8 md:flex-row justify-center">
           <ImageSelector product={product} />
           <ProductInfo product={product} />
         </div>
-      </div>
+      </Container>
     </Layout>
   );
 }

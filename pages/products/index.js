@@ -5,6 +5,7 @@ import PageTitle from "../../components/PageTitle";
 import ProductFeed from "../../components/productFeed";
 import ProductFilter from "../../components/ProductFilter";
 import { getProducts } from "../../lib/getProducts";
+import Container from '../../components/Container';
 
 export async function getStaticProps() {
   const products = await getProducts();
@@ -25,9 +26,11 @@ export default function AllProducts({ products }) {
       <Head>
         <title>{siteTitlePrefix} All Products</title>
       </Head>
+      <Container>
       <PageTitle>Products</PageTitle>
-      <ProductFilter setSort={setSort} setFilter={setFilter} />
-      <ProductFeed sort={sort} filter={filter} products={products} />
+        <ProductFilter setSort={setSort} setFilter={setFilter} />
+        <ProductFeed sort={sort} filter={filter} products={products} />
+      </Container>
     </Layout>
   );
 }

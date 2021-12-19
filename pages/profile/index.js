@@ -6,6 +6,7 @@ import { siteTitlePrefix } from "../../components/layout";
 import { auth } from "../../lib/fbInstance";
 import Head from "next/head";
 import UserContext from "../../contexts/userContext";
+import CenterTitle from "../../components/CenterTitle";
 
 const Profile = () => {
   const user = useContext(UserContext);
@@ -25,7 +26,7 @@ const Profile = () => {
       <Head>
         <title>{siteTitlePrefix} Profile</title>
       </Head>
-      <h1>Profile Page</h1>
+      <CenterTitle>Profile</CenterTitle>
       <button onClick={() => signOutUser(router)}>Sign Out</button>
     </Layout>
   );
