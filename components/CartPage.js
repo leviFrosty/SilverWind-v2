@@ -49,7 +49,7 @@ export default function CartPage({ user }) {
       const productTotalCost = product.price * item.quantity;
       totalCost = totalCost + productTotalCost;
     });
-    setTotal(totalCost);
+    setTotal(totalCost.toFixed(2));
   };
 
   useEffect(() => {
@@ -79,10 +79,10 @@ export default function CartPage({ user }) {
               })}
               <div className="flex justify-end gap-1 text-violet-300 py-2 mx-2 md:mx-6 md:my-6 ">
                 <span>Subtotal:</span>
-                <span>{total}</span>
+                <span>${total}</span>
               </div>
               <div className="flex justify-center md:justify-end md:mx-4">
-                <button className="flex bg-violet-500 text-center mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer">
+                <button onClick={()=>{console.log('CHECKOUT!')}} className="flex bg-violet-500 text-center mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer">
                   Checkout
                 </button>
               </div>
