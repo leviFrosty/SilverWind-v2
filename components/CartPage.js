@@ -8,6 +8,8 @@ import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../lib/fbInstance";
 import CartCard from "../components/CartCard";
 import Link from "next/link";
+import { createCheckoutSession } from 'next-stripe/client'
+import { loadStripe } from '@stripe/stripe-js';
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
@@ -41,6 +43,19 @@ export default function CartPage({ user }) {
       unsubscribeProducts();
     };
   }, []);
+
+  const handleCheckout = async () => {
+    const session = await createCheckoutSession({
+      success_url: `${window.location.href}/success`,
+      cancel_url: window.location.href,
+      line_items: [{price: "price_1K79tmLnQbDSCNA3gUdv2fLN" , quantity: 1}],
+      mode: "payment",
+    })
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+    if (stripe) {
+      stripe.redirectToCheckout({sessionId: session.id})
+    }
+  }
 
   const handleTotalPrice = () => {
     let totalCost = 0;
@@ -82,9 +97,12 @@ export default function CartPage({ user }) {
                 <span>${total}</span>
               </div>
               <div className="flex justify-center md:justify-end md:mx-4">
-                <button onClick={()=>{console.log('CHECKOUT!')}} className="flex bg-violet-500 text-center mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer">
-                  Checkout
-                </button>
+                  <button
+                    onClick={() => handleCheckout()}
+                    className="flex bg-violet-500 text-center my-3 mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer"
+                  >
+                    Checkout
+                  </button>
               </div>
             </>
           ) : (
