@@ -1,33 +1,27 @@
 import React, { useContext, useEffect } from "react";
 import Layout from "/components/layout";
-import { useRouter } from "next/router";
-import { signOut } from "firebase/auth";
 import { siteTitlePrefix } from "../../components/layout";
-import { auth } from "../../lib/fbInstance";
 import Head from "next/head";
 import UserContext from "../../contexts/userContext";
-import CenterTitle from "../../components/CenterTitle";
+import ProfilePage from "../../components/ProfilePage";
+import LoginPage from "../../components/LoginPage";
+import SpinnerFullScreen from "../../components/SpinnerFullScreen";
 
 const Profile = () => {
-  const user = useContext(UserContext);
-  const router = useRouter();
-  
+  const { user, isLoading } = useContext(UserContext);
+
   useEffect(() => {
-    if (!user) return router.replace("/login");
-  }, [])
-  
-  const signOutUser = () => {
-    signOut(auth);
-    router.push("/");
-  };
+    console.log(user);
+  }, []);
+
 
   return (
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Profile</title>
       </Head>
-      <CenterTitle>Profile</CenterTitle>
-      <button onClick={() => signOutUser(router)}>Sign Out</button>
+      {isLoading ? <SpinnerFullScreen /> : null}
+      {user ? <ProfilePage /> : <LoginPage />}
     </Layout>
   );
 };

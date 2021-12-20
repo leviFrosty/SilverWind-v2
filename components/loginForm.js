@@ -15,7 +15,7 @@ export default function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => router.push("/"))
+      .then(() => router.push(-1))
       .catch((error) => seterror(error.message));
   };
 

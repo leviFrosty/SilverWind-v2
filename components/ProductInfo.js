@@ -20,7 +20,7 @@ export default function ProductInfo({ product }) {
   const [addedQuantity, setAddedQuantity] = useState(0);
   const [toAdd, setToAdd] = useState(1);
   const router = useRouter();
-  const user = useContext(UserContext);
+  const {user} = useContext(UserContext);
 
   const handleAddToCart = async () => {
     if (!user) return router.push("/login");

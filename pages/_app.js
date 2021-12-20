@@ -7,11 +7,15 @@ import { auth } from "../lib/fbInstance";
 import Modal from "react-modal";
 
 function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ user: null, isLoading: true });
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      if (user) {
+        setUser({ user, isLoading: false });
+      } else {
+        setUser({ user: null, isLoading: false });
+      }
     });
   }, []);
 
