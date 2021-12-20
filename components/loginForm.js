@@ -6,7 +6,7 @@ import { auth } from "../lib/fbInstance";
 import Form from "./form";
 import FormSubmitButton from "./FormSubmitButton";
 
-export default function LoginForm() {
+export default function LoginForm({ redirectTo }) {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [error, seterror] = useState("");
@@ -15,7 +15,11 @@ export default function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => router.push(-1))
+      .then(() => {
+        if (redirectTo) {
+          router.push(redirectTo);
+        }
+      })
       .catch((error) => seterror(error.message));
   };
 

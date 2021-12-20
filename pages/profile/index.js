@@ -10,11 +10,6 @@ import SpinnerFullScreen from "../../components/SpinnerFullScreen";
 const Profile = () => {
   const { user, isLoading } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
-
-
   return (
     <Layout>
       <Head>
