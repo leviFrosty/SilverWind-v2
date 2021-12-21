@@ -1,10 +1,14 @@
 import React from "react";
-import SpinnerIcon from "../public/icons/circle-notch-solid.svg"
+import SpinnerIcon from "../public/icons/circle-notch-solid.svg";
 
-export default function Spinner() {
+export default function Spinner({ className }) {
   return (
     <>
-      <SpinnerIcon className="animate-spin text-violet-900" width={40} height={40}/>
-      </>
+      <SpinnerIcon
+        className={`animate-spin text-violet-900 ${className}`}
+        width={40}
+        height={40}
+      />
+    </>
   );
 }

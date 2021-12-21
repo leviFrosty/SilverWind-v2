@@ -18,7 +18,7 @@ import Spinner from "./Spinner";
 
 export default function AddProduct() {
   const [isLoadingSkele, setisloadingskele] = useState(true);
-  const [processing, setprocessing] = useState(false);
+  const [processing, setprocessing] = useState(true);
   const [error, seterror] = useState("");
   const [product, setProduct] = useState({});
 
@@ -91,6 +91,7 @@ export default function AddProduct() {
     } = event;
     const theFile = files[0];
     const reader = new FileReader();
+    if (reader.result === null) return
     reader.onerror = (err) => seterror(err);
     reader.onabort = (err) => seterror(err);
     reader.onloadend = (finishedEvent) => {
@@ -112,6 +113,8 @@ export default function AddProduct() {
     let results = [];
     filesArray.forEach((file) => {
       const reader = new FileReader();
+      if (reader.result === null) return
+      console.log(reader);
       reader.readAsDataURL(file);
       reader.onerror = (err) => seterror(err);
       reader.onabort = (err) => seterror(err);
@@ -205,8 +208,8 @@ export default function AddProduct() {
       {isLoadingSkele ? (
         <SpinnerFullScreen />
       ) : (
-        <Form onSubmit={onSubmit} error={error}>
-          {processing ? <Spinner /> : null}
+        <Form onSubmit={onSubmit} error={error} className="mx-2">
+          {processing ? <Spinner className="mx-auto" /> : null}
           <Input
             name="name"
             title="name"
