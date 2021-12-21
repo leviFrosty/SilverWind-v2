@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Input({
+export default function Select({
   name,
   title,
   type,
@@ -24,7 +24,7 @@ export default function Input({
       >
         {title}
       </label>
-      <input
+      <select
         className="rounded-md focus:border-violet-600 block w-full bg-violet-100 border-violet-200 px-3 py-2 focus:ring-violet-500"
         type={type}
         name={name}
@@ -33,7 +33,7 @@ export default function Input({
         {...options}
       >
         {children}
-      </input>
+      </select>
     </>
   );
 }
