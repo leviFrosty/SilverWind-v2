@@ -18,7 +18,7 @@ import Spinner from "./Spinner";
 
 export default function AddProduct() {
   const [isLoadingSkele, setisloadingskele] = useState(true);
-  const [processing, setprocessing] = useState(true);
+  const [processing, setprocessing] = useState(false);
   const [error, seterror] = useState("");
   const [product, setProduct] = useState({});
 
