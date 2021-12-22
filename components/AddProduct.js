@@ -15,6 +15,7 @@ import {
 } from "../lib/PRODUCT_KEYS";
 import Select from "./Select";
 import Spinner from "./Spinner";
+import axios from "axios";
 
 export default function AddProduct() {
   const [isLoadingSkele, setisloadingskele] = useState(true);
@@ -91,7 +92,6 @@ export default function AddProduct() {
     } = event;
     const theFile = files[0];
     const reader = new FileReader();
-    if (reader.result === null) return
     reader.onerror = (err) => seterror(err);
     reader.onabort = (err) => seterror(err);
     reader.onloadend = (finishedEvent) => {
@@ -113,8 +113,6 @@ export default function AddProduct() {
     let results = [];
     filesArray.forEach((file) => {
       const reader = new FileReader();
-      if (reader.result === null) return
-      console.log(reader);
       reader.readAsDataURL(file);
       reader.onerror = (err) => seterror(err);
       reader.onabort = (err) => seterror(err);
@@ -156,9 +154,7 @@ export default function AddProduct() {
     for (const image of product.otherImages) {
       const imgRef = await ref(storage, `products/${product.name}-${uuidv4()}`);
       await uploadString(imgRef, image, "data_url");
-      console.log("IMGREF:", imgRef);
       const url = await getDownloadURL(imgRef);
-      console.log("IMG URL:", url);
       otherImagesURLs = [url, ...otherImagesURLs];
     }
     setotherImagesURLS(otherImagesURLs);
@@ -172,35 +168,30 @@ export default function AddProduct() {
       otherImagesURLs,
     };
 
-    // sample object:
-    // const final product = {
-    //   active: true,
-    //   category: "rings",
-    //   coverPhotoURL:
-    //     "https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/products%2Fjkjkjkjkjkjk-eeb104c9-bbb1-4ef8-b5c6-4c8d9bf5c475?alt=media&token=2d98d417-a14c-48bd-9c72-20e09a90dca5",
-    //   createdAt: 1640065322918,
-    //   description: "asdfasdf",
-    //   id: "dd8b1fa4-082d-4650-a6d4-3096e5c6864d",
-    //   material: "asdfasdf",
-    //   name: "jkjkjkjkjkjk",
-    //   otherImagesURLs: [
-    //     "https://firebasestorage.googleapis.com/v0/b/silver…=media&token=34648927-da35-4de9-a322-1ad38ce7504c",
-    //     "https://firebasestorage.googleapis.com/v0/b/silver…=media&token=8109d536-4311-4940-b02f-c4af85f612ca",
-    //     "https://firebasestorage.googleapis.com/v0/b/silver…=media&token=ba9336c8-ab23-4278-a5ee-9e4e05cd6f10",
-    //     "https://firebasestorage.googleapis.com/v0/b/silver…=media&token=a474fa86-8051-440f-a53a-b2308ec7ac4f",
-    //   ],
-    //   price: "123",
-    //   quantity: "123",
-    // };
-
-    const dbRef = doc(db, "products", product.id);
-    setDoc(dbRef, newProductData)
-      .catch((err) => seterror(err))
-      .then(() => {
-        setprocessing(false);
-        const skele = MAKE_PRODUCT_SKELETON(); // generates new product id and properties
-        setProduct(skele);
+    // Upload to product & price stripe
+    const stripeRequest = axios.post("/api/stripe/add-product", newProductData);
+    stripeRequest.then((res) => {
+      console.log("PRODUCT API", res);
+      const stripePriceRequest = axios.post(
+        "/api/stripe/add-price",
+        newProductData
+      );
+      stripePriceRequest.then((res) => {
+        const newProductDataWithPrice = {
+          ...newProductData,
+          priceId: res.data.id,
+        };
+        // Upload document to database
+        const dbRef = doc(db, "products", product.id);
+        setDoc(dbRef, newProductDataWithPrice)
+          .catch((err) => seterror(err))
+          .then(() => {
+            setprocessing(false);
+            const skele = MAKE_PRODUCT_SKELETON(); // generates new product id and properties
+            setProduct(skele);
+          });
       });
+    });
   };
 
   return (
