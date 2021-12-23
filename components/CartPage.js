@@ -8,8 +8,8 @@ import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../lib/fbInstance";
 import CartCard from "../components/CartCard";
 import Link from "next/link";
-import { createCheckoutSession } from "next-stripe/client";
-import { loadStripe } from "@stripe/stripe-js";
+import getStripe from "../lib/getStripe";
+import axios from "axios";
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
@@ -48,18 +48,13 @@ export default function CartPage({ user }) {
     const stripeCartList = productList.map((product) => {
       return { quantity: product.quantity, price: product.priceId };
     });
-    const session = await createCheckoutSession({
-      success_url: `${window.location.href}/success`,
-      cancel_url: window.location.href,
-      line_items: stripeCartList,
-      mode: "payment",
+    const {
+      data: { id },
+    } = await axios.post("/api/stripe/checkout_session", {
+      items: stripeCartList,
     });
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    );
-    if (stripe) {
-      stripe.redirectToCheckout({ sessionId: session.id });
-    }
+    const stripe = await getStripe();
+    await stripe.redirectToCheckout({ sessionId: id });
   };
 
   const handleTotalPrice = () => {

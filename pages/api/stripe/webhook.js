@@ -1,28 +1,40 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const endpointSecret = 'whsec_I136y0Mrysl6ln5uoCHWb4UGOtejfVJ1';
+import { buffer } from "micro";
 
-export default async function AddStripePrice(req, res) {
-  const sig = req.headers['stripe-signature'];
-  console.log(sig)
-  let event;
-  try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-  } catch (err) {
-    res.status(400).send(`Webhook Error: ${err.message}`);
-    return;
-  } 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-  // Handle the event
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      // Then define and call a function to handle the event payment_intent.succeeded
-      break;
-    // ... handle other event types
-    default:
-      console.log(`Unhandled event type ${event.type}`);
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    let event;
+
+    try {
+      const rawBody = await buffer(req);
+      const signature = req.headers["stripe-signature"];
+      event = stripe.webhooks.constructEvent(
+        rawBody.toString(),
+        signature,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (error) {
+      console.log(`Error message: ${error.message}`);
+      res.status(400).send(`Webhook error: ${error.message}`);
+      return;
+    }
+
+    console.log("Success:", event.id);
+    if (event.type === "checkout.session.completed") {
+      console.log("Payment received!");
+    } else {
+      console.log("Unhandled event type:", event.type);
+    }
+
+    res.json({ recieved: true });
+  } else {
+    res.setHeader("Allow", "POST");
+    res.status(405).end("Method not allowed");
   }
-
-  // Return a 200 response to acknowledge receipt of the event
-  res.send();
 }
