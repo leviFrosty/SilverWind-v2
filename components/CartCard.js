@@ -2,6 +2,7 @@ import Plus from "../public/icons/plus-solid.svg";
 import Minus from "../public/icons/minus-solid.svg";
 import { useRouter } from "next/router";
 import { addToCart } from "../lib/addToCart";
+import Image from "next/image";
 
 export default function CartCard({ product, quantity, user }) {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function CartCard({ product, quantity, user }) {
   return (
     <article className="flex justify-between flex-row relative bg-white rounded-lg overflow-hidden p-3 mx-2 md:mx-4 my-2">
       <div className="flex gap-2 md:gap-8 relative items-center">
-        <img
+        <Image
           src={product.coverPhotoURL}
           className="w-32 h-full object-contain rounded-lg"
           alt=""

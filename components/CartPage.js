@@ -18,29 +18,35 @@ export default function CartPage({ user }) {
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState(0);
 
-  useEffect(async () => {
-    // user cart / products listener
+  useEffect(() => {
     let unsubscribeProducts = {};
-    const unsubscribeUserData = onSnapshot(
-      doc(db, "users", user.uid),
-      (userData) => {
-        const cartData = userData.data().cart;
-        setuserCart(cartData);
-        const productIds = cartData.map((item, index) => {
-          return cartData[index].id;
-        });
-        if (productIds.length !== 0) {
-          const collectionRef = collection(db, "products");
-          let q = query(collectionRef, where("id", "in", productIds));
-          unsubscribeProducts = onSnapshot(q, (querySnapshot) => {
-            const products = [];
-            querySnapshot.forEach((doc) => products.push(doc.data()));
-            setProductList(products);
-            setIsLoading(false);
+    let unsubscribeUserData;
+    async function getProductList() {
+      // user cart / products listener
+      unsubscribeUserData = onSnapshot(
+        doc(db, "users", user.uid),
+        (userData) => {
+          const cartData = userData.data().cart;
+          setuserCart(cartData);
+          const productIds = cartData.map((item, index) => {
+            return cartData[index].id;
           });
+          if (productIds.length !== 0) {
+            const collectionRef = collection(db, "products");
+            let q = query(collectionRef, where("id", "in", productIds));
+            unsubscribeProducts = onSnapshot(q, (querySnapshot) => {
+              const products = [];
+              querySnapshot.forEach((doc) => products.push(doc.data()));
+              setProductList(products);
+              setIsLoading(false);
+            });
+          }
         }
-      }
-    );
+      );
+    }
+
+    getProductList();
+
     return () => {
       unsubscribeUserData();
       unsubscribeProducts();

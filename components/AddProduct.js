@@ -246,7 +246,6 @@ export default function AddProduct() {
             required
             value={product.category}
             setState={setcategory}
-            required
           >
             <option>-- select category -- </option>
             <option>{RINGS}</option>

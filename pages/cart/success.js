@@ -1,4 +1,3 @@
-
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
@@ -8,7 +7,7 @@ import Layout, { siteTitlePrefix } from "../../components/layout";
 import SuccessPage from "../../components/SuccessPage";
 import UserContext from "../../contexts/userContext";
 
-export default function success() {
+export default function Success() {
   const { user, isLoading } = useContext(UserContext);
   const {
     query: { session_id },
@@ -21,7 +20,7 @@ export default function success() {
       </Head>
       <Container>
         {user ? <SuccessPage user={user} session_id={session_id} /> : null}
-        {isLoading? <SpinnerFullScreen /> : null}
+        {isLoading ? <SpinnerFullScreen /> : null}
       </Container>
     </Layout>
   );
