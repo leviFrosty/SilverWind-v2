@@ -28,6 +28,7 @@ export default async function handler(req, res) {
     console.log("Success:", event.id);
     if (event.type === "checkout.session.completed") {
       console.log("Payment received!");
+      console.log("EVENT:", event);
     } else {
       console.log("Unhandled event type:", event.type);
     }

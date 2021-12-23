@@ -10,10 +10,12 @@ import CartCard from "../components/CartCard";
 import Link from "next/link";
 import getStripe from "../lib/getStripe";
 import axios from "axios";
+import SpinnerFullScreen from "./SpinnerFullScreen";
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
   const [productList, setProductList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState(0);
 
   useEffect(async () => {
@@ -34,6 +36,7 @@ export default function CartPage({ user }) {
             const products = [];
             querySnapshot.forEach((doc) => products.push(doc.data()));
             setProductList(products);
+            setIsLoading(false);
           });
         }
       }
@@ -45,9 +48,11 @@ export default function CartPage({ user }) {
   }, []);
 
   const handleCheckout = async () => {
-    const stripeCartList = productList.map((product) => {
-      return { quantity: product.quantity, price: product.priceId };
+    const stripeCartList = userCart.map((cartItem) => {
+      const product = productList.find((product) => product.id === cartItem.id);
+      return { quantity: cartItem.quantity, price: product.priceId };
     });
+
     const {
       data: { id },
     } = await axios.post("/api/stripe/checkout_session", {
@@ -75,49 +80,53 @@ export default function CartPage({ user }) {
     <>
       <Head>{siteTitlePrefix} Cart</Head>
       <Container>
-        <div className="bg-violet-100 relative rounded-b-2xl shadow-md pb-4">
-          <CenterTitle>Cart</CenterTitle>
-          {productList.length > 0 ? (
-            <>
-              {productList.map((product) => {
-                const userCartItem = userCart.filter(
-                  (cartItems) => cartItems.id == product.id
-                );
-                return (
-                  <CartCard
-                    key={product.id}
-                    product={product}
-                    user={user}
-                    quantity={userCartItem[0].quantity}
-                  />
-                );
-              })}
-              <div className="flex justify-end gap-1 text-violet-300 py-2 mx-2 md:mx-6 md:my-6 ">
-                <span>Subtotal:</span>
-                <span>${total}</span>
+        {!isLoading ? (
+          <div className="bg-violet-100 relative rounded-b-2xl shadow-md pb-4">
+            <CenterTitle>Cart</CenterTitle>
+            {productList.length > 0 ? (
+              <>
+                {productList.map((product) => {
+                  const userCartItem = userCart.filter(
+                    (cartItems) => cartItems.id == product.id
+                  );
+                  return (
+                    <CartCard
+                      key={product.id}
+                      product={product}
+                      user={user}
+                      quantity={userCartItem[0].quantity}
+                    />
+                  );
+                })}
+                <div className="flex justify-end gap-1 text-violet-300 py-2 mx-2 md:mx-6 md:my-6 ">
+                  <span>Subtotal:</span>
+                  <span>${total}</span>
+                </div>
+                <div className="flex justify-center md:justify-end md:mx-4">
+                  <button
+                    onClick={() => handleCheckout()}
+                    className="flex bg-violet-500 text-center my-3 mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer"
+                  >
+                    Checkout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="h-[60vh] flex flex-col items-center justify-center">
+                <h2 className="text-center text-2xl text-violet-900 my-6">
+                  Nothing here! 😔
+                </h2>
+                <Link href="/products">
+                  <a className="text-center bg-violet-500 text-white rounded-md px-3 py-2 mx-4">
+                    View products
+                  </a>
+                </Link>
               </div>
-              <div className="flex justify-center md:justify-end md:mx-4">
-                <button
-                  onClick={() => handleCheckout()}
-                  className="flex bg-violet-500 text-center my-3 mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer"
-                >
-                  Checkout
-                </button>
-              </div>
-            </>
-          ) : (
-            <div className="h-[60vh] flex flex-col items-center justify-center">
-              <h2 className="text-center text-2xl text-violet-900 my-6">
-                Nothing here! 😔
-              </h2>
-              <Link href="/products">
-                <a className="text-center bg-violet-500 text-white rounded-md px-3 py-2 mx-4">
-                  View products
-                </a>
-              </Link>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        ) : (
+          <SpinnerFullScreen />
+        )}
       </Container>
     </>
   );

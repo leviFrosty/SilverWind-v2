@@ -11,6 +11,7 @@ export default function CartCard({ product, quantity, user }) {
   };
 
   const decreaseAmt = () => {
+    if (quantity === 1) return;
     addToCart(user.uid, product.id, -1);
   };
 
