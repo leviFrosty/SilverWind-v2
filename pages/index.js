@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 import Layout, { siteTitlePrefix } from "../components/layout";
 
 export default function Home() {
