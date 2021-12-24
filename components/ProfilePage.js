@@ -15,10 +15,10 @@ export default function ProfilePage() {
   };
 
   return (
-    <>
+    <React.Fragment>
       <CenterTitle>Profile</CenterTitle>
       <h2>Hello {user.email}</h2>
       <button onClick={() => signOutUser()}>Sign Out</button>
-    </>
+    </React.Fragment>
   );
 }

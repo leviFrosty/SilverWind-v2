@@ -25,7 +25,7 @@ export default function ProductFeed({ products, filter, sort }) {
   }, [sort]);
 
   return (
-    <>
+    <React.Fragment>
       <h1>Products</h1>
       {selectedProducts.length == 0 ? (
         <h4>Oops! Nothing here.</h4>
@@ -34,6 +34,6 @@ export default function ProductFeed({ products, filter, sort }) {
           <ProductCard key={product.id} product={product} />
         ))
       )}
-    </>
+    </React.Fragment>
   );
 }

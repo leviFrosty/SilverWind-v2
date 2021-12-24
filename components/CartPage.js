@@ -83,14 +83,14 @@ export default function CartPage({ user }) {
   }, [userCart, productList]);
 
   return (
-    <>
+    <React.Fragment>
       <Head>{siteTitlePrefix} Cart</Head>
       <Container>
         {!isLoading ? (
           <div className="bg-violet-100 relative rounded-b-2xl shadow-md pb-4">
             <CenterTitle>Cart</CenterTitle>
             {productList.length > 0 ? (
-              <>
+              <React.Fragment>
                 {productList.map((product) => {
                   const userCartItem = userCart.filter(
                     (cartItems) => cartItems.id == product.id
@@ -116,7 +116,7 @@ export default function CartPage({ user }) {
                     Checkout
                   </button>
                 </div>
-              </>
+              </React.Fragment>
             ) : (
               <div className="h-[60vh] flex flex-col items-center justify-center">
                 <h2 className="text-center text-2xl text-violet-900 my-6">
@@ -134,6 +134,6 @@ export default function CartPage({ user }) {
           <SpinnerFullScreen />
         )}
       </Container>
-    </>
+    </React.Fragment>
   );
 }

@@ -17,7 +17,7 @@ export default function Select({
   };
 
   return (
-    <>
+    <React.Fragment>
       <label
         className="block text-md font-medium text-violet-900"
         htmlFor={name}
@@ -34,6 +34,6 @@ export default function Select({
       >
         {children}
       </select>
-    </>
+    </React.Fragment>
   );
 }

@@ -195,7 +195,7 @@ export default function AddProduct() {
   };
 
   return (
-    <>
+    <React.Fragment>
       {isLoadingSkele ? (
         <SpinnerFullScreen />
       ) : (
@@ -278,6 +278,6 @@ export default function AddProduct() {
           />
         </Form>
       )}
-    </>
+    </React.Fragment>
   );
 }
