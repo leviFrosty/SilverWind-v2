@@ -19,7 +19,7 @@ export default function SuccessPage({ user, session_id }) {
   }, [data]);
 
   return (
-    <>
+    <React.Fragment>
       <div className="flex flex-col text-center h-[68vh] justify-center px-8">
         <CenterTitle>Success!✨</CenterTitle>
         <p className="text-center text-violet-900">
@@ -35,6 +35,6 @@ export default function SuccessPage({ user, session_id }) {
           </a>
         </Link>
       </div>
-    </>
+    </React.Fragment>
   );
 }

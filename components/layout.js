@@ -8,7 +8,7 @@ export const siteTitlePrefix = "SilverWind -";
 
 export default function Layout({ home, children }) {
   return (
-    <>
+    <React.Fragment>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -20,6 +20,6 @@ export default function Layout({ home, children }) {
       <main>{children}</main>
       {!home && <BackToHome />}
       <Footer />
-    </>
+    </React.Fragment>
   );
 }

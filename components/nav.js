@@ -40,7 +40,7 @@ export default function Nav() {
         />
       </div>
       {!isCollapsed ? (
-        <>
+        <React.Fragment>
           <div className="nav-collapsable flex flex-col md:flex-row gap-3 md:gap-5 my-4 items-center">
             <NavLink
               href="/about"
@@ -98,7 +98,7 @@ export default function Nav() {
               </a>
             </Link>
           </div>
-        </>
+        </React.Fragment>
       ) : null}
     </nav>
   );

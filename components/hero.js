@@ -5,7 +5,7 @@ import heroHeartRingVideo from "../public/videos/heroHeartRingVideo.gif";
 
 export default function Hero() {
   return (
-    <>
+    <React.Fragment>
       <div>
         <h1 className="">
           personalized handmade <span>jewelry</span>
@@ -23,6 +23,6 @@ export default function Hero() {
         />
         <p>Designed and Crafted by Julia</p>
       </div>
-    </>
+    </React.Fragment>
   );
 }
