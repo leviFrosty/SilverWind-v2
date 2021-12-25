@@ -68,6 +68,7 @@ export default function CartPage({ user }) {
       items: stripeCartList,
     });
     const stripe = await getStripe();
+    console.log("session id:", id);
     await stripe.redirectToCheckout({ sessionId: id });
   };
 
