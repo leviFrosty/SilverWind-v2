@@ -1,6 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
 import { siteTitlePrefix } from "./layout";
 import Container from "./Container";
 import CenterTitle from "./CenterTitle";
