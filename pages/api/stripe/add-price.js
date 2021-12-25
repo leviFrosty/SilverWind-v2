@@ -1,4 +1,5 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import { getPriceForStripe } from "../../../lib/utils";
 
 export default async function AddStripePrice(req, res) {
   if (req.method === "POST") {

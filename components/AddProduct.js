@@ -94,6 +94,11 @@ export default function AddProduct() {
     const reader = new FileReader();
     reader.onerror = (err) => seterror(err);
     reader.onabort = (err) => seterror(err);
+    if (theFile && theFile.type.match("image.*")) {
+      reader.readAsDataURL(theFile);
+    } else {
+      return setcoverImage("");
+    }
     reader.onloadend = (finishedEvent) => {
       const {
         target: { result },
@@ -101,10 +106,9 @@ export default function AddProduct() {
       setcoverImage(result);
       setprocessing(false);
     };
-    reader.onprogress = (progress) => {
+    reader.onprogress = () => {
       setprocessing(true);
     };
-    reader.readAsDataURL(theFile);
   };
 
   const handleOtherImagesChange = async (event) => {
@@ -113,9 +117,13 @@ export default function AddProduct() {
     let results = [];
     filesArray.forEach((file) => {
       const reader = new FileReader();
-      reader.readAsDataURL(file);
       reader.onerror = (err) => seterror(err);
       reader.onabort = (err) => seterror(err);
+      if (file && file.type.match("image.*")) {
+        reader.readAsDataURL(file);
+      } else {
+        return setotherImages([]);
+      }
       reader.onloadend = (finishedEvent) => {
         const {
           target: { result },
@@ -153,8 +161,8 @@ export default function AddProduct() {
     let otherImagesURLs = [];
     for (const image of product.otherImages) {
       const imgRef = await ref(storage, `products/${product.name}-${uuidv4()}`);
-      await uploadString(imgRef, image, "data_url");
-      const url = await getDownloadURL(imgRef);
+      await uploadString(imgRef, image, "data_url").catch((e) => seterror(e));
+      const url = await getDownloadURL(imgRef).catch((e) => seterror(e));
       otherImagesURLs = [url, ...otherImagesURLs];
     }
     setotherImagesURLS(otherImagesURLs);
@@ -267,10 +275,12 @@ export default function AddProduct() {
             title="price"
             type="number"
             step=".01"
+            placeholder="12.34"
             required
             value={product.price}
             setState={setprice}
           />
+          <p className="text-sm text-violet-900 opacity-75">Format as: 00.00</p>
           <input
             className="disabled:opacity-50 disabled:cursor-default disabled:hover:bg-violet-500 cursor-pointer bg-violet-500 w-full text-white rounded-md px-3 py-2 my-4 hover:bg-violet-600 active:bg-violet-600"
             type="submit"
