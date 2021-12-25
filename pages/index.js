@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Hero from "../components/hero";
+import OrderCustom from "../components/OrderCustom";
 import Layout, { siteTitlePrefix } from "../components/layout";
 
 export default function Home() {
@@ -10,6 +11,9 @@ export default function Home() {
       </Head>
       <section>
         <Hero />
+      </section>
+      <section>
+        <OrderCustom />
       </section>
     </Layout>
   );
