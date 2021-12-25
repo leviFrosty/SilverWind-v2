@@ -1,10 +1,9 @@
 import Link from "next/link";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../contexts/userContext";
 import Bars from "../public/icons/bars-solid.svg";
 import ShoppingBasket from "../public/icons/shopping-basket-solid.svg";
 import ProfileIcon from "../public/icons/profile-icon.svg";
-import { useState } from "react/cjs/react.development";
 import NavLink from "./NavLink";
 
 export default function Nav() {

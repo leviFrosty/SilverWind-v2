@@ -21,6 +21,7 @@ export default function CartCard({ product, quantity, user }) {
       <div className="flex gap-2 md:gap-8 relative items-center">
         <Image
           src={product.coverPhotoURL}
+          layout="fill"
           className="w-32 h-full object-contain rounded-lg"
           alt=""
           onClick={() => router.push(`/products/${product.id}`)}
