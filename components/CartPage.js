@@ -11,19 +11,19 @@ import Link from "next/link";
 import getStripe from "../lib/getStripe";
 import axios from "axios";
 import SpinnerFullScreen from "./SpinnerFullScreen";
-import { getPriceForStripe } from "../lib/utils";
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState(0);
+  let unsubscribeProducts = () => {};
 
   useEffect(() => {
-    let unsubscribeProducts = {};
     let unsubscribeUserData;
     async function getProductList() {
       // user cart / products listener
+      console.log("Loading user product list");
       unsubscribeUserData = onSnapshot(
         doc(db, "users", user.uid),
         (userData) => {
@@ -41,6 +41,8 @@ export default function CartPage({ user }) {
               setProductList(products);
               setIsLoading(false);
             });
+          } else {
+            setIsLoading(false);
           }
         }
       );
@@ -57,6 +59,7 @@ export default function CartPage({ user }) {
   const handleCheckout = async () => {
     const stripeCartList = userCart.map((cartItem) => {
       const product = productList.find((product) => product.id === cartItem.id);
+      console.log(product);
       return { quantity: cartItem.quantity, price: product.priceId };
     });
 
