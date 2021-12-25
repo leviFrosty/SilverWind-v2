@@ -1,8 +1,7 @@
 import "../styles/globals.css";
 import { UserProvider } from "../contexts/userContext";
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { auth } from "../lib/fbInstance";
 import Modal from "react-modal";
 
