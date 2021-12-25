@@ -18,14 +18,16 @@ export default function CartCard({ product, quantity, user }) {
 
   return (
     <article className="flex justify-between flex-row relative bg-white rounded-lg overflow-hidden p-3 mx-2 md:mx-4 my-2">
-      <div className="flex gap-2 md:gap-8 relative items-center">
+      <div className="w-32 md:h-32 md:w-40 relative rounded-lg">
         <Image
           src={product.coverPhotoURL}
           layout="fill"
-          className="w-32 h-full object-contain rounded-lg"
+          className="object-contain rounded-lg overflow-hidden"
           alt=""
           onClick={() => router.push(`/products/${product.id}`)}
         />
+      </div>
+      <div className="flex gap-2 md:gap-8 relative items-center">
         <h2 className="text-center text-violet-900 text-xl md:font-semibold">
           {product.name}
         </h2>
