@@ -6,9 +6,11 @@ import UserContext from "../../contexts/userContext";
 import ProfilePage from "../../components/ProfilePage";
 import LoginPage from "../../components/LoginPage";
 import SpinnerFullScreen from "../../components/SpinnerFullScreen";
+import { useRouter } from "next/router";
 
 const Profile = () => {
   const { user, isLoading } = useContext(UserContext);
+  const router = useRouter();
 
   return (
     <Layout>
@@ -16,7 +18,7 @@ const Profile = () => {
         <title>{siteTitlePrefix} Profile</title>
       </Head>
       {isLoading ? <SpinnerFullScreen /> : null}
-      {user ? <ProfilePage /> : <LoginPage />}
+      {user ? <ProfilePage /> : <LoginPage redirectTo={router.pathname} />}
     </Layout>
   );
 };
