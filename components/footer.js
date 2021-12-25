@@ -86,10 +86,15 @@ export default function Footer() {
             <a
               href="https://www.instagram.com/silverwind.store/"
               target="_blank"
+              rel="noreferrer"
             >
               <Instagram width={30} height={30} />
             </a>
-            <a href="https://www.tiktok.com/@silver.winds" target="_blank">
+            <a
+              href="https://www.tiktok.com/@silver.winds"
+              target="_blank"
+              rel="noreferrer"
+            >
               <TikTok width={30} height={30} />
             </a>
           </div>
