@@ -179,7 +179,6 @@ export default function AddProduct() {
     // Upload to product & price stripe
     const stripeRequest = axios.post("/api/stripe/add-product", newProductData);
     stripeRequest.then((res) => {
-      console.log("PRODUCT API", res);
       const stripePriceRequest = axios.post(
         "/api/stripe/add-price",
         newProductData

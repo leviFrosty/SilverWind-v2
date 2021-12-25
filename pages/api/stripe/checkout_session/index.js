@@ -2,7 +2,6 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  console.log(`Hello Vercel:${process.env.STRIPE_SECRET_KEY}`);
   if (req.method === "POST") {
     try {
       const session = await stripe.checkout.sessions.create({

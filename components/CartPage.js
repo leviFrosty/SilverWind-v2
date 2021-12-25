@@ -22,7 +22,6 @@ export default function CartPage({ user }) {
     let unsubscribeUserData;
     async function getProductList() {
       // user cart / products listener
-      console.log("Loading user product list");
       unsubscribeUserData = onSnapshot(
         doc(db, "users", user.uid),
         (userData) => {
@@ -58,7 +57,6 @@ export default function CartPage({ user }) {
   const handleCheckout = async () => {
     const stripeCartList = userCart.map((cartItem) => {
       const product = productList.find((product) => product.id === cartItem.id);
-      console.log(product);
       return { quantity: cartItem.quantity, price: product.priceId };
     });
 
@@ -68,7 +66,6 @@ export default function CartPage({ user }) {
       items: stripeCartList,
     });
     const stripe = await getStripe();
-    console.log("session id:", id);
     await stripe.redirectToCheckout({ sessionId: id });
   };
 
