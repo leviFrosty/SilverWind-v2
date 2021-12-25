@@ -10,9 +10,15 @@ export default function FooterListHead({ openState, setIsOpen, children }) {
     >
       {children}
       {openState ? (
-        <ChevronDown height={12} className="inline ml-2 md:hidden" />
+        <ChevronRight
+          height={12}
+          className="inline ml-2 md:hidden rotate-90 transition-all"
+        />
       ) : (
-        <ChevronRight height={12} className="inline ml-2 md:hidden" />
+        <ChevronRight
+          height={12}
+          className="inline ml-2 md:hidden transition-all"
+        />
       )}
     </li>
   );

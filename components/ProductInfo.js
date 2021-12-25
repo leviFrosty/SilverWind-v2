@@ -38,7 +38,7 @@ export default function ProductInfo({ product }) {
     <div className="flex flex-col max-w-xl">
       <div className="flex flex-row justify-between border-b-2 border-b-violet-100 px-2 py-3">
         <span className="text-violet-900 text-2xl font-bold">{`$${product.price}`}</span>
-        <span className="flex flex-row gap-1 text-violet-900 text-2xl min-w-fit">
+        <span className="flex flex-row gap-1 text-violet-900 text-2xl min-w-fit align-middle">
           {quantityText}
         </span>
       </div>
@@ -57,7 +57,7 @@ export default function ProductInfo({ product }) {
               ? `Added to cart! 🎉 +${addedQuantity}`
               : `Add to cart`}
           </p>
-          <div className="relative bottom-0 flex items-center bg-violet-800 rounded-md p-1 z-10">
+          <div className="relative bottom-0 flex items-center bg-violet-800 rounded-md p-1">
             <Plus
               className="w-4 h-4 mx-2 active:w-5 active:h-5"
               onClick={(e) => {
@@ -91,23 +91,23 @@ export default function ProductInfo({ product }) {
           Sustainably Sourced Recycled Materials
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-3 text-violet-500 my-8 mx-2">
-        <span className="flex flex-row gap-1 justify-center text-sm">
-          <Plane className="w-5" />
+      <div className="grid grid-cols-2 gap-3 text-violet-500 my-8 mx-2 align-middle">
+        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+          <Plane className="w-5 h-5"/>
           Internation Shipping*
-        </span>
-        <span className="flex flex-row gap-1 justify-center text-sm">
-          <Redo className="w-5" />
+        </div>
+        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+          <Redo className="w-5 h-5" />
           Returns Available
-        </span>
-        <span className="flex flex-row gap-1 justify-center text-sm">
-          <Basket className="w-5" />
+        </div>
+        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+          <Basket className="w-5 h-5" />
           Free standard over $40
-        </span>
-        <span className="flex flex-row gap-1 justify-center text-sm">
-          <Truck className="w-5" />
+        </div>
+        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+          <Truck className="w-5 h-5" />
           Free express over $120
-        </span>
+        </div>
       </div>
       <div className="product-description">
         <p className="text-violet-900 mx-6 my-4 leading-7">
