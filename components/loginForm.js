@@ -18,6 +18,8 @@ export default function LoginForm({ redirectTo }) {
       .then(() => {
         if (redirectTo) {
           router.push(redirectTo);
+        } else {
+          router.push("/");
         }
       })
       .catch((error) => seterror(error.message));

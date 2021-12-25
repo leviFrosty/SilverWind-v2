@@ -23,7 +23,13 @@ export default function ProductInfo({ product }) {
   const { user } = useContext(UserContext);
 
   const handleAddToCart = async () => {
-    if (!user) return router.push("/login");
+    if (!user) {
+      router.push({
+        pathname: "/login",
+        query: { redirectTo: window.location.href },
+      });
+      return;
+    }
     setAddedQuantity(addedQuantity + toAdd);
     addToCart(user.uid, product.id, toAdd, setAddedToCart).catch((e) =>
       console.log(e)
@@ -93,7 +99,7 @@ export default function ProductInfo({ product }) {
       </div>
       <div className="grid grid-cols-2 gap-3 text-violet-500 my-8 mx-2 align-middle">
         <div className="flex flex-row gap-2 justify-center text-sm align-middle">
-          <Plane className="w-5 h-5"/>
+          <Plane className="w-5 h-5" />
           Internation Shipping*
         </div>
         <div className="flex flex-row gap-2 justify-center text-sm align-middle">
