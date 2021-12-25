@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import Layout, { siteTitlePrefix } from "../../components/layout";
 import PageTitle from "../../components/PageTitle";
 import ProductFeed from "../../components/productFeed";
+import OrderCustom from "../../components/OrderCustom";
 import ProductFilter from "../../components/ProductFilter";
 import { getProducts } from "../../lib/getProducts";
-import Container from '../../components/Container';
+import Container from "../../components/Container";
 
 export async function getStaticProps() {
   const products = await getProducts();
@@ -27,9 +28,18 @@ export default function AllProducts({ products }) {
         <title>{siteTitlePrefix} All Products</title>
       </Head>
       <Container>
-      <PageTitle>Products</PageTitle>
-        <ProductFilter setSort={setSort} setFilter={setFilter} />
-        <ProductFeed sort={sort} filter={filter} products={products} />
+        <PageTitle>Products</PageTitle>
+        <div className="flex flex-col md:flex-row">
+          <div>
+            <ProductFilter setSort={setSort} setFilter={setFilter} />
+          </div>
+          <div className=" w-full">
+            <ProductFeed sort={sort} filter={filter} products={products} />
+          </div>
+        </div>
+        <section>
+          <OrderCustom />
+        </section>
       </Container>
     </Layout>
   );

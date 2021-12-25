@@ -12,6 +12,9 @@ export default function ProductFeed({ products, filter, sort }) {
 
   // Watches filter changes
   useEffect(() => {
+    if (filter === null) {
+      setselectedProducts(products);
+    }
     if (filter) {
       filterProducts(filter, products, setselectedProducts);
     }
@@ -26,13 +29,18 @@ export default function ProductFeed({ products, filter, sort }) {
 
   return (
     <React.Fragment>
-      <h1>Products</h1>
       {selectedProducts.length == 0 ? (
-        <h4>Oops! Nothing here.</h4>
+        <div className="h-[30vh]">
+          <h4 className="text-violet-900 text-xl text-center">
+            Oops! Nothing here. 🤔
+          </h4>
+        </div>
       ) : (
-        selectedProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))
+        <div className="p-2 grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-4">
+          {selectedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       )}
     </React.Fragment>
   );
