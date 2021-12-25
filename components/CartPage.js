@@ -11,6 +11,7 @@ import Link from "next/link";
 import getStripe from "../lib/getStripe";
 import axios from "axios";
 import SpinnerFullScreen from "./SpinnerFullScreen";
+import { getPriceForStripe } from "../lib/utils";
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);

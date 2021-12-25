@@ -272,9 +272,10 @@ export default function AddProduct() {
             setState={setprice}
           />
           <input
-            className="bg-violet-500 w-full text-white rounded-md px-3 py-2 my-4 hover:bg-violet-600 active:bg-violet-600"
+            className="disabled:opacity-50 disabled:cursor-default disabled:hover:bg-violet-500 cursor-pointer bg-violet-500 w-full text-white rounded-md px-3 py-2 my-4 hover:bg-violet-600 active:bg-violet-600"
             type="submit"
             value="Submit"
+            disabled={error ? true : false}
           />
         </Form>
       )}

@@ -30,7 +30,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-[#240066] text-white">
+    <footer className="bg-[#240066] text-white mt-10">
       <Container className="p-4 md:py-10 flex flex-col md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row md:gap-20">
           <ul>

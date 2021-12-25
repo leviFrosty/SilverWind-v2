@@ -17,7 +17,7 @@ export default function Layout({ home, children }) {
         />
       </Head>
       <Nav />
-      <main>{children}</main>
+      <main className="min-h-[75vh]">{children}</main>
       {!home && <BackToHome />}
       <Footer />
     </React.Fragment>
