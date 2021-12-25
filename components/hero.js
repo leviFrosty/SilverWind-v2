@@ -18,7 +18,7 @@ export default function Hero() {
               jewelry <Underline />
             </span>
             <Link href="/products">
-              <a className="bg-violet-900 rounded-md px-3 md:px-5 py-1 text-white text-xl md:text-2xl hover:bg-violet-600 active:bg-violet-600">
+              <a className="bg-violet-900 rounded-md px-10 md:px-5 py-3 text-white text-xl hover:bg-violet-600 active:bg-violet-600 transition-all">
                 Shop Now
               </a>
             </Link>
