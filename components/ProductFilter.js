@@ -22,7 +22,7 @@ export default function ProductFilter({ setFilter, setSort }) {
           onClick={() => setfilterExpanded(!filterExpanded)}
         >
           Filter
-          <ChevonRight width={10} width={10} className="inline mx-2" />
+          <ChevonRight width={10} height={10} className="inline mx-2" />
         </h3>
         {filterExpanded ? (
           <>
@@ -56,7 +56,7 @@ export default function ProductFilter({ setFilter, setSort }) {
           onClick={() => setsortExpanded(!sortExpanded)}
         >
           Sort
-          <ChevonRight width={10} width={10} className="inline mx-2" />
+          <ChevonRight width={10} height={10} className="inline mx-2" />
         </h3>
         {sortExpanded ? (
           <>
