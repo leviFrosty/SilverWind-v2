@@ -4,8 +4,10 @@ import React from "react";
 import Container from "./Container";
 import Underline from "../public/images/hero-underline.svg";
 import heroHeartRingVideo from "../public/videos/heroHeartRingVideo.gif";
+import { useRouter } from "next/router";
 
 export default function Hero() {
+  const router = useRouter();
   return (
     <React.Fragment>
       <Container>
@@ -28,10 +30,13 @@ export default function Hero() {
               src={heroHeartRingVideo}
               width={600}
               height={400}
+              onClick={() => router.push("/products")}
               alt="Heart shaped ring"
-              className="rounded-md"
+              className="rounded-md hover:cursor-pointer"
             />
-            <p className="text-right text-violet-900 opacity-30">designed and crafted by Julia</p>
+            <p className="text-right text-violet-900 opacity-30">
+              designed and crafted by Julia
+            </p>
           </div>
         </div>
       </Container>
