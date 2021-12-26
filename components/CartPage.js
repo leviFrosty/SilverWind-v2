@@ -10,11 +10,13 @@ import Link from "next/link";
 import getStripe from "../lib/getStripe";
 import axios from "axios";
 import SpinnerFullScreen from "./SpinnerFullScreen";
+import Spinner from "./Spinner";
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingCheckout, setisLoadingCheckout] = useState(false);
   const [total, setTotal] = useState(0);
   let unsubscribeProducts = () => {};
 
@@ -55,6 +57,7 @@ export default function CartPage({ user }) {
   }, []);
 
   const handleCheckout = async () => {
+    setisLoadingCheckout(true);
     const stripeCartList = userCart.map((cartItem) => {
       const product = productList.find((product) => product.id === cartItem.id);
       return { quantity: cartItem.quantity, price: product.priceId };
@@ -114,7 +117,11 @@ export default function CartPage({ user }) {
                     onClick={() => handleCheckout()}
                     className="flex bg-violet-500 text-center my-3 mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer"
                   >
-                    Checkout
+                    {isLoadingCheckout ? (
+                      <Spinner className="text-white" />
+                    ) : (
+                      "Checkout"
+                    )}
                   </button>
                 </div>
               </React.Fragment>
