@@ -1,10 +1,12 @@
 import Plus from "../public/icons/plus-solid.svg";
 import Minus from "../public/icons/minus-solid.svg";
+import removeFromCart from "../lib/removeFromCart";
 import { useRouter } from "next/router";
 import { addToCart } from "../lib/addToCart";
 import Image from "next/image";
+import Times from "../public/icons/times-solid.svg";
 
-export default function CartCard({ product, quantity, user }) {
+export default function CartCard({ product, quantity, user, userData }) {
   const router = useRouter();
 
   const increaseAmt = () => {
@@ -46,8 +48,12 @@ export default function CartCard({ product, quantity, user }) {
             onClick={() => decreaseAmt()}
           />
         </div>
-        <div>
-          <p className="font-bold text-violet-900">${product.price}</p>
+        <div className="font-bold text-violet-900 text-md flex flex-row gap-2 items-center">
+          <p>${product.price}</p>
+          <Times
+            className="w-4 h-4 opacity-25"
+            onClick={() => removeFromCart(user.uid, product.id)}
+          />
         </div>
       </div>
     </article>

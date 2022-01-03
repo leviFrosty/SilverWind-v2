@@ -28,6 +28,7 @@ export default function CartPage({ user }) {
         doc(db, "users", user.uid),
         (userData) => {
           const cartData = userData.data().cart;
+          console.log("CART DATA", cartData);
           setuserCart(cartData);
           const productIds = cartData.map((item, index) => {
             return cartData[index].id;
@@ -42,6 +43,7 @@ export default function CartPage({ user }) {
               setIsLoading(false);
             });
           } else {
+            setProductList([]);
             setIsLoading(false);
           }
         }
@@ -74,6 +76,7 @@ export default function CartPage({ user }) {
 
   const handleTotalPrice = () => {
     let totalCost = 0;
+    if (userCart.length == 0) return;
     productList.forEach((product) => {
       const item = userCart.filter((item) => item.id == product.id)[0];
       const productTotalCost = product.price * item.quantity;
@@ -93,12 +96,13 @@ export default function CartPage({ user }) {
         {!isLoading ? (
           <div className="bg-violet-100 relative rounded-b-2xl shadow-md pb-4">
             <CenterTitle>Cart</CenterTitle>
-            {productList.length > 0 ? (
+            {userCart.length > 0 ? (
               <React.Fragment>
                 {productList.map((product) => {
                   const userCartItem = userCart.filter(
                     (cartItems) => cartItems.id == product.id
                   );
+                  if (userCartItem.length == 0) return;
                   return (
                     <CartCard
                       key={product.id}

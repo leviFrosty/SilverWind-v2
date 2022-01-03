@@ -27,7 +27,6 @@ export default function Nav() {
         const cart = doc.data().cart;
         let total = 0;
         cart.forEach((item) => (total = total + item.quantity));
-        console.log(total);
         setCartSize(total);
       });
     }
