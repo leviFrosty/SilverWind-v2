@@ -12,6 +12,11 @@ import Head from "next/head";
 
 export default function ProductDetails({ product }) {
   const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <React.Fragment>
       <Head>
@@ -23,10 +28,7 @@ export default function ProductDetails({ product }) {
 
         {/* Open Graph / Facebook*/}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`${siteTitlePrefix}${product.name}`}
-        />
+        <meta property="og:title" content={siteTitlePrefix + product.name} />
         <meta property="og:description" content={product.description} />
         <meta property="og:image" content={product.coverPhotoURL} />
 
@@ -34,7 +36,7 @@ export default function ProductDetails({ product }) {
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:title"
-          content={`${siteTitlePrefix}${product.name}`}
+          content={siteTitlePrefix + product.name}
         />
         <meta property="twitter:description" content={product.description} />
         <meta property="twitter:image" content={product.coverPhotoURL} />
