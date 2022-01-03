@@ -37,21 +37,21 @@ export default function CartCard({ product, quantity, user, userData }) {
       <div className="flex flex-row md:gap-6 items-center">
         <div className="flex flex-col items-center gap-2 justify-center">
           <Plus
-            className="w-4 h-4 mx-2 active:w-5 active:h-5 text-violet-300"
+            className="cursor-pointer w-4 h-4 mx-2 active:w-5 active:h-5 text-violet-300 hover:text-violet-500"
             onClick={() => {
               increaseAmt();
             }}
           />
           <span>{quantity}</span>
           <Minus
-            className="w-4 h-4 mx-2 active:w-5 active:h-5 transition-all text-violet-300"
+            className="cursor-pointer w-4 h-4 mx-2 active:w-5 active:h-5 transition-all text-violet-300 hover:text-violet-500"
             onClick={() => decreaseAmt()}
           />
         </div>
         <div className="font-bold text-violet-900 text-md flex flex-row gap-2 items-center">
           <p>${product.price}</p>
           <Times
-            className="w-4 h-4 opacity-25"
+            className="cursor-pointer w-4 h-4 opacity-25 hover:opacity-80"
             onClick={() => removeFromCart(user.uid, product.id)}
           />
         </div>
