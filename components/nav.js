@@ -86,7 +86,6 @@ export default function Nav() {
           </div>
           <div className="nav-collapsable flex flex-col md:flex-row gap-3 mt-4 md:mt-0 items-center">
             <Link href="/profile">
-              {/* TODO: Add navbar toggling.  */}
               <a className="bg-violet-500 md:bg-inherit shadow-md md:shadow-none transition-all rounded-md px-6 py-3 w-full md:w-fit md:py-1 text-white md:text-violet-500 hover:bg-violet-800 hover:text-white ">
                 <ProfileIcon className="w-5 mx-auto" alt="Profile" />
               </a>
