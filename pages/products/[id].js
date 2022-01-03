@@ -1,18 +1,44 @@
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import React from "react";
 import { useRouter } from "next/router";
-import Layout from "../../components/layout";
+import Layout, { siteTitlePrefix } from "../../components/layout";
 import PageTitle from "../../components/PageTitle";
 import { db } from "../../lib/fbInstance";
 import SpinnerFullScreen from "../../components/SpinnerFullScreen";
 import ImageSelector from "../../components/ImageSelector";
 import ProductInfo from "../../components/ProductInfo";
 import Container from "../../components/Container";
+import Head from "next/head";
 
 export default function ProductDetails({ product }) {
   const router = useRouter();
   return (
     <React.Fragment>
+      <Head>
+        <title>
+          {siteTitlePrefix} {product.name}
+        </title>
+        {/* Primary Meta */}
+        <meta name="description" content={product.description} />
+
+        {/* Open Graph / Facebook*/}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content={`${siteTitlePrefix}${product.name}`}
+        />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.coverPhotoURL} />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:title"
+          content={`${siteTitlePrefix}${product.name}`}
+        />
+        <meta property="twitter:description" content={product.description} />
+        <meta property="twitter:image" content={product.coverPhotoURL} />
+      </Head>
       <Layout>
         {router.isFallback ? (
           <SpinnerFullScreen />
