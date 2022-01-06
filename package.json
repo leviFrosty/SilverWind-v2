@@ -10,7 +10,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.24.0",
-    "firebase": "^9.6.1",
+    "firebase": "^9.4.0",
     "micro": "^9.3.4",
     "next": "^12.0.7",
     "next-stripe": "^1.0.0-beta.8",
