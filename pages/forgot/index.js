@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { sendPasswordResetEmail } from "@firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { useRouter } from "next/router";
 import Layout from "../../components/layout";
 import Link from "next/link";

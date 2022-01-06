@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "./input";
-import { signInWithEmailAndPassword } from "@firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import { auth } from "../lib/fbInstance";
 import Form from "./form";

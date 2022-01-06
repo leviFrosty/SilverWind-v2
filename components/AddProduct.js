@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getDownloadURL, ref, uploadString } from "@firebase/storage";
-import { doc, setDoc } from "@firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 import { db, storage } from "../lib/fbInstance";
 import { v4 as uuidv4 } from "uuid";
 import SpinnerFullScreen from "./SpinnerFullScreen";
