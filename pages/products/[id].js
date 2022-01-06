@@ -20,15 +20,16 @@ export default function ProductDetails({ product }) {
   return (
     <React.Fragment>
       <Head>
-        <title>
-          {siteTitlePrefix} {product.name}
-        </title>
+        <title>{`${siteTitlePrefix} ${product.name}`}</title>
         {/* Primary Meta */}
         <meta name="description" content={product.description} />
 
         {/* Open Graph / Facebook*/}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={siteTitlePrefix + product.name} />
+        <meta
+          property="og:title"
+          content={`${siteTitlePrefix} ${product.name}`}
+        />
         <meta property="og:description" content={product.description} />
         <meta property="og:image" content={product.coverPhotoURL} />
 
@@ -36,7 +37,7 @@ export default function ProductDetails({ product }) {
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:title"
-          content={siteTitlePrefix + product.name}
+          content={`${siteTitlePrefix} ${product.name}`}
         />
         <meta property="twitter:description" content={product.description} />
         <meta property="twitter:image" content={product.coverPhotoURL} />
@@ -80,9 +81,7 @@ export async function getStaticProps(context) {
     })
     .catch((e) => console.log(e));
   return {
-    props: {
-      product,
-    },
-    revalidate: 60,
+    props: { product },
+    revalidate: 10,
   };
 }

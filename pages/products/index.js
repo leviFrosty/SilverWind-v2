@@ -14,7 +14,7 @@ export async function getStaticProps() {
     props: {
       products: products,
     },
-    revalidate: 30,
+    revalidate: 10,
   };
 }
 
