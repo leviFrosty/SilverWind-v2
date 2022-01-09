@@ -3,7 +3,14 @@ import React, { useState, useEffect } from "react";
 import { siteTitlePrefix } from "./layout";
 import Container from "./Container";
 import CenterTitle from "./CenterTitle";
-import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../lib/fbInstance";
 import CartCard from "../components/CartCard";
 import Link from "next/link";
@@ -11,6 +18,7 @@ import getStripe from "../lib/getStripe";
 import axios from "axios";
 import SpinnerFullScreen from "./SpinnerFullScreen";
 import Spinner from "./Spinner";
+import getUserData from "../lib/getUserData";
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
@@ -64,11 +72,17 @@ export default function CartPage({ user }) {
       const product = productList.find((product) => product.id === cartItem.id);
       return { quantity: cartItem.quantity, price: product.priceId };
     });
+    let stripeCustomerId;
+    await getUserData(user.uid).then(
+      (res) => (stripeCustomerId = res.stripeCustomerId)
+    );
+    console.log(stripeCustomerId);
 
     const {
       data: { id },
     } = await axios.post("/api/stripe/checkout_session", {
       items: stripeCartList,
+      stripeCustomerId: stripeCustomerId,
     });
     const stripe = await getStripe();
     await stripe.redirectToCheckout({ sessionId: id });

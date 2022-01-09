@@ -32,11 +32,14 @@ export default async function handler(req, res) {
       console.log(err);
     }
 
+    console.log("STRIPE CUSTOMER ID:", req.body.stripeCustomerId);
+
     try {
       const session = await stripe.checkout.sessions.create({
         mode: "payment",
         payment_method_types: ["card"],
         line_items: req?.body?.items ?? [],
+        customer: req.body.stripeCustomerId,
         success_url: `${req.headers.origin}/cart/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/cart`,
         shipping_address_collection: {
