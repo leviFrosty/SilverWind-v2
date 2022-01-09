@@ -12,6 +12,4 @@ export default async function AddStripeProduct(req, res) {
     });
     res.status(200).json(stripeProduct);
   }
-
-  // Send back product information from stripe api in res
 }

@@ -13,6 +13,10 @@ import Minus from "../public/icons/minus-solid.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { addToCart } from "../lib/addToCart";
+import {
+  FREE_STANDARD_SHIPPING_ORDER_MIN,
+  FREE_EXPRESS_SHIPPING_ORDER_MIN,
+} from "../lib/PRODUCT_KEYS";
 
 export default function ProductInfo({ product }) {
   const [quantityText, setquantityText] = useState("");
@@ -108,11 +112,11 @@ export default function ProductInfo({ product }) {
         </div>
         <div className="flex flex-row gap-2 justify-center text-sm align-middle">
           <Basket className="w-5 h-5" />
-          Free standard over $40
+          Free standard over ${FREE_STANDARD_SHIPPING_ORDER_MIN * 0.01}
         </div>
         <div className="flex flex-row gap-2 justify-center text-sm align-middle">
           <Truck className="w-5 h-5" />
-          Free express over $120
+          Free express over ${FREE_EXPRESS_SHIPPING_ORDER_MIN * 0.01}
         </div>
       </div>
       <div className="product-description">

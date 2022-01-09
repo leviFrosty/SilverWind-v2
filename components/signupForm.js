@@ -1,21 +1,54 @@
+import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { auth } from "../lib/fbInstance";
+import { auth, db } from "../lib/fbInstance";
 import Form from "./form";
 import FormSubmitButton from "./FormSubmitButton";
 import Input from "./input";
+import Select from "./Select";
 
 export default function SignupForm() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [gender, setgender] = useState("");
   const [error, seterror] = useState("");
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then(async (userCredential) => {
+        const { uid } = userCredential.user;
+        let stripeCustomerId;
+        // Adds user document for extra user data in Firebase.
+        await axios
+          .post("/api/stripe/create-customer", {
+            name: `${firstName} ${lastName}`,
+            email,
+            uid,
+          })
+          .then((res) => (stripeCustomerId = res.data.id));
+        const docData = {
+          firstName,
+          lastName,
+          gender,
+          email,
+          cart: [],
+          likes: [],
+          purchases: [],
+          stripeCustomerId,
+        };
+        setDoc(doc(db, "users", uid), docData)
+          .then(() => {
+            navigate("/welcome", { replace: true });
+          })
+          .catch((e) => {
+            console.log(e);
+          });
         router.push("/");
       })
       .catch((e) => seterror(e.message));
@@ -32,6 +65,34 @@ export default function SignupForm() {
         required
       />
       <Input
+        name="firstName"
+        title="first name"
+        type="text"
+        value={firstName}
+        setState={setfirstName}
+        required
+      />
+      <Input
+        name="lastName"
+        title="last name"
+        type="text"
+        value={lastName}
+        setState={setlastName}
+        required
+      />
+      <Select
+        id="category"
+        title="category"
+        required
+        value={gender}
+        setState={setgender}
+      >
+        <option>-- select gender -- </option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </Select>
+      <Input
         name="password"
         title="password"
         type="password"
@@ -41,5 +102,6 @@ export default function SignupForm() {
       />
       <FormSubmitButton label="Sign up" />
     </Form>
+    
   );
 }
