@@ -8,6 +8,10 @@ export default function privacyPolicy() {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Privacy Policy</title>
+        <meta
+          name="description"
+          content="The SilverWind Privacy Policy."
+        />
       </Head>
       <CenterTitle>Privacy Policy</CenterTitle>
       <div className="text-violet-900 px-2 flex flex-col gap-2">

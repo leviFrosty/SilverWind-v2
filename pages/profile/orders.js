@@ -1,7 +1,8 @@
 import axios from "axios";
+import Head from "next/head";
 import React, { useContext, useEffect, useState } from "react";
 import CenterTitle from "../../components/CenterTitle";
-import Layout from "../../components/layout";
+import Layout, { siteTitlePrefix } from "../../components/layout";
 import OrderCheckoutSessionCard from "../../components/OrderCheckoutSessionCard";
 import ProfileLayout from "../../components/ProfileLayout";
 import UserContext from "../../contexts/userContext";
@@ -31,6 +32,13 @@ export default function Orders() {
 
   return (
     <Layout>
+      <Head>
+        <title>{siteTitlePrefix} Orders</title>
+        <meta
+          name="description"
+          content="Follow previous orders and see your SilverWind order details."
+        />
+      </Head>
       <ProfileLayout>
         <CenterTitle>Orders</CenterTitle>
         <div className="flex flex-col justify-center items-center">

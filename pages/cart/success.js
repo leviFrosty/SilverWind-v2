@@ -17,6 +17,7 @@ export default function Success() {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Thank you!</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <Container>
         {user ? <SuccessPage user={user} session_id={session_id} /> : null}

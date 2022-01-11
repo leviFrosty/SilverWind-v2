@@ -8,10 +8,15 @@ export default function ResetSuccess() {
   return (
     <Layout>
       <Head>
-        <title>{siteTitlePrefix} Password Reset!</title>
+        <title>{siteTitlePrefix} Password Reset Submitted!</title>
+        <meta
+          name="description"
+          content="Your password request has been submitted!"
+        />
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <div className="h-[70vh] flex items-center justify-center flex-col">
-        <CenterTitle>Reset Success! 🤕</CenterTitle>
+        <CenterTitle>Reset Request Success! 🤕</CenterTitle>
         <p className="text-center text-violet-900">
           You should recieve an email shortly if there is an account linked to
           your email.

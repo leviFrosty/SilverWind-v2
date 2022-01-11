@@ -1,9 +1,10 @@
 import { doc, setDoc } from "firebase/firestore";
+import Head from "next/head";
 import React, { useContext, useEffect, useState } from "react";
 import CenterTitle from "../../components/CenterTitle";
 import Form from "../../components/form";
 import Input from "../../components/input";
-import Layout from "../../components/layout";
+import Layout, { siteTitlePrefix } from "../../components/layout";
 import ProfileLayout from "../../components/ProfileLayout";
 import UserContext from "../../contexts/userContext";
 import { db } from "../../lib/fbInstance";
@@ -35,6 +36,13 @@ export default function Settings() {
 
   return (
     <Layout>
+      <Head>
+        <title>{siteTitlePrefix} Settings</title>
+        <meta
+          name="description"
+          content="Change your SilverWind profile settings."
+        />
+      </Head>
       <ProfileLayout>
         <CenterTitle>Settings</CenterTitle>
         <Form onSubmit={handleSubmit} error={error}>

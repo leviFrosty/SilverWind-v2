@@ -10,6 +10,10 @@ export default function login() {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Sign Up</title>
+        <meta
+          name="description"
+          content="Fill out the form to join SilverWind today. Sign up to get access to special pieces that will not be seen elsewhere."
+        />
       </Head>
       <div className="mx-auto w-fit max-w-xl min-h-[70vh] flex flex-col items-center justify-center">
         <CenterTitle>Welcome to SilverWinds</CenterTitle>

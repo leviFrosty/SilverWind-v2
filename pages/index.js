@@ -8,6 +8,10 @@ export default function Home() {
     <Layout home>
       <Head>
         <title>{siteTitlePrefix} Custom Handmade Jewelry</title>
+        <meta
+          name="description"
+          content="SilverWind is offering the best in custom handcrafted Jewelry and bespoke pieces. Our goal is to deliver a quality and unique experience that will leave you feeling special with something special."
+        />
       </Head>
       <section>
         <Hero />

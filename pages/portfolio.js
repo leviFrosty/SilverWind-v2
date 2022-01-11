@@ -9,6 +9,10 @@ export default function Portfolio() {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Portfolio</title>
+        <meta
+          name="description"
+          content="View SilverWind's best jewelry pieces, all made by hand."
+        />
       </Head>
       <Container>
         <PageTitle>Portfolio</PageTitle>

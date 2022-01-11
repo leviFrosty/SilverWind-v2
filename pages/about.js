@@ -9,6 +9,10 @@ export default function About() {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} About</title>
+        <meta
+          name="description"
+          content="The story of how Julia Hodory started SilverWind Jewelry starting from a little workbench and $100."
+        />
       </Head>
       <Container>
         <PageTitle>About SilverWind</PageTitle>

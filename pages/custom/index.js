@@ -9,6 +9,10 @@ export default function Custom() {
     <>
       <Head>
         <title>{siteTitlePrefix} Submit Custom Order</title>
+        <meta
+          name="description"
+          content="Order a custom SilverWind handmade piece of Jewelry to your details."
+        />
       </Head>
       <Layout>
         <Container className="justify-center px-4">

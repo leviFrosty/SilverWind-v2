@@ -24,6 +24,10 @@ export default function Forgot() {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Reset Your Password</title>
+        <meta
+          name="description"
+          content="Learn how to change or rest your SilverWind password."
+        />
       </Head>
       <h1>Reset your Password</h1>
       <form onSubmit={handleFormSubmit}>

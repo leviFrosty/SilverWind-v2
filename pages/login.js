@@ -11,6 +11,10 @@ export default function Login() {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Login</title>
+        <meta
+          name="description"
+          content="Login to your SilverWind account."
+        />
       </Head>
       <LoginPage redirectTo={router.query.redirectTo} />
     </Layout>

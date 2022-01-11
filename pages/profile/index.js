@@ -16,6 +16,7 @@ const Profile = () => {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} Profile</title>
+        <meta name="description" content="View your SilverWind profile page." />
       </Head>
       {isLoading ? <SpinnerFullScreen /> : null}
       {user ? <ProfilePage /> : <LoginPage redirectTo={router.pathname} />}
