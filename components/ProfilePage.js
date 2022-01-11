@@ -6,17 +6,17 @@ import UserContext from "../contexts/userContext";
 import { auth, db } from "../lib/fbInstance";
 import CenterTitle from "./CenterTitle";
 import Container from "./Container";
+import getUserData from "../lib/getUserData";
+import ProfileLayout from "./ProfileLayout";
 
 export default function ProfilePage() {
   const { user } = useContext(UserContext);
   const [isAdmin, setisAdmin] = useState(false);
   const [userToken, setuserToken] = useState("");
+  const [userData, setuserData] = useState({});
   const router = useRouter();
 
-  const signOutUser = () => {
-    signOut(auth);
-    router.push("/login");
-  };
+
 
   const checkAdmin = async () => {
     await getDoc(doc(db, "users", user.uid))
@@ -31,21 +31,23 @@ export default function ProfilePage() {
       .catch((e) => console.log(e));
   };
 
+  const fetchuserData = async () => {
+    await getUserData(user.uid)
+      .then((data) => setuserData(data))
+      .catch((e) => console.log(e));
+  };
+
   useEffect(() => {
     checkAdmin();
+    fetchuserData();
   }, []);
 
   return (
     <React.Fragment>
-      <CenterTitle>Profile</CenterTitle>
-      <Container>
-        <h2 className="text-center">Hello {user.email}</h2>
-        <button
-          className="underline decoration-2 rounded-md px-8 py-2 text-violet-900"
-          onClick={() => signOutUser()}
-        >
-          Sign Out
-        </button>
+      <ProfileLayout userData={userData}>
+        <CenterTitle>Hello {userData.firstName}</CenterTitle>
+        <p className="text-center">Email: {user.email}</p>
+        
         {isAdmin && (
           <button
             className="underline decoration-2 rounded-md px-8 py-2 text-violet-900"
@@ -56,7 +58,7 @@ export default function ProfilePage() {
             Admin Dashboard
           </button>
         )}
-      </Container>
+      </ProfileLayout>
     </React.Fragment>
   );
 }

@@ -24,7 +24,7 @@ export default function Nav() {
     let unsubscribeCart = () => {};
     if (user) {
       unsubscribeCart = onSnapshot(doc(db, "users", user.uid), (doc) => {
-        const cart = doc.data().cart;
+        const { cart } = doc.data();
         let total = 0;
         cart.forEach((item) => (total = total + item.quantity));
         setCartSize(total);

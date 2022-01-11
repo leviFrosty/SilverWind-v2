@@ -3,7 +3,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   const id = req.query.id;
-
   try {
     if (!id.startsWith("cs_")) {
       throw Error("Incorrect checkout session ID");
