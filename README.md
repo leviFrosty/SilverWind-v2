@@ -1,6 +1,6 @@
 # SilverWind Official Site
 
-_Under Construction_. I know... Sad.
+_Under Construction_. I know... Sad. But it's nearly done! (Well mostly)
 
 #### Can't wait? Check out our pages below!
 
@@ -14,8 +14,8 @@ _Under Construction_. I know... Sad.
 
 #### Developer?
 
-[Node](https://nodejs.org/en/) is required.
+[Node](https://nodejs.org/en/) is required to run locally.
 
-Preview locally by running `npm i` then `npm run dev`.
+Clone this repo, then run `npm i` then `npm run dev`.
 
-Any contributions are appreciated!
+Any contributions are much appreciated!
