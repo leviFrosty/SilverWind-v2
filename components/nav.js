@@ -24,10 +24,14 @@ export default function Nav() {
     let unsubscribeCart = () => {};
     if (user) {
       unsubscribeCart = onSnapshot(doc(db, "users", user.uid), (doc) => {
-        const { cart } = doc.data();
-        let total = 0;
-        cart.forEach((item) => (total = total + item.quantity));
-        setCartSize(total);
+        try {
+          const { cart } = doc.data();
+          let total = 0;
+          cart.forEach((item) => (total = total + item.quantity));
+          setCartSize(total);
+        } catch (err) {
+          console.log(err.message);
+        }
       });
     }
     return () => unsubscribeCart();
