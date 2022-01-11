@@ -15,7 +15,7 @@ export default function login() {
         <CenterTitle>Welcome to SilverWinds</CenterTitle>
         <SignupForm />
         <span className="text-violet-900 text-sm opacity-80">
-          By clicking 'Sign up' you agree to our Terms and Conditions
+          By clicking &quot;Sign up&quot; you agree to our Terms and Conditions
         </span>
         <Link href="/login">
           <a className="text-violet-900 underline decoration-2 my-2 font-semibold">
