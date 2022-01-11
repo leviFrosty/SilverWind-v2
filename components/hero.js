@@ -1,12 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Underline from "../public/images/hero-underline.svg";
-import heroHeartRingVideo from "../public/videos/heroHeartRingVideo.gif";
 import { useRouter } from "next/router";
 
 export default function Hero() {
+  const [ismobile, setismobile] = useState(true);
+  useEffect(() => {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+    } else {
+      setismobile(false);
+    }
+  }, []);
+
   const router = useRouter();
   return (
     <React.Fragment>
@@ -26,14 +37,33 @@ export default function Hero() {
             </Link>
           </div>
           <div className="px-4">
-            <Image
-              src={heroHeartRingVideo}
-              width={600}
-              height={400}
-              onClick={() => router.push("/products")}
-              alt="Heart shaped ring"
-              className="rounded-md hover:cursor-pointer"
-            />
+            {ismobile ? (
+              <Image
+                src="https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FScreen%20Shot%202022-01-11%20at%203.12.35%20AM%201-min.png?alt=media&token=18bd4c7f-d765-46c2-9aa3-81578a746b51"
+                onClick={() => router.push("/products")}
+                alt="Heart shaped ring"
+                className="rounded-md hover:cursor-pointer"
+                width={600}
+                height={400}
+              />
+            ) : (
+              <video
+                width={600}
+                height={400}
+                autoPlay
+                muted
+                loop
+                onClick={() => router.push("/products")}
+                alt="Heart shaped ring"
+                className="rounded-md hover:cursor-pointer"
+              >
+                <source
+                  src="https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FheroHeartRingVideo.mp4?alt=media&token=7bdf3b90-c35e-4713-b5d5-80dc1cc0497c"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            )}
             <p className="text-right text-violet-900 opacity-30">
               designed and crafted by Julia
             </p>
