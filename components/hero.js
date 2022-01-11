@@ -5,7 +5,7 @@ import Container from "./Container";
 import Underline from "../public/images/hero-underline.svg";
 import { useRouter } from "next/router";
 
-export default function Hero() {
+export default function Hero({ coverPhotoUrl }) {
   const [ismobile, setismobile] = useState(true);
   useEffect(() => {
     if (
@@ -39,7 +39,7 @@ export default function Hero() {
           <div className="px-4">
             {ismobile ? (
               <Image
-                src="https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FScreen%20Shot%202022-01-11%20at%203.12.35%20AM%201-min.png?alt=media&token=18bd4c7f-d765-46c2-9aa3-81578a746b51"
+                src={coverPhotoUrl}
                 onClick={() => router.push("/products")}
                 alt="Heart shaped ring"
                 className="rounded-md hover:cursor-pointer"
