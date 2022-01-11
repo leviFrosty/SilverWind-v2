@@ -5,7 +5,7 @@ import CenterTitle from "../components/CenterTitle";
 import Container from "../components/Container";
 import Layout, { siteTitlePrefix } from "../components/layout";
 
-export default function termsAndConditions() {
+export default function returnpolicy() {
   return (
     <Layout>
       <Head>
