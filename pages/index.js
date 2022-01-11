@@ -26,7 +26,7 @@ export default function Home() {
           property="og:description"
           content="SilverWind is offering the best in custom handcrafted Jewelry and bespoke pieces. Our goal is to deliver a quality and unique experience that will leave you feeling special with something special."
         />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content={coverPhotoUrl} />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://www.silverwind.store/" />
