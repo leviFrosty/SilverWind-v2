@@ -1,10 +1,14 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Layout, { siteTitlePrefix } from "../../components/layout";
 import PageTitle from "../../components/PageTitle";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../lib/fbInstance";
 import { RINGS } from "../../lib/PRODUCT_KEYS";
+import Container from "../../components/Container";
+import ProductFilter from "../../components/ProductFilter";
+import ProductFeed from "../../components/productFeed";
+import OrderCustom from "../../components/OrderCustom";
 
 export async function getStaticProps() {
   let products = [];
@@ -22,7 +26,9 @@ export async function getStaticProps() {
 }
 
 export default function Rings({ products }) {
-  console.log(products);
+  const [filter, setFilter] = useState(null);
+  const [sort, setSort] = useState(null);
+
   return (
     <Layout>
       <Head>
@@ -33,7 +39,24 @@ export default function Rings({ products }) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <PageTitle>Rings</PageTitle>
+      <Container>
+        <PageTitle>Rings</PageTitle>
+        <div className="flex flex-col md:flex-row">
+          <div>
+            <ProductFilter
+              setSort={setSort}
+              setFilter={setFilter}
+              filterDisable
+            />
+          </div>
+          <div className=" w-full">
+            <ProductFeed sort={sort} filter={filter} products={products} />
+          </div>
+        </div>
+        <section>
+          <OrderCustom />
+        </section>
+      </Container>
     </Layout>
   );
 }

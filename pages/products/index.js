@@ -26,6 +26,11 @@ export default function AllProducts({ products }) {
     <Layout>
       <Head>
         <title>{siteTitlePrefix} All Products</title>
+        <meta
+          name="description"
+          content="View all SilverWinds products from handmade Rings, Necklaces, Earrings, and more! Filter and search by the product that you want."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Container>
         <PageTitle>Products</PageTitle>

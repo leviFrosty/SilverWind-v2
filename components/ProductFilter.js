@@ -10,58 +10,60 @@ import {
 import FilterButton from "./FilterButton";
 import ChevonRight from "../public/icons/chevron-right-solid.svg";
 
-export default function ProductFilter({ setFilter, setSort }) {
-  const [filterExpanded, setfilterExpanded] = useState(false);
-  const [sortExpanded, setsortExpanded] = useState(false);
+export default function ProductFilter({ setFilter, setSort, filterDisable }) {
+  const [filterExpanded, setfilterExpanded] = useState(true);
+  const [sortExpanded, setsortExpanded] = useState(true);
 
   return (
     <aside className="flex flex-col px-2 gap-4 my-2">
-      <div className="flex flex-col gap-2 w-[160px]">
-        <h3
-          className="font-bold text-left text-lg text-violet-300 hover:text-violet-500 cursor-pointer flex items-center"
-          onClick={() => setfilterExpanded(!filterExpanded)}
-        >
-          Filter
+      {!filterDisable == true ? (
+        <div className="flex flex-col gap-2 md:w-[160px] w-full">
+          <h3
+            className="font-bold text-left text-lg text-violet-300 hover:text-violet-500 cursor-pointer flex items-center"
+            onClick={() => setfilterExpanded(!filterExpanded)}
+          >
+            Filter
+            {filterExpanded ? (
+              <ChevonRight
+                width={10}
+                height={10}
+                className="inline mx-2 rotate-90 transition-all"
+              />
+            ) : (
+              <ChevonRight
+                width={10}
+                height={10}
+                className="inline mx-2 transition-all"
+              />
+            )}
+          </h3>
           {filterExpanded ? (
-            <ChevonRight
-              width={10}
-              height={10}
-              className="inline mx-2 rotate-90 transition-all"
-            />
-          ) : (
-            <ChevonRight
-              width={10}
-              height={10}
-              className="inline mx-2 transition-all"
-            />
-          )}
-        </h3>
-        {filterExpanded ? (
-          <>
-            <FilterButton filter={null} setFilter={setFilter}>
-              All
-            </FilterButton>
-            <FilterButton
-              filter={{ type: CATEGORY, value: RINGS }}
-              setFilter={setFilter}
-            >
-              Rings
-            </FilterButton>
-            <FilterButton
-              filter={{ type: CATEGORY, value: NECKLACES }}
-              setFilter={setFilter}
-            >
-              Necklaces
-            </FilterButton>
-            <FilterButton
-              filter={{ type: CATEGORY, value: EARRINGS }}
-              setFilter={setFilter}
-            >
-              Earrings
-            </FilterButton>
-          </>
-        ) : null}
-      </div>
+            <div className="flex flex-row md:flex-col justify-between">
+              <FilterButton filter={null} setFilter={setFilter}>
+                All
+              </FilterButton>
+              <FilterButton
+                filter={{ type: CATEGORY, value: RINGS }}
+                setFilter={setFilter}
+              >
+                Rings
+              </FilterButton>
+              <FilterButton
+                filter={{ type: CATEGORY, value: NECKLACES }}
+                setFilter={setFilter}
+              >
+                Necklaces
+              </FilterButton>
+              <FilterButton
+                filter={{ type: CATEGORY, value: EARRINGS }}
+                setFilter={setFilter}
+              >
+                Earrings
+              </FilterButton>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
       <div className="flex flex-col gap-2 w-[160px]">
         <h3
           className="font-bold text-left text-lg text-violet-300 hover:text-violet-500 cursor-pointer flex items-center "
@@ -83,20 +85,20 @@ export default function ProductFilter({ setFilter, setSort }) {
           )}
         </h3>
         {sortExpanded ? (
-          <>
+          <div className="flex flex-col gap-2 w-[160px]">
             <button
-              className="text-left border-l-4 border-violet-200 px-2 hover:border-violet-300 transition-all"
+              className="text-center rounded-md bg-violet-100 px-2 py-1 md:bg-inherit md:rounded-none md:text-left md:border-l-4 md:border-violet-200 md:hover:border-violet-300 transition-all text-violet-900"
               onClick={() => setSort({ type: PRICE_ASC })}
             >
               Price Low to High
             </button>
             <button
-              className="text-left border-l-4 border-violet-200 px-2 hover:border-violet-300 transition-all"
+              className="text-center rounded-md bg-violet-100 px-2 py-1 md:bg-inherit md:rounded-none md:text-left md:border-l-4 md:border-violet-200 md:hover:border-violet-300 transition-all text-violet-900"
               onClick={() => setSort({ type: PRICE_DESC })}
             >
               Price High to Low
             </button>
-          </>
+          </div>
         ) : null}
       </div>
     </aside>
