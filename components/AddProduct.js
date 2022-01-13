@@ -207,7 +207,6 @@ export default function AddProduct() {
         <SpinnerFullScreen />
       ) : (
         <Form onSubmit={onSubmit} error={error} className="mx-2">
-          {processing ? <Spinner className="mx-auto" /> : null}
           <Input
             name="name"
             title="name"
@@ -280,12 +279,13 @@ export default function AddProduct() {
             setState={setprice}
           />
           <p className="text-sm text-violet-900 opacity-75">Format as: 00.00</p>
-          <input
+          <button
             className="disabled:opacity-50 disabled:cursor-default disabled:hover:bg-violet-500 cursor-pointer bg-violet-500 w-full text-white rounded-md px-3 py-2 my-4 hover:bg-violet-600 active:bg-violet-600"
             type="submit"
-            value="Submit"
             disabled={error ? true : false}
-          />
+          >
+            {processing ? <Spinner className="mx-auto text-white h-6" /> : "Submit"}
+          </button>
         </Form>
       )}
     </React.Fragment>
