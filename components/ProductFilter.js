@@ -10,7 +10,13 @@ import {
 import FilterButton from "./FilterButton";
 import ChevonRight from "../public/icons/chevron-right-solid.svg";
 
-export default function ProductFilter({ setFilter, setSort, filterDisable }) {
+export default function ProductFilter({
+  filter,
+  sort,
+  setFilter,
+  setSort,
+  filterDisable,
+}) {
   const [filterExpanded, setfilterExpanded] = useState(true);
   const [sortExpanded, setsortExpanded] = useState(true);
 
@@ -39,23 +45,30 @@ export default function ProductFilter({ setFilter, setSort, filterDisable }) {
           </h3>
           {filterExpanded ? (
             <div className="flex flex-row md:flex-col justify-between">
-              <FilterButton filter={null} setFilter={setFilter}>
+              <FilterButton
+                filter={{}}
+                setFilter={setFilter}
+                style={{ fontWeight: filter.value == undefined ? "bold" : "" }}
+              >
                 All
               </FilterButton>
               <FilterButton
                 filter={{ type: CATEGORY, value: RINGS }}
+                style={{ fontWeight: filter.value == RINGS ? "bold" : "" }}
                 setFilter={setFilter}
               >
                 Rings
               </FilterButton>
               <FilterButton
                 filter={{ type: CATEGORY, value: NECKLACES }}
+                style={{ fontWeight: filter.value == NECKLACES ? "bold" : "" }}
                 setFilter={setFilter}
               >
                 Necklaces
               </FilterButton>
               <FilterButton
                 filter={{ type: CATEGORY, value: EARRINGS }}
+                style={{ fontWeight: filter.value == EARRINGS ? "bold" : "" }}
                 setFilter={setFilter}
               >
                 Earrings

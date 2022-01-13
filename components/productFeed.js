@@ -12,11 +12,10 @@ export default function ProductFeed({ products, filter, sort }) {
 
   // Watches filter changes
   useEffect(() => {
-    if (filter === null) {
-      setselectedProducts(products);
-    }
-    if (filter) {
+    if (filter.value) {
       filterProducts(filter, products, setselectedProducts);
+    } else {
+      setselectedProducts(products);
     }
   }, [filter]);
 

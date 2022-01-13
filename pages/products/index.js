@@ -19,7 +19,7 @@ export async function getStaticProps() {
 }
 
 export default function AllProducts({ products }) {
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState({});
   const [sort, setSort] = useState(null);
 
   return (
@@ -36,7 +36,12 @@ export default function AllProducts({ products }) {
         <PageTitle>Products</PageTitle>
         <div className="flex flex-col md:flex-row">
           <div>
-            <ProductFilter setSort={setSort} setFilter={setFilter} />
+            <ProductFilter
+              filter={filter}
+              sort={sort}
+              setSort={setSort}
+              setFilter={setFilter}
+            />
           </div>
           <div className=" w-full">
             <ProductFeed sort={sort} filter={filter} products={products} />
