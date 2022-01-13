@@ -4,8 +4,9 @@ import OrderCustom from "../components/OrderCustom";
 import Layout, { siteTitlePrefix } from "../components/layout";
 
 const coverPhotoUrl =
-  "https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FcarvedRingPhoto-min.png?alt=media&token=2c2de65f-f3ab-4d12-91a9-a20a33128bb9";
-const coverVideoUrl = "https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FcarvedRingVideo.mp4?alt=media&token=dc2242ed-b0f8-496f-86b6-53a083aeb555"
+  "https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FcarvedRingPhoto-min.jpeg?alt=media&token=57bc831b-9e2d-472f-a61e-579aee86b907";
+const coverVideoUrl =
+  "https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FcarvedRingVideo.mp4?alt=media&token=dc2242ed-b0f8-496f-86b6-53a083aeb555";
 
 export default function Home() {
   return (
