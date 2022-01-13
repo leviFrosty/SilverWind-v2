@@ -5,7 +5,7 @@ import Container from "./Container";
 import Underline from "../public/images/hero-underline.svg";
 import { useRouter } from "next/router";
 
-export default function Hero({ coverPhotoUrl }) {
+export default function Hero({ coverPhotoUrl, coverVideoUrl }) {
   const [ismobile, setismobile] = useState(true);
   useEffect(() => {
     if (
@@ -57,10 +57,7 @@ export default function Hero({ coverPhotoUrl }) {
                 alt="Heart shaped ring"
                 className="rounded-md hover:cursor-pointer"
               >
-                <source
-                  src="https://firebasestorage.googleapis.com/v0/b/silverwind-ca60d.appspot.com/o/assets%2FheroHeartRingVideo.mp4?alt=media&token=7bdf3b90-c35e-4713-b5d5-80dc1cc0497c"
-                  type="video/mp4"
-                />
+                <source src={coverVideoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             )}
