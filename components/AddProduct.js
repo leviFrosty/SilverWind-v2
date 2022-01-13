@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
+import TimesSolid from "../public/icons/times-solid.svg";
+
 import { doc, setDoc } from "@firebase/firestore";
 import { db, storage } from "../lib/fbInstance";
 import { v4 as uuidv4 } from "uuid";
@@ -196,9 +198,21 @@ export default function AddProduct() {
             setprocessing(false);
             const skele = MAKE_PRODUCT_SKELETON(); // generates new product id and properties
             setProduct(skele);
+            handleClearCoverPhoto();
+            handleClearOtherPhotos();
           });
       });
     });
+  };
+
+  const handleClearCoverPhoto = () => {
+    const coverPhotoElement = document.querySelector("#coverPhoto");
+    coverPhotoElement.value = null;
+  };
+
+  const handleClearOtherPhotos = () => {
+    const coverPhotoElement = document.querySelector("#otherPhotos");
+    coverPhotoElement.value = null;
   };
 
   return (
@@ -231,21 +245,35 @@ export default function AddProduct() {
             setState={setmaterial}
             required
           />
-          <Input
-            name="coverImg"
-            title="cover image"
-            type="file"
-            required
-            onChange={handleCoverChange}
-          />
-          <Input
-            name="otherimgs"
-            title="other images"
-            type="file"
-            multiple
-            required
-            onChange={handleOtherImagesChange}
-          />
+          <div className="relative">
+            <Input
+              name="coverImg"
+              title="cover image"
+              type="file"
+              required
+              id="coverPhoto"
+              onChange={handleCoverChange}
+            />
+            <TimesSolid
+              onClick={() => handleClearCoverPhoto()}
+              className="text-violet-900 absolute top-10 right-5 h-5 w-5 hover:opacity-50 cursor-pointer"
+            />
+          </div>
+          <div className="relative">
+            <Input
+              name="otherimgs"
+              title="other images"
+              type="file"
+              multiple
+              required
+              id="otherPhotos"
+              onChange={handleOtherImagesChange}
+            />
+            <TimesSolid
+              onClick={() => handleClearOtherPhotos()}
+              className="text-violet-900 absolute top-10 right-5 h-5 w-5 hover:opacity-50 cursor-pointer"
+            />
+          </div>
           <Select
             id="category"
             title="category"
@@ -284,7 +312,11 @@ export default function AddProduct() {
             type="submit"
             disabled={error ? true : false}
           >
-            {processing ? <Spinner className="mx-auto text-white h-6" /> : "Submit"}
+            {processing ? (
+              <Spinner className="mx-auto text-white h-6" />
+            ) : (
+              "Submit"
+            )}
           </button>
         </Form>
       )}
