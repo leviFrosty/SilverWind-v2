@@ -26,7 +26,7 @@ export async function getStaticProps() {
 }
 
 export default function Earrings({ products }) {
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState({});
   const [sort, setSort] = useState(null);
 
   return (
