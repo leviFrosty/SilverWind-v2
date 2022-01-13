@@ -24,13 +24,16 @@ export default function CartCard({ product, quantity, user, userData }) {
         <Image
           src={product.coverPhotoURL}
           layout="fill"
-          className="object-contain rounded-lg overflow-hidden"
+          className="object-contain rounded-lg overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform"
           alt=""
           onClick={() => router.push(`/products/${product.id}`)}
         />
       </div>
       <div className="flex gap-2 md:gap-8 relative items-center">
-        <h2 className="text-center text-violet-900 text-xl md:font-semibold">
+        <h2
+          onClick={() => router.push(`/products/${product.id}`)}
+          className="text-center text-violet-900 text-xl md:font-semibold cursor-pointer hover:decoration-2 hover:underline hover:decoration-violet-400"
+        >
           {product.name}
         </h2>
       </div>

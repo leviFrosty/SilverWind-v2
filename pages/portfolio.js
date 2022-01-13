@@ -68,7 +68,7 @@ export default function Portfolio({ images }) {
           {images.map((image, index) => {
             return (
               <figure
-                className={`relative w-full
+                className={`relative w-full hover:cursor-pointer
                 ${index == 0 ? "h-full row-span-2 col-span-2" : "h-[270px]"}
                 `}
                 key={index}

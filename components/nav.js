@@ -65,42 +65,42 @@ export default function Nav() {
             <NavLink
               href="/about"
               exact
-              className="hover:bg-violet-100 hover:rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
+              className="hover:bg-violet-100 rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
             >
               about us
             </NavLink>
             <NavLink
               href="/portfolio"
               exact
-              className="hover:bg-violet-100 hover:rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
+              className="hover:bg-violet-100 rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
             >
               portfolio
             </NavLink>
             <NavLink
               href="/products"
               exact
-              className="hover:bg-violet-100 hover:rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
+              className="hover:bg-violet-100 rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
             >
               products
             </NavLink>
             <NavLink
               href="/products/rings"
               exact
-              className="hover:bg-violet-100 hover:rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
+              className="hover:bg-violet-100 rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
             >
               rings
             </NavLink>
             <NavLink
               href="/products/necklaces"
               exact
-              className="hover:bg-violet-100 hover:rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
+              className="hover:bg-violet-100 rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
             >
               necklaces
             </NavLink>
             <NavLink
               href="/products/earrings"
               exact
-              className="hover:bg-violet-100 hover:rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
+              className="hover:bg-violet-100 rounded-md px-2 py-1 focus:bg-violet-200 transition-all"
             >
               earrings
             </NavLink>
