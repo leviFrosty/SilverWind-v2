@@ -10,7 +10,6 @@ import { storage } from "../lib/fbInstance";
 import OrderCustom from "../components/OrderCustom";
 import TimesSolid from "../public/icons/times-solid.svg";
 
-
 export async function getStaticProps() {
   const listRef = ref(storage, "assets/portfolio_page/");
   let images = [];
@@ -51,8 +50,9 @@ export default function Portfolio({ images }) {
           isOpen={modalIsOpen}
           onRequestClose={() => setmodalIsOpen(false)}
         >
-          <img
+          <Image
             src={selectedImage}
+            layout="fill"
             alt=""
             className="w-full max-h-full object-contain"
           />
@@ -71,6 +71,7 @@ export default function Portfolio({ images }) {
                 className={`relative w-full
                 ${index == 0 ? "h-full row-span-2 col-span-2" : "h-[270px]"}
                 `}
+                key={index}
                 onClick={() => {
                   setSelectedImage(image);
                   setmodalIsOpen(true);
@@ -80,22 +81,20 @@ export default function Portfolio({ images }) {
                   src={image}
                   alt=""
                   layout="fill"
-                  key={index}
                   className="w-full h-full object-cover"
                 />
               </figure>
             );
-            console.log(index, image);
           })}
         </div>
         <section className="text-violet-900 my-4 mx-2">
           <p className="my-2">
-            These are just some of my favorite custom pieces I've made. All of
-            these are avaiable for order at the link below.
+            These are just some of my favorite custom pieces I&apos;ve made. All
+            of these are avaiable for order at the link below.
           </p>
           <p>
             <span className="font-semibold">Best part? </span>You can change
-            anything you don't like or request something else!
+            anything you don&apos;t like or request something else!
           </p>
         </section>
         <OrderCustom />
