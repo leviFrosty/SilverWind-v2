@@ -27,7 +27,7 @@ export async function getStaticProps() {
 
 export default function Earrings({ products }) {
   const [filter, setFilter] = useState({});
-  const [sort, setSort] = useState(null);
+  const [sort, setSort] = useState({});
 
   return (
     <Layout>
@@ -44,6 +44,7 @@ export default function Earrings({ products }) {
         <div className="flex flex-col md:flex-row">
           <div>
             <ProductFilter
+              sort={sort}
               setSort={setSort}
               setFilter={setFilter}
               filterDisable

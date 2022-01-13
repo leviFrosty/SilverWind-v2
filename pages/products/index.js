@@ -20,7 +20,7 @@ export async function getStaticProps() {
 
 export default function AllProducts({ products }) {
   const [filter, setFilter] = useState({});
-  const [sort, setSort] = useState(null);
+  const [sort, setSort] = useState({});
 
   return (
     <Layout>
