@@ -1,8 +1,8 @@
 # SilverWind Official Site
 
-_Under Construction_. I know... Sad. But it's nearly done! (Well mostly)
+Launched Jan, 2022!
 
-#### Can't wait? Check out our pages below!
+#### Check out our other pages below!
 
 [Etsy](https://www.etsy.com/shop/SSilverWind)
 
@@ -14,9 +14,6 @@ _Under Construction_. I know... Sad. But it's nearly done! (Well mostly)
 
 #### Developer?
 
-[Node](https://nodejs.org/en/) is required to run locally.
-
-Clone this repo, then run `npm i` then `npm run dev`.
-
 Any contributions are much appreciated!
 
+This project is still a WIP, refactoring and more SSR / security practices will be implemented in the future.
