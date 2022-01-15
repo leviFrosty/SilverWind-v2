@@ -45,23 +45,25 @@ export default function Settings() {
       </Head>
       <ProfileLayout>
         <CenterTitle>Settings</CenterTitle>
-        <Form onSubmit={handleSubmit} error={error}>
-          <h3 className="text-lg text-violet-900">Full Name</h3>
-          <p>{`${userData.firstName} ${userData.lastName}`}</p>
-          <h3 className="mt-2 text-lg text-violet-900">Email</h3>
-          <Input
-            name="email"
-            type="text"
-            value={email}
-            setState={setemail}
-          ></Input>
-          <button
-            className="my-4 bg-violet-900 px-auto w-full text-white hover:bg-violet-500 active:bg-violet-500 py-2 rounded-md"
-            type="submit"
-          >
-            Save
-          </button>
-        </Form>
+        <div className="px-2">
+          <Form onSubmit={handleSubmit} error={error}>
+            <h3 className="text-lg text-violet-900">Full Name</h3>
+            <p>{`${userData.firstName} ${userData.lastName}`}</p>
+            <h3 className="mt-2 text-lg text-violet-900">Email</h3>
+            <Input
+              name="email"
+              type="text"
+              value={email}
+              setState={setemail}
+            ></Input>
+            <button
+              className="my-4 bg-violet-900 px-auto w-full text-white hover:bg-violet-500 active:bg-violet-500 py-2 rounded-md"
+              type="submit"
+            >
+              Save
+            </button>
+          </Form>
+        </div>
       </ProfileLayout>
     </Layout>
   );
