@@ -49,7 +49,7 @@ export default function Hero({ coverPhotoUrl, coverVideoUrl }) {
             ) : (
               <video
                 width={600}
-                height={400}
+                height={500}
                 autoPlay
                 muted
                 loop
