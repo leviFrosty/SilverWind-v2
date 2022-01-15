@@ -10,54 +10,63 @@ export default function OrderCheckoutSessionCard({ checkoutSession }) {
       .catch((e) => console.log(e));
   }, []);
   return (
-    <div className="border-2 border-violet-100 text-violet-900">
-      <div className="flex flex-row justify-between">
-        <h2>
+    <div className="border-2 border-violet-100 text-violet-900 w-full max-w-[500px] px-1 overflow-hidden shadow-sm rounded-md">
+      <div className="flex flex-row justify-between items-center">
+        <h2 className="text-xl">
           Total:{" "}
-          <span className="font-semibold">
+          <span className="font-bold text-lg">
             ${(checkoutSession.amount_total * 0.01).toFixed(2)}
             {checkoutSession.curreny}
           </span>
         </h2>
-        <h2>
-          Payment Status: <span>{checkoutSession.payment_status}</span>
-        </h2>
+        <h3 className="opacity-60 text-sm">
+          Payment Status:{" "}
+          <span className="uppercase">{checkoutSession.payment_status}</span>
+        </h3>
       </div>
       <div>
-        <table>
+        <table className="w-full">
           <thead>
             <tr>
-              <th>Shipping</th>
-              <th className="font-semibold">{shippingRateDisplayName}</th>
+              <th className="text-left">Shipping:</th>
+              <th className="flex justify-end">
+                <span className="font-semibold bg-violet-100 rounded-full px-4 py-1">
+                  {shippingRateDisplayName}
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Deliver to:</td>
+              <td className="text-right pr-2 opacity-70 text-sm">
+                Deliver to:
+              </td>
               <td>{checkoutSession.shipping.name}</td>
             </tr>
             <tr>
-              <td>Street</td>
+              <td className="text-right pr-2 opacity-70 text-sm">Street:</td>
               <td>{checkoutSession.shipping.address.line1}</td>
             </tr>
             <tr>
-              <td>Unit / Apt #</td>
+              <td className="text-right pr-2 opacity-70 text-sm">
+                Unit / Apt #:
+              </td>
               <td>{checkoutSession.shipping.address.line2}</td>
             </tr>
             <tr>
-              <td>City</td>
+              <td className="text-right pr-2 opacity-70 text-sm">City:</td>
               <td>{checkoutSession.shipping.address.city}</td>
             </tr>
             <tr>
-              <td>State</td>
+              <td className="text-right pr-2 opacity-70 text-sm">State:</td>
               <td>{checkoutSession.shipping.address.state}</td>
             </tr>
             <tr>
-              <td>Zip Code</td>
+              <td className="text-right pr-2 opacity-70 text-sm">Zip Code:</td>
               <td>{checkoutSession.shipping.address.postal_code}</td>
             </tr>
             <tr>
-              <td>Country</td>
+              <td className="text-right pr-2 opacity-70 text-sm">Country:</td>
               <td>{checkoutSession.shipping.address.country}</td>
             </tr>
           </tbody>

@@ -22,7 +22,10 @@ export default function Orders() {
           setisloading(false);
           setcheckoutSessions(res.data);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setisloading(false);
+          console.log(e);
+        });
     });
   };
 
@@ -41,7 +44,7 @@ export default function Orders() {
       </Head>
       <ProfileLayout>
         <CenterTitle>Orders</CenterTitle>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col gap-2 justify-center items-center">
           {!isloading
             ? checkoutSessions.map((checkoutSession) => {
                 return (
