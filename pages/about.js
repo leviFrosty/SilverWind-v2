@@ -36,13 +36,13 @@ export default function About({ PORTRAIT_PHOTO_URL }) {
               videos teaching myself the trade.
             </p>
             <p>
-              At first I was terrible, I felt like I couldn't do anything.
+              At first I was terrible, I felt like I couldn&apos;t do anything.
               However, I grew to love it and grew to learn the techniques that
               eventually made me want to spend more of my time smithing.
             </p>
             <p>
               Now here we are, in {new Date().getFullYear()}. I have made over
-              100 pieces of jewelry and I'm proud of my work. I hope you enjoy
+              100 pieces of jewelry and I&apos;m proud of my work. I hope you enjoy
               your piece as much as I enjoyed making it.
             </p>
             <p className="text-xl">
