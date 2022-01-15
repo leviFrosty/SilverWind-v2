@@ -3,6 +3,8 @@ import FooterLink from "./FooterLink";
 import FooterListHead from "./FooterListHead";
 import Instagram from "../public/icons/instagram.svg";
 import TikTok from "../public/icons/tiktok.svg";
+import Etsy from "../public/icons/etsy-brands.svg";
+
 import Container from "./Container";
 
 export default function Footer() {
@@ -82,7 +84,7 @@ export default function Footer() {
           <div className="flex justify-center">
             <span className="font-bold">More from SilverWind</span>
           </div>
-          <div className="flex flex-row gap-4 justify-center">
+          <div className="flex flex-row gap-4 justify-center opacity-20">
             <a
               href="https://www.instagram.com/silverwind.store/"
               target="_blank"
@@ -96,6 +98,13 @@ export default function Footer() {
               rel="noreferrer"
             >
               <TikTok width={30} height={30} />
+            </a>
+            <a
+              href="https://www.etsy.com/shop/ssilverwind"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Etsy width={30} height={30} />
             </a>
           </div>
         </div>
