@@ -14,7 +14,7 @@ export default function Admin() {
 
   // TODO: Refactor to server side render.
   const handlePageSelection = () => {
-    if (user.uid == "bTgRT75RGXMxZZFWnAySPVvVh5t2") {
+    if (user.isAdmin == true) {
       return <AdminDashboard />;
     } else {
       return <LoginPage />;
