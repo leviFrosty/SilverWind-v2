@@ -21,10 +21,10 @@ export default function About() {
           Not to worry!
         </p>
         <p className="text-violet-900 text-center my-1 text-lg">
-          Let&apos;s get you back{" "}
+          Let&apos;s get you{" "}
           <Link href="/">
             <a className="bg-violet-500 rounded-md px-3 py-1 hover:bg-violet-700 text-white">
-              home.
+              ← home
             </a>
           </Link>
         </p>
