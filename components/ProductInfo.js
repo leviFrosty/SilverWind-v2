@@ -120,7 +120,7 @@ export default function ProductInfo({ product }) {
         </div>
       </div>
       <div className="product-description">
-        <p className="text-violet-900 mx-6 my-4 leading-7">
+        <p className="text-violet-900 mx-6 my-4 leading-7 whitespace-pre-wrap">
           {product.description}
         </p>
       </div>

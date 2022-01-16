@@ -18,6 +18,7 @@ import {
 import Select from "./Select";
 import Spinner from "./Spinner";
 import axios from "axios";
+import TextArea from "./TextArea";
 
 export default function AddProduct() {
   const [isLoadingSkele, setisloadingskele] = useState(true);
@@ -229,7 +230,7 @@ export default function AddProduct() {
             setState={setname}
             required
           />
-          <Input
+          <TextArea
             name="description"
             title="description"
             type="text"
