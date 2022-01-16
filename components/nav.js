@@ -108,12 +108,12 @@ export default function Nav() {
           <div className="nav-collapsable flex flex-col md:flex-row gap-3 mt-4 md:mt-0 items-center">
             <Link href="/profile">
               <a className="bg-violet-500 md:bg-inherit shadow-md md:shadow-none transition-all rounded-md px-6 py-3 w-full md:w-fit md:py-1 text-white md:text-violet-500 hover:bg-violet-800 hover:text-white ">
-                <ProfileIcon className="w-5 mx-auto" alt="Profile" />
+                <ProfileIcon className="w-5 h-5 mx-auto" alt="Profile" />
               </a>
             </Link>
             <Link href="/cart">
-              <a className="bg-violet-500 relative flex shadow-lg rounded-md transition-all px-6 py-3 w-full md:py-1 text-white gap-2 justify-center hover:bg-violet-700 ">
-                <ShoppingBasket className="w-5 mx-auto" alt="Cart" />
+              <a className="bg-violet-500 relative flex shadow-lg rounded-md transition-all px-6 py-3 w-full md:py-1 text-white gap-2 justify-center hover:bg-violet-700">
+                <ShoppingBasket className="w-5 h-5 mx-auto" alt="Cart" />
                 {cartSize === 0 ? null : (
                   <span className="absolute m-0 -right-1 md:-bottom-3 md:-right-1 text-violet-500 bg-white border-violet-500 border-2 text-md md:text-xs rounded-full px-4 py-1 md:px-2 md:py-1">
                     {cartSize}
