@@ -18,12 +18,16 @@ export default function ProfilePage() {
 
   const fetchuserSince = async () => {
     console.log("stripeid", userData.stripeCustomerId);
-    const { data: customer } = await axios.post("/api/stripe/get-customer", {
-      id: userData.stripeCustomerId,
-    });
-    const date = new Date(customer.created * 1000);
-    const year = date.getFullYear();
-    setuserSince(`${year}`);
+    try {
+      const { data: customer } = await axios.post("/api/stripe/get-customer", {
+        id: userData.stripeCustomerId,
+      });
+      const date = new Date(customer.created * 1000);
+      const year = date.getFullYear();
+      setuserSince(`${year}`);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const checkAdmin = async () => {

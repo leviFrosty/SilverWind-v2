@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout, { siteTitlePrefix } from "../../components/layout";
 import LoginPage from "../../components/LoginPage";
 import UserContext from "../../contexts/userContext";
@@ -10,22 +10,32 @@ import { db } from "../../lib/fbInstance";
 
 export default function Admin() {
   const { user, isLoading } = useContext(UserContext);
-  // REFACTOR START
-
-  // REFACTOR END
+  const [isAdmin, setisAdmin] = useState(false);
+  const [isDataLoading, setisDataLoading] = useState(true);
 
   // TODO: Refactor to server side render.
-  const handlePageSelection = async () => {
+  const handlePageSelection = () => {
+    if (isAdmin) return <AdminDashboard />;
+    return <LoginPage />;
+  };
+
+  const checkAdmin = async () => {
     await getDoc(doc(db, "users", user.uid))
       .then(async (user) => {
         if (user.data().isAdmin === true) {
-          return <AdminDashboard />;
-        } else {
-          return <LoginPage />;
+          setisAdmin(true);
+          setisDataLoading(false);
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setisDataLoading(false);
+        console.log(e);
+      });
   };
+
+  useEffect(() => {
+    if (user) checkAdmin();
+  }, [user]);
 
   return (
     <Layout>
@@ -37,7 +47,11 @@ export default function Admin() {
         />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      {isLoading ? <SpinnerFullScreen /> : handlePageSelection()}
+      {isLoading || isDataLoading ? (
+        <SpinnerFullScreen />
+      ) : (
+        handlePageSelection()
+      )}
     </Layout>
   );
 }
