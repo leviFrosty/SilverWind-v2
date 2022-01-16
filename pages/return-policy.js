@@ -37,7 +37,7 @@ export default function returnpolicy() {
           <p className="font-semibold">
             While our policies are firm for obvious reasons, we will do
             everything we can to work with you and make sure your experience
-            with is positive.
+            with us positive.
           </p>
         </div>
       </Container>
