@@ -41,6 +41,7 @@ export default function SignupForm() {
           likes: [],
           purchases: [],
           stripeCustomerId,
+          isAdmin: false,
         };
         setDoc(doc(db, "users", uid), docData)
           .then(() => {
@@ -102,6 +103,5 @@ export default function SignupForm() {
       />
       <FormSubmitButton label="Sign up" />
     </Form>
-    
   );
 }
