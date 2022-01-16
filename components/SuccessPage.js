@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import useSWR from "swr";
 import { db } from "../lib/fbInstance";
-import CenterTitle from "./CenterTitle"
+import CenterTitle from "./CenterTitle";
 
 export default function SuccessPage({ user, session_id }) {
   const fetcher = (url) => axios.get(url).then((res) => res.data);
@@ -11,11 +11,14 @@ export default function SuccessPage({ user, session_id }) {
     () => `api/checkout_session/${session_id}`,
     fetcher
   );
-  useEffect(async () => {
-    const ref = await doc(db, "users", user.uid);
-    await setDoc(ref, { cart: [] }, { merge: true }).catch((e) =>
-      console.log(e)
-    );
+  useEffect(() => {
+    async function clearCart() {
+      const ref = await doc(db, "users", user.uid);
+      await setDoc(ref, { cart: [] }, { merge: true }).catch((e) =>
+        console.log(e)
+      );
+    }
+    clearCart();
   }, [data]);
 
   return (

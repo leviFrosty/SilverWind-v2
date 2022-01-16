@@ -1,6 +1,5 @@
 import React from "react";
 import ChevronRight from "../public/icons/chevron-right-solid.svg";
-import ChevronDown from "../public/icons/chevron-down-solid.svg";
 
 export default function FooterListHead({ openState, setIsOpen, children }) {
   return (
