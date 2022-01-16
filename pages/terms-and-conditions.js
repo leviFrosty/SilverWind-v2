@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import CenterTitle from "../components/CenterTitle";
+import Container from "../components/Container";
 import Layout, { siteTitlePrefix } from "../components/layout";
 
 export default function termsAndConditions() {
@@ -12,7 +13,7 @@ export default function termsAndConditions() {
         <meta name="description" content="SilverWind's Terms and Conditions." />
       </Head>
       <CenterTitle>Terms and Conditions</CenterTitle>
-      <div className="text-violet-900">
+      <Container className="text-violet-900">
         <p>
           In General SilverWind LLC (&quot;
           <a href="https://silverwind.store/" target="_blank" rel="noreferrer">
@@ -285,7 +286,7 @@ export default function termsAndConditions() {
           </a>
           .
         </p>
-      </div>
+      </Container>
     </Layout>
   );
 }
