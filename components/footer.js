@@ -73,9 +73,9 @@ export default function Footer() {
             {isPagesOpen ? (
               <>
                 {" "}
-                <FooterLink href="/frequently-asked-questions">FAQ</FooterLink>
+                <FooterLink href="/about">About</FooterLink>
                 <FooterLink href="/products">All Products</FooterLink>
-                <FooterLink href="/return-policy">Return Policy</FooterLink>
+                <FooterLink href="/cart">Cart</FooterLink>
               </>
             ) : null}
           </ul>
@@ -84,7 +84,7 @@ export default function Footer() {
           <div className="flex justify-center">
             <span className="font-bold">More from SilverWind</span>
           </div>
-          <div className="flex flex-row gap-4 justify-center opacity-20">
+          <div className="flex flex-row gap-4 justify-center">
             <a
               href="https://www.instagram.com/silverwind.store/"
               target="_blank"
@@ -104,7 +104,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
             >
-              <Etsy width={30} height={30} />
+              <Etsy width={30} height={30} className="opacity-60" />
             </a>
           </div>
         </div>
