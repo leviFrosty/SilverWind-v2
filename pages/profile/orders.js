@@ -45,7 +45,8 @@ export default function Orders() {
       <ProfileLayout>
         <CenterTitle>Orders</CenterTitle>
         <div className="flex flex-col gap-2 justify-center items-center">
-          {!isloading
+          {!isloading ? null : "Loading..."}
+          {checkoutSessions.length > 0
             ? checkoutSessions.map((checkoutSession) => {
                 return (
                   <OrderCheckoutSessionCard
@@ -54,7 +55,7 @@ export default function Orders() {
                   />
                 );
               })
-            : "Loading..."}
+            : null}
           {!isloading && checkoutSessions.length === 0 ? (
             <p>No orders! 😰</p>
           ) : null}
