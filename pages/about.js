@@ -7,6 +7,10 @@ import PageTitle from "../components/PageTitle";
 import { getDownloadURL, ref, list } from "@firebase/storage";
 import { storage } from "../lib/fbInstance";
 
+const META_DESCRIPTION =
+  "The story of how Julia Hodory started SilverWind Jewelry starting from a little workbench and $100.";
+const META_TITLE = `${siteTitlePrefix} About`;
+
 export async function getStaticProps() {
   const listRef = await ref(storage, "assets/about_page");
   const imageRef = await list(listRef, { maxResults: 1 });
@@ -20,11 +24,18 @@ export default function About({ PORTRAIT_PHOTO_URL }) {
   return (
     <Layout>
       <Head>
-        <title>{siteTitlePrefix} About</title>
-        <meta
-          name="description"
-          content="The story of how Julia Hodory started SilverWind Jewelry starting from a little workbench and $100."
-        />
+        <title></title>
+        <meta name="description" content={META_DESCRIPTION} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={META_TITLE} />
+        <meta property="og:description" content={META_DESCRIPTION} />
+        <meta property="og:image" content={PORTRAIT_PHOTO_URL} />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={META_TITLE} />
+        <meta property="twitter:description" content={META_DESCRIPTION} />
+        <meta property="twitter:image" content={PORTRAIT_PHOTO_URL} />
       </Head>
       <Container>
         <PageTitle>About SilverWind</PageTitle>
@@ -42,15 +53,15 @@ export default function About({ PORTRAIT_PHOTO_URL }) {
             </p>
             <p>
               Now here we are, in {new Date().getFullYear()}. I have made over
-              100 pieces of jewelry and I&apos;m proud of my work. I hope you enjoy
-              your piece as much as I enjoyed making it.
+              100 pieces of jewelry and I&apos;m proud of my work. I hope you
+              enjoy your piece as much as I enjoyed making it.
             </p>
             <p className="text-xl">
               <span className="font-bold">&mdash;</span> Julia
             </p>
           </div>
           <div className="relative h-[500px] w-full overflow-hidden rounded-md mt-4 md:mt-0">
-              <Image
+            <Image
               src={PORTRAIT_PHOTO_URL}
               alt="Julia Hodory"
               layout="fill"
