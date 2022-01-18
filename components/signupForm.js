@@ -8,6 +8,7 @@ import Form from "./form";
 import FormSubmitButton from "./FormSubmitButton";
 import Input from "./input";
 import Select from "./Select";
+import { signupSchema } from "../schemas/admin/signupSchema";
 
 export default function SignupForm() {
   const [email, setemail] = useState("");
@@ -20,6 +21,14 @@ export default function SignupForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { value, error } = signupSchema.validate({
+      email,
+      password,
+      firstName,
+      lastName,
+      gender,
+    });
+    if (error) return seterror(error.message);
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const { uid } = userCredential.user;
