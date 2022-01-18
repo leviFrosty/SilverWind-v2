@@ -16,7 +16,7 @@ a {
   @apply min-h-screen;
 }
 
-/* Workaround tailwind */
+/* BackToHome Component */
 .backToHome:hover span {
   transform: translateX(-5px);
 }
