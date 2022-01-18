@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 import TimesSolid from "../public/icons/times-solid.svg";
-
 import { doc, setDoc } from "@firebase/firestore";
 import { db, storage } from "../lib/fbInstance";
 import { v4 as uuidv4 } from "uuid";
 import SpinnerFullScreen from "./SpinnerFullScreen";
+import Container from "./Container";
 import Input from "./input";
 import Form from "./form";
 import {
@@ -221,105 +221,109 @@ export default function AddProduct() {
       {isLoadingSkele ? (
         <SpinnerFullScreen />
       ) : (
-        <Form onSubmit={onSubmit} error={error} className="mx-2">
-          <Input
-            name="name"
-            title="name"
-            type="text"
-            value={product.name}
-            setState={setname}
-            required
-          />
-          <TextArea
-            name="description"
-            title="description"
-            type="text"
-            value={product.description}
-            setState={setdescription}
-            required
-          />
-          <Input
-            name="material"
-            title="material"
-            type="text"
-            value={product.material}
-            setState={setmaterial}
-            required
-          />
-          <div className="relative">
+        <Container>
+          <Form onSubmit={onSubmit} error={error} className="mx-2">
             <Input
-              name="coverImg"
-              title="cover image"
-              type="file"
+              name="name"
+              title="name"
+              type="text"
+              value={product.name}
+              setState={setname}
               required
-              id="coverPhoto"
-              onChange={handleCoverChange}
             />
-            <TimesSolid
-              onClick={() => handleClearCoverPhoto()}
-              className="text-violet-900 absolute top-10 right-5 h-5 w-5 hover:opacity-50 cursor-pointer"
+            <TextArea
+              name="description"
+              title="description"
+              type="text"
+              value={product.description}
+              setState={setdescription}
+              required
             />
-          </div>
-          <div className="relative">
             <Input
-              name="otherimgs"
-              title="other images"
-              type="file"
-              multiple
+              name="material"
+              title="material"
+              type="text"
+              value={product.material}
+              setState={setmaterial}
               required
-              id="otherPhotos"
-              onChange={handleOtherImagesChange}
             />
-            <TimesSolid
-              onClick={() => handleClearOtherPhotos()}
-              className="text-violet-900 absolute top-10 right-5 h-5 w-5 hover:opacity-50 cursor-pointer"
+            <div className="relative">
+              <Input
+                name="coverImg"
+                title="cover image"
+                type="file"
+                required
+                id="coverPhoto"
+                onChange={handleCoverChange}
+              />
+              <TimesSolid
+                onClick={() => handleClearCoverPhoto()}
+                className="text-violet-900 absolute top-10 right-5 h-5 w-5 hover:opacity-50 cursor-pointer"
+              />
+            </div>
+            <div className="relative">
+              <Input
+                name="otherimgs"
+                title="other images"
+                type="file"
+                multiple
+                required
+                id="otherPhotos"
+                onChange={handleOtherImagesChange}
+              />
+              <TimesSolid
+                onClick={() => handleClearOtherPhotos()}
+                className="text-violet-900 absolute top-10 right-5 h-5 w-5 hover:opacity-50 cursor-pointer"
+              />
+            </div>
+            <Select
+              id="category"
+              title="category"
+              required
+              value={product.category}
+              setState={setcategory}
+            >
+              <option>-- select category -- </option>
+              <option>{RINGS}</option>
+              <option>{NECKLACES}</option>
+              <option>{EARRINGS}</option>
+              <option>{BRACELETS}</option>
+            </Select>
+            <Input
+              name="quantity"
+              title="quantity"
+              type="number"
+              step="1"
+              required
+              value={product.quantity}
+              setState={setquantity}
             />
-          </div>
-          <Select
-            id="category"
-            title="category"
-            required
-            value={product.category}
-            setState={setcategory}
-          >
-            <option>-- select category -- </option>
-            <option>{RINGS}</option>
-            <option>{NECKLACES}</option>
-            <option>{EARRINGS}</option>
-            <option>{BRACELETS}</option>
-          </Select>
-          <Input
-            name="quantity"
-            title="quantity"
-            type="number"
-            step="1"
-            required
-            value={product.quantity}
-            setState={setquantity}
-          />
-          <Input
-            name="price"
-            title="price"
-            type="number"
-            step=".01"
-            placeholder="12.34"
-            required
-            value={product.price}
-            setState={setprice}
-          />
-          <p className="text-sm text-violet-900 opacity-75">Format as: 00.00</p>
-          <button
-            className="disabled:opacity-50 disabled:cursor-default disabled:hover:bg-violet-500 cursor-pointer bg-violet-500 w-full text-white rounded-md px-3 py-2 my-4 hover:bg-violet-600 active:bg-violet-600"
-            type="submit"
-            disabled={error ? true : false}
-          >
-            {processing ? (
-              <Spinner className="mx-auto text-white h-6" />
-            ) : (
-              "Submit"
-            )}
-          </button>
-        </Form>
+            <Input
+              name="price"
+              title="price"
+              type="number"
+              step=".01"
+              placeholder="12.34"
+              required
+              value={product.price}
+              setState={setprice}
+            />
+            <p className="text-sm text-violet-900 opacity-75">
+              Format as: 00.00
+            </p>
+            <button
+              className="disabled:opacity-50 disabled:cursor-default disabled:hover:bg-violet-500 cursor-pointer bg-violet-500 w-full text-white rounded-md px-3 py-2 my-4 hover:bg-violet-600 active:bg-violet-600"
+              type="submit"
+              disabled={error ? true : false}
+            >
+              {processing ? (
+                <Spinner className="mx-auto text-white h-6" />
+              ) : (
+                "Submit"
+              )}
+            </button>
+          </Form>
+        </Container>
       )}
     </React.Fragment>
   );
