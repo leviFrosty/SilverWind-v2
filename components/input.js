@@ -25,7 +25,7 @@ export default function Input({
         {title}
       </label>
       <input
-        className="rounded-md focus:border-violet-600 block w-full bg-violet-100 border-violet-200 px-3 py-2 focus:ring-violet-500"
+        className="file:rounded-md mb-4 file:mr-2 text-violet-900 file:bg-violet-500 file:text-white file:px-5 file:py-1 file:border-0 file:hover:bg-violet-600 placeholder:text-gray-500 placeholder:opacity-50 rounded-md focus:border-violet-600 block w-full bg-violet-100 border-violet-200 px-3 py-2 focus:ring-violet-500"
         type={type}
         name={name}
         onChange={onChange}
