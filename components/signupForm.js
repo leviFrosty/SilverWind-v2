@@ -8,7 +8,7 @@ import Form from "./form";
 import FormSubmitButton from "./FormSubmitButton";
 import Input from "./input";
 import Select from "./Select";
-import { signupSchema } from "../schemas/admin/signupSchema";
+import { signupSchema } from "../schemas/auth/signupSchema";
 
 export default function SignupForm() {
   const [email, setemail] = useState("");
