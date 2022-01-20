@@ -1,54 +1,45 @@
 import Joi from "joi";
 
-const descriptionSchema = Joi.string().trim().required
-const imageSchema = Joi.string().dataUri().required,
-const idSchema = Joi.string().uuid().required
-const bandsSchema = Joi.array().items({
+export const descriptionSchema = Joi.string().trim().required();
+export const imageSchema = Joi.string().dataUri().required();
+export const idSchema = Joi.string().required();
+
+export const stoneSchema = Joi.object({
+  description: descriptionSchema,
+  dimensions: Joi.string().alphanum().required(),
   id: idSchema,
   image: imageSchema,
-  description: descriptionSchema,
-})
-
-const stonesSchema = Joi.array().items(
-  Joi.object({
-    id: idSchema,
-    image: imageSchema,
-    description: descriptionSchema,
-    quantity: Joi.number().integer().positive().required,
-    size: Joi.string().alphanum().required
-  })
-)
-const stoneSettingsSchema = Joi.array().items(
-  Joi.object({
-    id: idSchema,
-    image: imageSchema,
-    description: descriptionSchema,
-  })
-)
-const backExposedSchema = Joi.boolean().required
-const categoriesSchema = Joi.array().items(
-  Joi.object({
-    name: descriptionSchema,
-    options: Joi.object({
-      lengths: Joi.array(),
-      bands: bandsSchema,
-      earringType: Joi.array().items({
-        name: descriptionSchema,
-        image: imageSchema,
-        id: idSchema,
-      })
-    })
-  })
-)
-
-
-export default Joi.object({
-  stones: stonesSchema,
-  stoneSettings: stoneSettingsSchema,
-  backExposed: backExposedSchema,
-  categories: categoriesSchema,
+  quantity: Joi.number().integer().positive().required(),
 });
 
+// const bandsSchema = Joi.array().items({
+//   id: idSchema,
+//   image: imageSchema,
+//   description: descriptionSchema,
+// });
+
+// export const backExposedSchema = Joi.boolean().required();
+// export const categoriesSchema = Joi.array().items(
+//   Joi.object({
+//     name: descriptionSchema,
+//     options: Joi.object({
+//       lengths: Joi.array(),
+//       bands: bandsSchema,
+//       earringType: Joi.array().items({
+//         name: descriptionSchema,
+//         image: imageSchema,
+//         id: idSchema,
+//       }),
+//     }),
+//   })
+// );
+
+// export default Joi.object({
+//   stones: stoneSchema,
+//   stoneSettings: stoneSettingsSchema,
+//   backExposed: backExposedSchema,
+//   categories: categoriesSchema,
+// });
 
 // const exampleOutput = {
 //   // General Options
