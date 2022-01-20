@@ -10,6 +10,7 @@ import { db, storage } from "../../lib/fbInstance";
 import { ref } from "firebase/storage";
 import { uploadString, getDownloadURL } from "@firebase/storage";
 import Spinner from "../Spinner";
+import { stoneSchema } from "./../../schemas/admin/customOrdersSchema";
 
 export default function NewStone({ setisStoneOpen, isStoneOpen }) {
   const [stone, setStone] = useState(new Stone("", "", 0, ""));
@@ -69,14 +70,19 @@ export default function NewStone({ setisStoneOpen, isStoneOpen }) {
     setsuccessCount(successCount + 1);
     setprocessing(false);
     seterror("");
-    setStone(new Stone("", "", 0, ""));
+    const newStone = new Stone("", "", 0, "");
+    console.log(newStone);
     clearFileInput();
+    setStone(newStone);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     seterror("");
     setprocessing(true);
+    const { value, error } = stoneSchema.validate(stone);
+    if (error) return seterror(error.message);
+    setStone(value);
     uploadImage();
   };
 
@@ -142,7 +148,7 @@ export default function NewStone({ setisStoneOpen, isStoneOpen }) {
       />
       <button
         type="submit"
-        className="bg-violet-200 py-3 rounded-md text-violet-900 font-extrabold"
+        className="hover:bg-violet-600 hover:text-white bg-violet-200 py-3 rounded-md text-violet-900 font-extrabold"
       >
         {processing ? <Spinner className="w-4 h-4 mx-auto" /> : "Add Stone"}
       </button>
