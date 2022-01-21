@@ -88,33 +88,33 @@ export default function ProductInfo({ product }) {
       </div>
       <div className="flex flex-col bg-violet-100 rounded-md mx-2 my-3 px-10 py-3 gap-4">
         <h2 className="mx-auto text-xl font-bold text-violet-900">Details:</h2>
-        <span className="flex flex-row text-violet-900 gap-2 align-middle">
-          <Hammer className="h-8" />
+        <span className="flex flex-row text-violet-900 gap-2 items-center">
+          <Hammer className="h-5" />
           Handmade in Fort Thomas, KY USA
         </span>
-        <span className="flex flex-row text-violet-900 gap-2 align-middle">
-          <Ingots className="h-6" />
+        <span className="flex flex-row text-violet-900 gap-2 items-center">
+          <Ingots className="h-5" />
           {product.material}
         </span>
-        <span className="flex flex-row text-violet-900 gap-2 align-middle">
-          <Recycle className="h-8" />
+        <span className="flex flex-row text-violet-900 gap-2 items-center">
+          <Recycle className="h-5" />
           Sustainably Sourced Recycled Materials
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-3 text-violet-500 my-8 mx-2 align-middle">
-        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+      <div className="grid grid-cols-2 gap-3 text-violet-500 my-8 mx-2 items-center">
+        <div className="flex flex-row gap-2 justify-center text-sm items-center">
           <Plane className="w-5 h-5" />
           Internation Shipping*
         </div>
-        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+        <div className="flex flex-row gap-2 justify-center text-sm items-center">
           <Redo className="w-5 h-5" />
           Returns Available
         </div>
-        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+        <div className="flex flex-row gap-2 justify-center text-sm items-center">
           <Basket className="w-5 h-5" />
           Free standard over ${FREE_STANDARD_SHIPPING_ORDER_MIN * 0.01}
         </div>
-        <div className="flex flex-row gap-2 justify-center text-sm align-middle">
+        <div className="flex flex-row gap-2 justify-center text-sm items-center">
           <Truck className="w-5 h-5" />
           Free express over ${FREE_EXPRESS_SHIPPING_ORDER_MIN * 0.01}
         </div>
