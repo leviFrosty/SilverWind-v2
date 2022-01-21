@@ -44,7 +44,7 @@ export default function Footer() {
                 <FooterLink className="md" href="/contact">
                   Contact Us
                 </FooterLink>
-                <FooterLink href="/delivery-info">
+                <FooterLink href="/profile/orders">
                   Delivery Information
                 </FooterLink>
                 <FooterLink href="/return-policy">Return Policy</FooterLink>

@@ -8,15 +8,16 @@ import ChevronRight from "../public/icons/chevron-right-solid.svg";
 import NecklaceLengths from "./CustomOrderFormAdminSections/NecklaceLengths";
 import NewStoneSetting from "./CustomOrderFormAdminSections/NewStoneSetting";
 import NewRingBand from "./CustomOrderFormAdminSections/NewRingBand";
+import NewEarringType from "./CustomOrderFormAdminSections/NewEarringType";
 
 export default function CustomRingConfigurer() {
   const [isStoneOpen, setisStoneOpen] = useState(false);
   const [isLengthsOpen, setisLengthsOpen] = useState(false);
-  const [isStoneSettingOpen, setisStoneSettingOpen] = useState(true);
-  const [isRingBandOpen, setisRingBandOpen] = useState(true);
-  const [isEarringType, setisEarringType] = useState(true);
+  const [isStoneSettingOpen, setisStoneSettingOpen] = useState(false);
+  const [isRingBandOpen, setisRingBandOpen] = useState(false);
+  const [isEarringTypeOpen, setisEarringTypeOpen] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {5
     e.preventDefault();
   };
 
@@ -109,7 +110,7 @@ export default function CustomRingConfigurer() {
         ) : null}
         <button
           className="flex w-full items-center mb-2"
-          onClick={() => setisEarringType(!isEarringType)}
+          onClick={() => setisEarringTypeOpen(!isEarringTypeOpen)}
         >
           {" "}
           <h2 className="text-lg font-bold text-violet-900 inline">
@@ -117,12 +118,15 @@ export default function CustomRingConfigurer() {
           </h2>
           <span>
             <ChevronRight
-              style={isEarringType ? { transform: "rotate(90deg)" } : {}}
+              style={isEarringTypeOpen ? { transform: "rotate(90deg)" } : {}}
               className="ml-1 w-4 h-4 transition-transform text-violet-900"
             />
           </span>
         </button>
-        <Input />
+        {isEarringTypeOpen ? (<NewEarringType
+          setisEarringTypeOpen={setisEarringTypeOpen}
+          isEarringTypeOpen={isEarringTypeOpen}
+        />) : null}
       </div>
     </Container>
   );

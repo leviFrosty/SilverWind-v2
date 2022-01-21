@@ -41,6 +41,7 @@ export default function Portfolio({ images }) {
         <Modal
           style={{
             content: {
+              inset: "10px",
               display: "flex",
               overflow: "hidden",
               padding: "0px",
@@ -89,7 +90,8 @@ export default function Portfolio({ images }) {
         </div>
         <section className="text-violet-900 my-4 mx-2">
           <p className="my-2">
-            These are just some of my favorite custom pieces I&apos;ve made. Feel free to use these as inspiration for your custom order.
+            These are just some of my favorite custom pieces I&apos;ve made.
+            Feel free to use these as inspiration for your custom order.
           </p>
           <p>
             <span className="font-semibold">Best part? </span>You can change
