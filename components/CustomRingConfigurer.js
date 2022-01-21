@@ -5,13 +5,18 @@ import Stone from "../classes/Stone";
 import Container from "./Container";
 import NewStone from "./CustomOrderFormAdminSections/NewStone";
 import ChevronRight from "../public/icons/chevron-right-solid.svg";
+import NecklaceLengths from "./CustomOrderFormAdminSections/NecklaceLengths";
+import NewStoneSetting from "./CustomOrderFormAdminSections/NewStoneSetting";
+import NewRingBand from "./CustomOrderFormAdminSections/NewRingBand";
 
 export default function CustomRingConfigurer() {
-  const [isStoneOpen, setisStoneOpen] = useState(true);
+  const [isStoneOpen, setisStoneOpen] = useState(false);
+  const [isLengthsOpen, setisLengthsOpen] = useState(false);
+  const [isStoneSettingOpen, setisStoneSettingOpen] = useState(true);
+  const [isRingBandOpen, setisRingBandOpen] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
   };
 
   return (
@@ -21,7 +26,7 @@ export default function CustomRingConfigurer() {
       </h2>
       <div className="p-2">
         <button
-          className="flex w-full items-center"
+          className="flex w-full items-center mb-2"
           onClick={() => setisStoneOpen(!isStoneOpen)}
         >
           {" "}
@@ -38,12 +43,69 @@ export default function CustomRingConfigurer() {
         {isStoneOpen ? (
           <NewStone isStoneOpen={isStoneOpen} setisStoneOpen={setisStoneOpen} />
         ) : null}
-        <h2 className="text-lg font-bold text-violet-900">New Setting</h2>
-        <Input />
-        <h2 className="text-lg font-bold text-violet-900">Necklace Length</h2>
-        <Input />
-        <h2 className="text-lg font-bold text-violet-900">New Ring Band</h2>
-        <Input />
+        <button
+          className="flex w-full items-center mb-2"
+          onClick={() => setisLengthsOpen(!isLengthsOpen)}
+        >
+          {" "}
+          <h2 className="text-lg font-bold text-violet-900 inline">
+            Edit Necklace Lengths
+          </h2>
+          <span>
+            <ChevronRight
+              style={isLengthsOpen ? { transform: "rotate(90deg)" } : {}}
+              className="ml-1 w-4 h-4 transition-transform text-violet-900"
+            />
+          </span>
+        </button>
+        {isLengthsOpen ? (
+          <NecklaceLengths
+            isLengthsOpen={isLengthsOpen}
+            setisLengthsOpen={setisLengthsOpen}
+          />
+        ) : null}
+        <button
+          className="flex w-full items-center mb-2"
+          onClick={() => setisStoneSettingOpen(!isStoneSettingOpen)}
+        >
+          {" "}
+          <h2 className="text-lg font-bold text-violet-900 inline">
+            New Stone Setting
+          </h2>
+          <span>
+            <ChevronRight
+              style={isStoneSettingOpen ? { transform: "rotate(90deg)" } : {}}
+              className="ml-1 w-4 h-4 transition-transform text-violet-900"
+            />
+          </span>
+        </button>
+        {isStoneSettingOpen ? (
+          <NewStoneSetting
+            isStoneSettingOpen={isStoneSettingOpen}
+            setisStoneSettingOpen={setisStoneSettingOpen}
+          />
+        ) : null}
+        <button
+          className="flex w-full items-center mb-2"
+          onClick={() => setisRingBandOpen(!isRingBandOpen)}
+        >
+          {" "}
+          <h2 className="text-lg font-bold text-violet-900 inline">
+            New Ring Band
+          </h2>
+          <span>
+            <ChevronRight
+              style={isRingBandOpen ? { transform: "rotate(90deg)" } : {}}
+              className="ml-1 w-4 h-4 transition-transform text-violet-900"
+            />
+          </span>
+        </button>
+        {isRingBandOpen ? (
+          <NewRingBand
+            isRingBandOpen={isRingBandOpen}
+            setisRingBandOpen={setisRingBandOpen}
+          />
+        ) : null}
         <h2 className="text-lg font-bold text-violet-900">New Earring Type</h2>
         <Input />
       </div>
