@@ -19,6 +19,8 @@ import axios from "axios";
 import SpinnerFullScreen from "./SpinnerFullScreen";
 import Spinner from "./Spinner";
 import getUserData from "../lib/getUserData";
+import Stripe from "../public/icons/stripe-brands.svg"
+import Lock from "../public/icons/lock-solid.svg"
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
@@ -131,9 +133,10 @@ export default function CartPage({ user }) {
                   <span>${total}</span>
                 </div>
                 <div className="flex justify-center md:justify-end md:mx-4">
-                  <button
+                  
+                  <div className="flex flex-col gap-4 md:gap-2 mt-8 md:mt-2"><button
                     onClick={() => handleCheckout()}
-                    className="flex bg-violet-500 text-center my-3 mx-2 py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer"
+                    className="flex bg-violet-500 text-center py-2 px-10 font-extrabold text-white rounded-lg hover:bg-violet-600 active:bg-violet-600 transition-color cursor-pointer"
                   >
                     {isLoadingCheckout ? (
                       <Spinner className="text-white" />
@@ -141,6 +144,10 @@ export default function CartPage({ user }) {
                       "Checkout"
                     )}
                   </button>
+                  <div>
+                    <a className="flex flex-row items-center justify-center md:justify-start gap-1 text-violet-300 text-sm" href="https://stripe.com/docs/security/stripe" target="_blank" rel="noreferrer"><Lock className="h-4"/>Secured by <Stripe className="h-8"/></a>
+                  </div>
+                  </div>
                 </div>
               </React.Fragment>
             ) : (

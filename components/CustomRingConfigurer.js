@@ -14,6 +14,7 @@ export default function CustomRingConfigurer() {
   const [isLengthsOpen, setisLengthsOpen] = useState(false);
   const [isStoneSettingOpen, setisStoneSettingOpen] = useState(true);
   const [isRingBandOpen, setisRingBandOpen] = useState(true);
+  const [isEarringType, setisEarringType] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,7 +107,21 @@ export default function CustomRingConfigurer() {
             setisRingBandOpen={setisRingBandOpen}
           />
         ) : null}
-        <h2 className="text-lg font-bold text-violet-900">New Earring Type</h2>
+        <button
+          className="flex w-full items-center mb-2"
+          onClick={() => setisEarringType(!isEarringType)}
+        >
+          {" "}
+          <h2 className="text-lg font-bold text-violet-900 inline">
+            New Earring Type
+          </h2>
+          <span>
+            <ChevronRight
+              style={isEarringType ? { transform: "rotate(90deg)" } : {}}
+              className="ml-1 w-4 h-4 transition-transform text-violet-900"
+            />
+          </span>
+        </button>
         <Input />
       </div>
     </Container>
