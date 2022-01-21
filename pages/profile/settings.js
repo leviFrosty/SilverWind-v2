@@ -9,6 +9,7 @@ import ProfileLayout from "../../components/ProfileLayout";
 import UserContext from "../../contexts/userContext";
 import { db } from "../../lib/fbInstance";
 import getUserData from "../../lib/getUserData";
+import Container from './../../components/Container';
 
 export default function Settings() {
   const { user } = useContext(UserContext);
@@ -45,7 +46,7 @@ export default function Settings() {
       </Head>
       <ProfileLayout>
         <CenterTitle>Settings</CenterTitle>
-        <div className="px-2">
+        <Container className="px-2">
           <Form onSubmit={handleSubmit} error={error}>
             <h3 className="text-lg text-violet-900">Full Name</h3>
             <p>{`${userData.firstName} ${userData.lastName}`}</p>
@@ -63,7 +64,7 @@ export default function Settings() {
               Save
             </button>
           </Form>
-        </div>
+        </Container>
       </ProfileLayout>
     </Layout>
   );

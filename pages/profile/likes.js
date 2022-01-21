@@ -3,6 +3,7 @@ import React from "react";
 import CenterTitle from "../../components/CenterTitle";
 import Layout, { siteTitlePrefix } from "../../components/layout";
 import ProfileLayout from "../../components/ProfileLayout";
+import Container from './../../components/Container';
 
 export default function Likes() {
   return (
@@ -15,8 +16,10 @@ export default function Likes() {
         />
       </Head>
       <ProfileLayout>
-        <CenterTitle>Likes</CenterTitle>
-        <p className="text-center">Coming soon! 🙊</p>
+        <Container>
+          <CenterTitle>Likes</CenterTitle>
+          <p className="text-center">Coming soon! 🙊</p>
+        </Container>
       </ProfileLayout>
     </Layout>
   );

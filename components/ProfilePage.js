@@ -7,6 +7,7 @@ import CenterTitle from "./CenterTitle";
 import getUserData from "../lib/getUserData";
 import ProfileLayout from "./ProfileLayout";
 import axios from "axios";
+import Container from "./Container";
 
 export default function ProfilePage() {
   const { user } = useContext(UserContext);
@@ -63,7 +64,7 @@ export default function ProfilePage() {
     <React.Fragment>
       <ProfileLayout userData={userData}>
         <CenterTitle>Hello {userData.firstName}</CenterTitle>
-        <div className="text-center text-violet-900 opacity-80">
+        <Container className="text-center text-violet-900 opacity-80">
           <p>Email: {user.email}</p>
           <p>
             Since{" "}
@@ -81,7 +82,7 @@ export default function ProfilePage() {
               Admin Dashboard
             </button>
           )}
-        </div>
+        </Container>
       </ProfileLayout>
     </React.Fragment>
   );
