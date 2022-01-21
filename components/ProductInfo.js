@@ -48,7 +48,7 @@ export default function ProductInfo({ product }) {
     <div className="flex flex-col max-w-xl">
       <div className="flex flex-row justify-between border-b-2 border-b-violet-100 px-2 py-3">
         <span className="text-violet-900 text-2xl font-bold">{`$${product.price}`}</span>
-        <span className="flex flex-row gap-1 text-violet-900 text-2xl min-w-fit align-middle">
+        <span className="flex flex-row gap-1 text-violet-900 text-2xl min-w-fit items-center">
           {quantityText}
         </span>
       </div>
