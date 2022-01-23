@@ -64,6 +64,11 @@ export default function AddProduct() {
     obj.quantity = quantity;
     setProduct(obj);
   };
+  const setcustomizable = (boolean) => {
+    const obj = { ...product };
+    obj.customizable = boolean;
+    setProduct(obj);
+  };
 
   const setotherImages = (otherImages) => {
     const obj = { ...product };
@@ -307,6 +312,14 @@ export default function AddProduct() {
               required
               value={product.price}
               setState={setprice}
+            />
+            <Input
+              name="customizable"
+              title="Customizable"
+              type="checkbox"
+              required
+              value={product.customizable}
+              setState={setcustomizable}
             />
             <p className="text-sm text-violet-900 opacity-75">
               Format as: 00.00
