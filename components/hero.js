@@ -42,6 +42,7 @@ export default function Hero({ coverPhotoUrl, coverVideoUrl }) {
                 src={coverPhotoUrl}
                 onClick={() => router.push("/products")}
                 alt="Heart shaped ring"
+                priority
                 className="rounded-md hover:cursor-pointer"
                 width={600}
                 height={400}

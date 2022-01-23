@@ -42,6 +42,7 @@ export default function ImageSelector({ product }) {
         <Image
           src={selectedImage}
           layout="fill"
+          priority
           className="object-contain w-full max-h-full cursor-pointer"
           alt={product.name}
         />
