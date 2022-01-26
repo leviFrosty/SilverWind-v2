@@ -7,28 +7,31 @@ import Image from "next/image";
 import Times from "../public/icons/times-solid.svg";
 import { useState, useEffect } from "react";
 import getProduct from "../lib/getProduct";
-export default function CartCard({ index, user, userCart }) {
+export default function CartCard({ user, cartItem }) {
   const [options, setoptions] = useState([]);
   const [product, setproduct] = useState({});
   const router = useRouter();
 
   useEffect(() => {
-    getProduct(userCart[index].id).then((res) => setproduct(res.data()));
-    const keys = Object.keys(userCart[index].options);
+    getProduct(cartItem.id).then((res) => setproduct(res.data()));
+    const keys = Object.keys(cartItem.options);
     if (keys.length == 0) return;
     const formattedOptions = keys.map(
-      (key) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${userCart[index].options[key]}`
+      (key) =>
+        `${key.charAt(0).toUpperCase() + key.slice(1)}: ${
+          cartItem.options[key]
+        }`
     );
     setoptions(formattedOptions);
   }, []);
 
   const increaseAmt = () => {
-    addToCart(user.uid, userCart[index].id, 1, {}, userCart[index].options);
+    addToCart(user.uid, cartItem.id, 1, {}, cartItem.options);
   };
 
   const decreaseAmt = () => {
-    if (userCart[index].quantity === 1) return;
-    addToCart(user.uid, userCart[index].id, -1, {}, userCart[index].options);
+    if (cartItem.quantity === 1) return;
+    addToCart(user.uid, cartItem.id, -1, {}, cartItem.options);
   };
 
   return (
@@ -58,7 +61,9 @@ export default function CartCard({ index, user, userCart }) {
         {options.length > 0 ? (
           <div className="text-violet-900 opacity-60 text-sm flex-grow">
             {options.map((option) => (
-              <p className="break-all" key={option}>{option}</p>
+              <p className="break-all" key={option}>
+                {option}
+              </p>
             ))}
           </div>
         ) : null}
@@ -71,7 +76,7 @@ export default function CartCard({ index, user, userCart }) {
               increaseAmt();
             }}
           />
-          <span className="select-none">{userCart[index].quantity}</span>
+          <span className="select-none">{cartItem.quantity}</span>
           <Minus
             className="cursor-pointer w-4 h-4 mx-2 active:w-5 active:h-5 transition-all text-violet-300 hover:text-violet-500"
             onClick={() => decreaseAmt()}
@@ -81,7 +86,9 @@ export default function CartCard({ index, user, userCart }) {
           <p className="select-none">${product.price}</p>
           <Times
             className="cursor-pointer w-4 h-4 opacity-25 hover:opacity-80"
-            onClick={() => removeFromCart(user.uid, product.id)}
+            onClick={() =>
+              removeFromCart(user.uid, cartItem.cartEntryId)
+            }
           />
         </div>
       </div>

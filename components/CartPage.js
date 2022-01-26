@@ -30,14 +30,6 @@ export default function CartPage({ user }) {
   const [total, setTotal] = useState(0);
   let unsubscribeProducts = () => {};
 
-  userCart.map((cartItem) => {
-    let results = "";
-    const keys = Object.keys(cartItem.options);
-    if (keys.length == 0) return results;
-    results = keys.map((key) => `${key}: ${cartItem.options[key]}`);
-    return results;
-  });
-
   useEffect(() => {
     let unsubscribeUserData;
     async function getProductList() {
@@ -119,17 +111,14 @@ export default function CartPage({ user }) {
   const handleTotalPrice = () => {
     let totalCost = 0;
     if (userCart.length == 0) return;
+    if (userCart.length !== productList.length) return;
     for (const cartEntry of userCart) {
-      const product = productList.filter(product => cartEntry.id == product.id)
-      const entryTotal = cartEntry.quantity * product[0].price
-      totalCost += entryTotal
+      const product = productList.filter(
+        (product) => cartEntry.id == product.id
+      );
+      const entryTotal = cartEntry.quantity * product[0].price;
+      totalCost += entryTotal;
     }
-
-    // productList.forEach((product) => {
-    //   const item = userCart.filter((item) => item.id == product.id)[0];
-    //   const productTotalCost = product.price * item.quantity;
-    //   totalCost = totalCost + productTotalCost;
-    // });
     setTotal(totalCost.toFixed(2));
   };
 
@@ -146,11 +135,10 @@ export default function CartPage({ user }) {
             <CenterTitle>Cart</CenterTitle>
             {userCart.length > 0 ? (
               <React.Fragment>
-                {userCart.map((cartItem, index) => (
+                {userCart.map((cartItem) => (
                   <CartCard
-                    key={index}
-                    index={index}
-                    userCart={userCart}
+                    key={cartItem.cartEntryId}
+                    cartItem={cartItem}
                     user={user}
                   />
                 ))}
