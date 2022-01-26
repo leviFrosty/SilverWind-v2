@@ -41,13 +41,11 @@ export default function ProductInfo({ product }) {
       });
       return;
     }
-    console.log(options);
     if (
       product.category === RINGS &&
       (options.size == "" || options.size == undefined)
     )
       return;
-    console.log("adding to cart");
     setAddedQuantity(addedQuantity + toAdd);
     addToCart(user.uid, product.id, toAdd, setAddedToCart, options).catch((e) =>
       console.log(e)
