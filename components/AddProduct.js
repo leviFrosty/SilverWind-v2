@@ -44,6 +44,11 @@ export default function AddProduct() {
     obj.material = material;
     setProduct(obj);
   };
+  const setstone = (stone) => {
+    const obj = { ...product };
+    obj.stone = stone;
+    setProduct(obj);
+  };
   const setdescription = (description) => {
     const obj = { ...product };
     obj.description = description;
@@ -252,6 +257,13 @@ export default function AddProduct() {
               setState={setmaterial}
               required
             />
+            <Input
+              name="stone"
+              title="stone"
+              type="text"
+              value={product.stone}
+              setState={setstone}
+            />
             <div className="relative">
               <Input
                 name="coverImg"
@@ -317,7 +329,6 @@ export default function AddProduct() {
               name="customizable"
               title="Customizable"
               type="checkbox"
-              required
               value={product.customizable}
               setState={setcustomizable}
             />

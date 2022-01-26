@@ -10,6 +10,7 @@ import Basket from "../public/icons/shopping-basket-solid.svg";
 import Truck from "../public/icons/truck-solid.svg";
 import Plus from "../public/icons/plus-solid.svg";
 import Minus from "../public/icons/minus-solid.svg";
+import Gem from "../public/icons/gem-solid.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { addToCart } from "../lib/addToCart";
@@ -139,7 +140,6 @@ export default function ProductInfo({ product }) {
                 type="text"
                 value={options.customization}
                 setState={setcustomization}
-            
               />
             ) : null}
           </Form>
@@ -155,6 +155,12 @@ export default function ProductInfo({ product }) {
           <Ingots className="h-5" />
           {product.material}
         </span>
+        {product.stone ? (
+          <span className="flex flex-row text-violet-900 gap-2 items-center">
+            <Gem className="h-5" />
+            {product.stone}
+          </span>
+        ) : null}
         <span className="flex flex-row text-violet-900 gap-2 items-center">
           <Recycle className="h-5" />
           Sustainably Sourced Recycled Materials
