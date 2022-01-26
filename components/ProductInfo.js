@@ -16,12 +16,18 @@ import { addToCart } from "../lib/addToCart";
 import {
   FREE_STANDARD_SHIPPING_ORDER_MIN,
   FREE_EXPRESS_SHIPPING_ORDER_MIN,
+  RINGS,
+  RING_SIZES,
 } from "../lib/PRODUCT_KEYS";
+import Select from "./Select";
+import Form from "./form";
+import Input from "./input";
 
 export default function ProductInfo({ product }) {
   const [quantityText, setquantityText] = useState("");
   const [addedToCart, setAddedToCart] = useState(false);
   const [addedQuantity, setAddedQuantity] = useState(0);
+  const [options, setoptions] = useState({});
   const [toAdd, setToAdd] = useState(1);
   const router = useRouter();
   const { user } = useContext(UserContext);
@@ -34,10 +40,28 @@ export default function ProductInfo({ product }) {
       });
       return;
     }
+    console.log(options);
+    if (
+      product.category === RINGS &&
+      (options.size == "" || options.size == undefined)
+    )
+      return;
+    console.log("adding to cart");
     setAddedQuantity(addedQuantity + toAdd);
-    addToCart(user.uid, product.id, toAdd, setAddedToCart).catch((e) =>
+    addToCart(user.uid, product.id, toAdd, setAddedToCart, options).catch((e) =>
       console.log(e)
     );
+  };
+
+  const setsize = (size) => {
+    const obj = { ...options };
+    obj.size = size;
+    setoptions(obj);
+  };
+  const setcustomization = (customization) => {
+    const obj = { ...options };
+    obj.customization = customization;
+    setoptions(obj);
   };
 
   useEffect(() => {
@@ -52,15 +76,12 @@ export default function ProductInfo({ product }) {
           {quantityText}
         </span>
       </div>
-      <div className="flex flex-col-reverse my-3">
-        <Link href="/return-policy">
-          <a className="text-violet-300 m-0 text-sm">
-            *Shipping and return policies
-          </a>
-        </Link>
+      <div className="flex flex-col px-2 my-3">
         <button
+          type={product.category === RINGS ? "submit" : "button"}
+          form="optionsForm"
           onClick={handleAddToCart}
-          className="relative flex flex-row mx-2 cursor-pointer bg-violet-500 text-white rounded-md px-3 py-2 hover:bg-violet-600 font-bold active:bg-violet-700 items-center"
+          className="relative flex flex-row cursor-pointer bg-violet-500 text-white rounded-md px-3 py-2 hover:bg-violet-600 font-bold active:bg-violet-700 items-center"
         >
           <p className="flex-grow hover:font-semibold active:font-semibold">
             {addedToCart
@@ -85,6 +106,44 @@ export default function ProductInfo({ product }) {
             />
           </div>
         </button>
+        <Link href="/return-policy">
+          <a className="text-violet-300 m-0 text-sm">
+            *Shipping and return policies
+          </a>
+        </Link>
+        {product.category === RINGS || product.customizable ? (
+          <Form
+            id="optionsForm"
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            {product.category === RINGS ? (
+              <Select
+                id="ringSize"
+                title="Ring Size"
+                required
+                value={options.size}
+                setState={setsize}
+              >
+                <option value="">-- Select Ring Size --</option>
+                {RING_SIZES.map((size, index) => (
+                  <option key={index}>{size}</option>
+                ))}
+              </Select>
+            ) : null}
+            {product.customizable ? (
+              <Input
+                name="customization"
+                title="Customization"
+                type="text"
+                value={options.customization}
+                setState={setcustomization}
+            
+              />
+            ) : null}
+          </Form>
+        ) : null}
       </div>
       <div className="flex flex-col bg-violet-100 rounded-md mx-2 my-3 px-10 py-3 gap-4">
         <h2 className="mx-auto text-xl font-bold text-violet-900">Details:</h2>
