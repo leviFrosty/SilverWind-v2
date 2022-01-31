@@ -19,21 +19,27 @@ import {
   FREE_EXPRESS_SHIPPING_ORDER_MIN,
   RINGS,
   RING_SIZES,
+  NECKLACES,
 } from "../lib/PRODUCT_KEYS";
 import Select from "./Select";
 import Form from "./form";
 import Input from "./input";
 
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../lib/fbInstance";
+
 export default function ProductInfo({ product }) {
   const [quantityText, setquantityText] = useState("");
   const [addedToCart, setAddedToCart] = useState(false);
   const [addedQuantity, setAddedQuantity] = useState(0);
+  const [necklaceLengths, setNecklacesLengths] = useState([]);
   const [options, setoptions] = useState({});
   const [toAdd, setToAdd] = useState(1);
   const router = useRouter();
   const { user } = useContext(UserContext);
 
   const handleAddToCart = async () => {
+    // Redirects if not signed in
     if (!user) {
       router.push({
         pathname: "/login",
@@ -41,9 +47,15 @@ export default function ProductInfo({ product }) {
       });
       return;
     }
+    // Checks rings options against rings expected input
     if (
       product.category === RINGS &&
       (options.size == "" || options.size == undefined)
+    )
+      return;
+    if (
+      product.category === NECKLACES &&
+      (options.necklaceLength === "" || options.necklaceLength === undefined)
     )
       return;
     setAddedQuantity(addedQuantity + toAdd);
@@ -57,6 +69,11 @@ export default function ProductInfo({ product }) {
     obj.size = size;
     setoptions(obj);
   };
+  const setnecklaceLength = (necklaceLength) => {
+    const obj = { ...options };
+    obj.necklaceLength = necklaceLength;
+    setoptions(obj);
+  };
   const setcustomization = (customization) => {
     const obj = { ...options };
     obj.customization = customization;
@@ -64,6 +81,14 @@ export default function ProductInfo({ product }) {
   };
 
   useEffect(() => {
+    async function fetchNecklaceLengths() {
+      const dbRef = doc(db, "necklaceLengths", "length");
+      const resultDoc = await getDoc(dbRef);
+      const { values } = await (await resultDoc).data();
+      setNecklacesLengths(values);
+    }
+    if (product.category === NECKLACES) fetchNecklaceLengths();
+
     formatItemQuantity(product, setquantityText);
   }, []);
 
@@ -77,7 +102,7 @@ export default function ProductInfo({ product }) {
       </div>
       <div className="flex flex-col px-2 my-3">
         <button
-          type={product.category === RINGS ? "submit" : "button"}
+          type={product.category === RINGS || NECKLACES ? "submit" : "button"}
           form="optionsForm"
           onClick={handleAddToCart}
           className="relative flex flex-row cursor-pointer bg-violet-500 text-white rounded-md px-3 py-2 hover:bg-violet-600 font-bold active:bg-violet-700 items-center"
@@ -110,7 +135,7 @@ export default function ProductInfo({ product }) {
             *Shipping and return policies
           </a>
         </Link>
-        {product.category === RINGS || product.customizable ? (
+        {product.category === RINGS || NECKLACES || product.customizable ? (
           <Form
             id="optionsForm"
             onSubmit={(e) => {
@@ -127,6 +152,20 @@ export default function ProductInfo({ product }) {
               >
                 <option value="">-- Select Ring Size --</option>
                 {RING_SIZES.map((size, index) => (
+                  <option key={index}>{size}</option>
+                ))}
+              </Select>
+            ) : null}
+            {product.category === NECKLACES ? (
+              <Select
+                id="necklaceLength"
+                title="Necklace Length"
+                required
+                value={options.necklaceLength}
+                setState={setnecklaceLength}
+              >
+                <option value="">-- Select Necklace Size --</option>
+                {necklaceLengths.map((size, index) => (
                   <option key={index}>{size}</option>
                 ))}
               </Select>
