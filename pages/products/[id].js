@@ -1,4 +1,11 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import React from "react";
 import { useRouter } from "next/router";
 import Layout, { siteTitlePrefix } from "../../components/layout";
@@ -60,7 +67,8 @@ export default function ProductDetails({ product }) {
 }
 
 export async function getStaticPaths() {
-  const querySnapshot = await getDocs(collection(db, "products"));
+  const q = query(collection(db, "products"), where("active", "==", true));
+  const querySnapshot = await getDocs(q);
   let docIds = [];
   await querySnapshot.forEach((doc) => docIds.push(doc.id));
   const paths = docIds.map((id) => ({
