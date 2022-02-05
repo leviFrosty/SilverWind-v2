@@ -61,6 +61,7 @@ export default function ImageSelector({ product }) {
             src={product.coverPhotoURL}
             layout="fill"
             alt=""
+            priority
             className="h-20 w-20 object-cover cursor-pointer"
             onClick={() => setSelectedImage(product.coverPhotoURL)}
           />
@@ -78,6 +79,7 @@ export default function ImageSelector({ product }) {
               onClick={() => setSelectedImage(img)}
               className="object-cover cursor-pointer"
               src={img}
+              priority
               alt=""
               layout="fill"
             />
