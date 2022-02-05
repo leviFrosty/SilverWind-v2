@@ -7,7 +7,7 @@ import Image from "next/image";
 import Times from "../public/icons/times-solid.svg";
 import { useState, useEffect } from "react";
 import getProduct from "../lib/getProduct";
-export default function CartCard({ user, cartItem }) {
+export default function CartCard({ user, cartItem, seterror }) {
   const [options, setoptions] = useState([]);
   const [product, setproduct] = useState({});
   const router = useRouter();
@@ -26,12 +26,16 @@ export default function CartCard({ user, cartItem }) {
   }, []);
 
   const increaseAmt = () => {
-    addToCart(user.uid, cartItem.id, 1, {}, cartItem.options);
+    addToCart(user.uid, cartItem.id, 1, {}, cartItem.options).catch((e) =>
+      seterror(e.message)
+    );
   };
 
   const decreaseAmt = () => {
     if (cartItem.quantity === 1) return;
-    addToCart(user.uid, cartItem.id, -1, {}, cartItem.options);
+    addToCart(user.uid, cartItem.id, -1, {}, cartItem.options).catch((e) =>
+      seterror(e.message)
+    );
   };
 
   return (
@@ -41,6 +45,7 @@ export default function CartCard({ user, cartItem }) {
           <Image
             src={product.coverPhotoURL}
             layout="fill"
+            priority
             className="object-contain rounded-lg overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform"
             alt=""
             onClick={() => router.push(`/products/${product.id}`)}
@@ -86,9 +91,7 @@ export default function CartCard({ user, cartItem }) {
           <p className="select-none">${product.price}</p>
           <Times
             className="cursor-pointer w-4 h-4 opacity-25 hover:opacity-80"
-            onClick={() =>
-              removeFromCart(user.uid, cartItem.cartEntryId)
-            }
+            onClick={() => removeFromCart(user.uid, cartItem.cartEntryId)}
           />
         </div>
       </div>

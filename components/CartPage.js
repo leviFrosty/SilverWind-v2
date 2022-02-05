@@ -28,6 +28,7 @@ export default function CartPage({ user }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingCheckout, setisLoadingCheckout] = useState(false);
   const [total, setTotal] = useState(0);
+  const [error, seterror] = useState("");
   let unsubscribeProducts = () => {};
 
   useEffect(() => {
@@ -140,8 +141,14 @@ export default function CartPage({ user }) {
                     key={cartItem.cartEntryId}
                     cartItem={cartItem}
                     user={user}
+                    seterror={seterror}
                   />
                 ))}
+                {error ? (
+                  <div className="flex justify-end text-red-500 py-2 mx-2 md:mx-6 md:my-6">
+                    {error}
+                  </div>
+                ) : null}
                 <div className="flex justify-end gap-1 text-violet-300 py-2 mx-2 md:mx-6 md:my-6 ">
                   <span>Subtotal:</span>
                   <span>${total}</span>

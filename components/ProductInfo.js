@@ -33,10 +33,17 @@ export default function ProductInfo({ product }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const [addedQuantity, setAddedQuantity] = useState(0);
   const [necklaceLengths, setNecklacesLengths] = useState([]);
+  const [error, seterror] = useState("");
   const [options, setoptions] = useState({});
   const [toAdd, setToAdd] = useState(1);
   const router = useRouter();
   const { user } = useContext(UserContext);
+
+  const handleToAdd = (changeByAmount) => {
+    if (changeByAmount > 0 && toAdd == product.quantity) return;
+    if (toAdd + changeByAmount < 1) return;
+    setToAdd(toAdd + changeByAmount);
+  };
 
   const handleAddToCart = async () => {
     // Redirects if not signed in
@@ -58,10 +65,19 @@ export default function ProductInfo({ product }) {
       (options.necklaceLength === "" || options.necklaceLength === undefined)
     )
       return;
-    setAddedQuantity(addedQuantity + toAdd);
-    addToCart(user.uid, product.id, toAdd, setAddedToCart, options).catch((e) =>
-      console.log(e)
-    );
+    addToCart(user.uid, product.id, toAdd, setAddedToCart, options)
+      .then(() => {
+        setAddedToCart(true);
+        setAddedQuantity(addedQuantity + toAdd);
+      })
+      .catch((e) => {
+        console.log(e.message);
+        seterror(e.message);
+      });
+    if (error == "") {
+      setAddedToCart(true);
+      setAddedQuantity(addedQuantity + toAdd);
+    }
   };
 
   const setsize = (size) => {
@@ -108,7 +124,7 @@ export default function ProductInfo({ product }) {
           className="relative flex flex-row cursor-pointer bg-violet-500 text-white rounded-md px-3 py-2 hover:bg-violet-600 font-bold active:bg-violet-700 items-center"
         >
           <p className="flex-grow hover:font-semibold active:font-semibold">
-            {addedToCart
+            {!error && addedToCart
               ? `Added to cart! 🎉 +${addedQuantity}`
               : `Add to cart`}
           </p>
@@ -117,7 +133,7 @@ export default function ProductInfo({ product }) {
               className="w-4 h-4 mx-2 active:w-5 active:h-5"
               onClick={(e) => {
                 e.stopPropagation();
-                setToAdd(toAdd + 1);
+                handleToAdd(1);
               }}
             />
             <span>{toAdd}</span>
@@ -125,11 +141,12 @@ export default function ProductInfo({ product }) {
               className="w-4 h-4 mx-2 active:w-5 active:h-5 transition-all"
               onClick={(e) => {
                 e.stopPropagation();
-                if (toAdd > 1) setToAdd(toAdd - 1);
+                handleToAdd(-1);
               }}
             />
           </div>
         </button>
+        {error ? <p className="text-red-500">{error}</p> : null}
         <Link href="/return-policy">
           <a className="text-violet-300 m-0 text-sm">
             *Shipping and return policies
