@@ -11,6 +11,7 @@
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.24.0",
     "firebase": "^9.6.2",
+    "firebase-admin": "^10.0.2",
     "joi": "^17.5.0",
     "lodash": "^4.17.21",
     "micro": "^9.3.4",
