@@ -2,12 +2,14 @@ import Stripe from "stripe";
 import { buffer } from "micro";
 import * as admin from "firebase-admin";
 
+const { private_key } = JSON.parse(process.env.ADMIN_PRIVATE_KEY);
+
 // Init firebase admin sdk
 const ADMIN_FIREBASE_CREDS = {
   type: process.env.ADMIN_TYPE,
   project_id: process.env.ADMIN_PROJECT_ID,
   private_key_id: process.env.ADMIN_PRIVATE_KEY_ID,
-  private_key: process.env.ADMIN_PRIVATE_KEY,
+  private_key,
   client_email: process.env.ADMIN_CLIENT_EMAIL,
   client_id: process.env.ADMIN_CLIENT_ID,
   auth_uri: process.env.ADMIN_AUTH_URI,
