@@ -109,22 +109,22 @@ export default function CartPage({ user }) {
     await stripe.redirectToCheckout({ sessionId: id });
   };
 
-  const handleTotalPrice = () => {
-    let totalCost = 0;
-    if (userCart.length == 0) return;
-    if (userCart.length !== productList.length) return;
-    for (const cartEntry of userCart) {
-      const product = productList.filter(
-        (product) => cartEntry.id == product.id
-      );
-      const entryTotal = cartEntry.quantity * product[0].price;
-      totalCost += entryTotal;
-    }
-    setTotal(totalCost.toFixed(2));
-  };
-
   useEffect(() => {
-    handleTotalPrice();
+    const handleTotalPrice = () => {
+      let totalCost = 0;
+      if (userCart.length == 0) return;
+      for (const cartEntry of userCart) {
+        const product = productList.filter(
+          (product) => cartEntry.id == product.id
+        );
+        const entryTotal = cartEntry.quantity * product[0].price;
+        totalCost += entryTotal;
+      }
+      setTotal(totalCost.toFixed(2));
+    };
+    if (productList) {
+      handleTotalPrice();
+    }
   }, [productList]);
 
   return (
