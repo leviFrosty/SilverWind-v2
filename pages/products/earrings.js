@@ -16,6 +16,8 @@ export async function getStaticProps() {
     query(collection(db, "products"), where("category", "==", EARRINGS))
   );
   await querySnapshot.forEach((doc) => products.push(doc.data()));
+  const enabledProducts = products.filter((product) => product.active == true);
+  products = enabledProducts;
 
   return {
     props: {

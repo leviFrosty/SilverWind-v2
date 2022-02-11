@@ -12,10 +12,13 @@ import OrderCustom from "../../components/OrderCustom";
 
 export async function getStaticProps() {
   let products = [];
+  const ringsRef = collection(db, "products");
   const querySnapshot = await getDocs(
-    query(collection(db, "products"), where("category", "==", RINGS))
+    query(ringsRef, where("category", "==", RINGS))
   );
   await querySnapshot.forEach((doc) => products.push(doc.data()));
+  const enabledProducts = products.filter((product) => product.active == true);
+  products = enabledProducts;
 
   return {
     props: {
