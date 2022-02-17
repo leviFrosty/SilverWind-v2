@@ -20,15 +20,21 @@ import Spinner from "./Spinner";
 import axios from "axios";
 import TextArea from "./TextArea";
 
-export default function AddProduct() {
+export default function AddProduct({ currentlyEditingProduct }) {
   const [isLoadingSkele, setisloadingskele] = useState(true);
   const [processing, setprocessing] = useState(false);
   const [error, seterror] = useState("");
   const [product, setProduct] = useState({});
 
+  // TODO: Handle currentlyEditingProduct to set default state
+  // and edit existing product instead of adding new product
+
   // Initialize product skeleton
   useEffect(() => {
-    const skele = MAKE_PRODUCT_SKELETON(); // generates new product id and properties
+    let skele;
+    if (currentlyEditingProduct !== {}) {
+      skele = MAKE_PRODUCT_SKELETON(); // generates new product id and properties
+    }
     setProduct(skele);
     setisloadingskele(false);
   }, []);
