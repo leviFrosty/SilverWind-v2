@@ -5,12 +5,13 @@ import UserContext from "../../contexts/userContext";
 import SpinnerFullScreen from "../../components/SpinnerFullScreen";
 import AdminDashboard from "../../components/AdminDashboard";
 import Head from "next/head";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../lib/fbInstance";
 import { getProducts } from "../../lib/getProducts";
 
-export default function Admin({ products }) {
+export default function Admin() {
   const { user, isLoading } = useContext(UserContext);
+  const [products, setProducts] = useState([]);
   const [isAdmin, setisAdmin] = useState(false);
   const [isDataLoading, setisDataLoading] = useState(true);
 
@@ -19,6 +20,17 @@ export default function Admin({ products }) {
     if (isAdmin) return <AdminDashboard products={products} />;
     return <LoginPage />;
   };
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const querySnapshot = await getDocs(collection(db, "products"));
+      let fetchedProducts = [];
+      querySnapshot.forEach((doc) => fetchedProducts.push(doc.data()));
+      setProducts(fetchedProducts);
+    };
+
+    getProducts();
+  }, []);
 
   useEffect(() => {
     const checkAdmin = async () => {
@@ -54,10 +66,4 @@ export default function Admin({ products }) {
       )}
     </Layout>
   );
-}
-export async function getServerSideProps() {
-  const products = await getProducts();
-  return {
-    props: { products }, // will be passed to the page component as props
-  };
 }
