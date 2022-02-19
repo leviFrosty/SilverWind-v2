@@ -14,11 +14,9 @@ export async function getStaticProps() {
   let products = [];
   const ringsRef = collection(db, "products");
   const querySnapshot = await getDocs(
-    query(ringsRef, where("category", "==", RINGS))
+    query(ringsRef, where("active", "==", true), where("active", "==", true))
   );
   await querySnapshot.forEach((doc) => products.push(doc.data()));
-  const enabledProducts = products.filter((product) => product.active == true);
-  products = enabledProducts;
 
   return {
     props: {
