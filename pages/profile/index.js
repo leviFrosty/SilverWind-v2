@@ -7,6 +7,8 @@ import ProfilePage from "../../components/ProfilePage";
 import LoginPage from "../../components/LoginPage";
 import SpinnerFullScreen from "../../components/SpinnerFullScreen";
 import { useRouter } from "next/router";
+import { signOut } from "firebase/auth";
+import { auth } from "../../lib/fbInstance";
 
 const Profile = () => {
   const { user, isLoading } = useContext(UserContext);
@@ -19,7 +21,11 @@ const Profile = () => {
         <meta name="description" content="View your SilverWind profile page." />
       </Head>
       {isLoading ? <SpinnerFullScreen /> : null}
-      {user ? <ProfilePage /> : <LoginPage redirectTo={router.pathname} />}
+      {user ? (
+        <ProfilePage user={user} />
+      ) : (
+        <LoginPage redirectTo={router.pathname} />
+      )}
     </Layout>
   );
 };
