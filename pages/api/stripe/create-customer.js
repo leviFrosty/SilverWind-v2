@@ -16,6 +16,4 @@ export default async function CreateCustomer(req, res) {
       res.status(400).json(err.message);
     }
   }
-
-  // Send back product information from stripe api in res
 }

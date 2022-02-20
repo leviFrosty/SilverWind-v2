@@ -21,6 +21,7 @@ import Spinner from "./Spinner";
 import getUserData from "../lib/getUserData";
 import Stripe from "../public/icons/stripe-brands.svg";
 import Lock from "../public/icons/lock-solid.svg";
+import { useRouter } from "next/router";
 
 export default function CartPage({ user }) {
   const [userCart, setuserCart] = useState([]);
@@ -29,10 +30,11 @@ export default function CartPage({ user }) {
   const [isLoadingCheckout, setisLoadingCheckout] = useState(false);
   const [total, setTotal] = useState(0);
   const [error, seterror] = useState("");
-  let unsubscribeProducts = () => {};
+  const router = useRouter();
 
   useEffect(() => {
     let unsubscribeUserData;
+    let unsubscribeProducts = () => {};
     async function getProductList() {
       // user cart / products listener
       unsubscribeUserData = onSnapshot(
@@ -43,15 +45,18 @@ export default function CartPage({ user }) {
           const productIds = cartData.map((item, index) => {
             return cartData[index].id;
           });
-          if (productIds.length !== 0) {
+          if (cartData.length !== 0) {
             const collectionRef = collection(db, "products");
             let q = query(collectionRef, where("id", "in", productIds));
             unsubscribeProducts = onSnapshot(q, (querySnapshot) => {
               const products = [];
-              querySnapshot.forEach((doc) => products.push(doc.data()));
+              querySnapshot.forEach((doc) => {
+                products.push(doc.data());
+              });
+
               setProductList(products);
-              setIsLoading(false);
             });
+            setIsLoading(false);
           } else {
             setProductList([]);
             setIsLoading(false);
@@ -70,6 +75,14 @@ export default function CartPage({ user }) {
 
   const handleCheckout = async () => {
     setisLoadingCheckout(true);
+    if (user.isAnonymous) {
+      router.push({
+        pathname: "/signup",
+        query: { redirectTo: window.location.href },
+      });
+      setisLoadingCheckout(false);
+      return;
+    }
     const stripeCartList = userCart.map((cartItem) => {
       let descriptionString;
       const keys = Object.keys(cartItem.options);

@@ -1,11 +1,15 @@
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import CenterTitle from "../components/CenterTitle";
 import Layout, { siteTitlePrefix } from "../components/layout";
 import SignupForm from "../components/signupForm";
+import UserContext from "../contexts/userContext";
 
-export default function login() {
+export default function Login() {
+  const { user } = useContext(UserContext);
+  const router = useRouter();
   return (
     <Layout>
       <Head>
@@ -17,7 +21,10 @@ export default function login() {
       </Head>
       <div className="mx-auto w-fit max-w-xl min-h-[70vh] flex flex-col items-center justify-center">
         <CenterTitle>Welcome to SilverWinds</CenterTitle>
-        <SignupForm />
+        {user && user.isAnonymous ? (
+          <p>To continue, you must create an account.</p>
+        ) : null}
+        <SignupForm redirectTo={router.query.redirectTo} />
         <span className="text-violet-900 text-sm opacity-80">
           By clicking &quot;Sign up&quot; you agree to our{" "}
           <Link href="/terms-and-conditions">

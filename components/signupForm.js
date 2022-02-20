@@ -1,16 +1,25 @@
 import axios from "axios";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  linkWithRedirect,
+  EmailAuthProvider,
+  linkWithCredential,
+} from "firebase/auth";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { auth, db } from "../lib/fbInstance";
 import Form from "./form";
 import FormSubmitButton from "./FormSubmitButton";
 import Input from "./input";
 import Select from "./Select";
 import { signupSchema } from "../schemas/auth/signupSchema";
+import UserContext from "../contexts/userContext";
+import initializeUserData from "../lib/auth/initializeUserData";
+import initializeStripeUser from "../lib/stripe/initializeStripeUser";
+import { doc, setDoc } from "firebase/firestore";
 
-export default function SignupForm() {
+export default function SignupForm({ redirectTo }) {
+  const { user } = useContext(UserContext);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [firstName, setfirstName] = useState("");
@@ -29,39 +38,66 @@ export default function SignupForm() {
       gender,
     });
     if (error) return seterror(error.message);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        const { uid } = userCredential.user;
-        let stripeCustomerId;
-        // Adds user document for extra user data in Firebase.
-        await axios
-          .post("/api/stripe/create-customer", {
-            name: `${firstName} ${lastName}`,
+
+    if (user && user.isAnonymous) {
+      const credential = EmailAuthProvider.credential(email, password);
+      linkWithCredential(user, credential)
+        .then(async (userCredential) => {
+          const { uid } = userCredential.user;
+          // Create stripe user association
+          const stripeCustomerId = await initializeStripeUser(
+            firstName,
+            lastName,
             email,
+            uid
+          );
+          // Update user firestore data with new information
+          // firestore user document data base already created when anonymously signed in.
+          await setDoc(
+            doc(db, "users", uid),
+            {
+              firstName,
+              lastName,
+              gender,
+              stripeCustomerId,
+            },
+            { merge: true }
+          );
+          if (redirectTo) {
+            router.push(redirectTo);
+          } else {
+            router.push("/");
+          }
+        })
+        .catch((e) => seterror(e.message));
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async (userCredential) => {
+          const { uid } = userCredential.user;
+          // 1. Create stripe user association
+          const stripeCustomerId = await initializeStripeUser(
+            firstName,
+            lastName,
+            email,
+            uid
+          );
+          // 2. Create firestore user document
+          await initializeUserData(
             uid,
-          })
-          .then((res) => (stripeCustomerId = res.data.id));
-        const docData = {
-          firstName,
-          lastName,
-          gender,
-          email,
-          cart: [],
-          likes: [],
-          purchases: [],
-          stripeCustomerId,
-          isAdmin: false,
-        };
-        setDoc(doc(db, "users", uid), docData)
-          .then(() => {
-            navigate("/welcome", { replace: true });
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+            firstName,
+            lastName,
+            gender,
+            email,
+            stripeCustomerId
+          );
+        })
+        .catch((e) => seterror(e.message));
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
         router.push("/");
-      })
-      .catch((e) => seterror(e.message));
+      }
+    }
   };
 
   return (
