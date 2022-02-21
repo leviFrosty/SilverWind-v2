@@ -34,6 +34,8 @@ export default function LoginForm({ redirectTo }) {
         await initializeUserData(uid);
         if (redirectTo) {
           router.push(redirectTo);
+        } else {
+          router.push("/products");
         }
       })
       .catch((error) => setError(error.message));
