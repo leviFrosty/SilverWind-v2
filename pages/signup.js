@@ -20,7 +20,7 @@ export default function Login() {
         />
       </Head>
       <div className="mx-auto w-fit max-w-xl min-h-[70vh] flex flex-col items-center justify-center">
-        <CenterTitle>Welcome to SilverWinds</CenterTitle>
+        <CenterTitle>Welcome to SilverWind</CenterTitle>
         {user && user.isAnonymous ? (
           <p>To continue, you must create an account.</p>
         ) : null}
