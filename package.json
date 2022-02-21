@@ -9,6 +9,8 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
+    "@mantine/core": "^3.6.9",
+    "@mantine/hooks": "^3.6.9",
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.24.0",
     "firebase": "^9.6.2",
