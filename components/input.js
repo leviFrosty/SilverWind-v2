@@ -6,7 +6,7 @@ export default function Input({
   type,
   value,
   setState,
-  children,
+  children = undefined,
   className,
   ...options
 }) {
