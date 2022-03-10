@@ -16,7 +16,7 @@ import ImageSelector from "../../components/ImageSelector";
 import ProductInfo from "../../components/ProductInfo";
 import Container from "../../components/Container";
 import Head from "next/head";
-import * as admin from "firebase-admin";
+import admin from "../../lib/fbAdminInstance";
 
 export default function ProductDetails({ product }) {
   const router = useRouter();
@@ -68,19 +68,6 @@ export default function ProductDetails({ product }) {
 }
 
 export async function getStaticPaths() {
-  const { private_key } = JSON.parse(process.env.ADMIN_PRIVATE_KEY);
-  // Init firebase admin sdk
-  const ADMIN_FIREBASE_CREDS = {
-    projectId: process.env.ADMIN_PROJECT_ID,
-    privateKey: private_key,
-    clientEmail: process.env.ADMIN_CLIENT_EMAIL,
-  };
-  if (admin.apps.length === 0) {
-    admin.initializeApp({
-      credential: admin.credential.cert(ADMIN_FIREBASE_CREDS),
-      databaseURL: "https://silverwind-ca60d.firebaseio.com",
-    });
-  }
   const db = admin.firestore();
   const productsRef = db.collection("products");
   const snapshot = await productsRef.where("active", "==", true).get();
@@ -95,19 +82,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const { private_key } = JSON.parse(process.env.ADMIN_PRIVATE_KEY);
-  // Init firebase admin sdk
-  const ADMIN_FIREBASE_CREDS = {
-    projectId: process.env.ADMIN_PROJECT_ID,
-    privateKey: private_key,
-    clientEmail: process.env.ADMIN_CLIENT_EMAIL,
-  };
-  if (admin.apps.length === 0) {
-    admin.initializeApp({
-      credential: admin.credential.cert(ADMIN_FIREBASE_CREDS),
-      databaseURL: "https://silverwind-ca60d.firebaseio.com",
-    });
-  }
   const {
     params: { id },
   } = context;
