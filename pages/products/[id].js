@@ -16,6 +16,7 @@ import ImageSelector from "../../components/ImageSelector";
 import ProductInfo from "../../components/ProductInfo";
 import Container from "../../components/Container";
 import Head from "next/head";
+import admin from "../../lib/fbAdminInstance";
 
 export default function ProductDetails({ product }) {
   const router = useRouter();
@@ -67,10 +68,13 @@ export default function ProductDetails({ product }) {
 }
 
 export async function getStaticPaths() {
-  const q = query(collection(db, "products"), where("active", "==", true));
-  const querySnapshot = await getDocs(q);
+  const db = admin.firestore();
+  const productsRef = db.collection("products");
+  const snapshot = await productsRef.where("active", "==", true).get();
   let docIds = [];
-  await querySnapshot.forEach((doc) => docIds.push(doc.id));
+  snapshot.forEach((doc) => {
+    docIds.push(doc.id);
+  });
   const paths = docIds.map((id) => ({
     params: { id },
   }));
@@ -81,15 +85,11 @@ export async function getStaticProps(context) {
   const {
     params: { id },
   } = context;
-  const docRef = await doc(db, "products", id);
-  let product = {};
-  await getDoc(docRef)
-    .then((doc) => {
-      product = doc.data();
-    })
-    .catch((e) => console.log(e));
+  const db = admin.firestore();
+  const productRef = db.collection("products").doc(id);
+  const product = await productRef.get();
   return {
-    props: { product },
-    revalidate: 10,
+    props: { product: product.data() },
+    revalidate: 60,
   };
 }
