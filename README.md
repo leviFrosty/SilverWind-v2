@@ -1,6 +1,6 @@
 # SilverWind Official Site
 
-Launched Jan, 2022!
+~~Launched Jan, 2022!~~ No longer maintained.
 
 #### Check out our other pages below!
 
